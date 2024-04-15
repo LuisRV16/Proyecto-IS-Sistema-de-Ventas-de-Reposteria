@@ -11,7 +11,7 @@ public class Main extends Application{
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/loginFrame.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/mainMenu/loginFrame.fxml"));
         Scene scene = new Scene(root);
         //stage.getIcons().add(new Image("images/icon.jpg"));
         stage.setTitle("Login");

@@ -9,8 +9,8 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "model.Main",
-            "projectName": "proyectoSistemaReposteria_19041c1c",
-            "vmArgs": "--module-path C:/Users/Manuel/Documents/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
+            "projectName": "proyectoSistemaReposteria_e0c970fa",
+            "vmArgs": "--module-path C:/LibreriasJava/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }
