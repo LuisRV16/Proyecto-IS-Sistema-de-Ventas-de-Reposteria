@@ -108,6 +108,12 @@ create table almacen (
 	cantidad int not null
 )
 
+-- insercion de prueba para JDBC
+insert into almacen (idMaterial, nombre, cantidad) values ('asggh4ca34gas45', 'Huevos', 2)
+select * from almacen
+GRANT SELECT ON sistemaReposteria.almacen TO userprueba;
+-- insercion de prueba para JDBC
+
 create table preparacion(
 	idMaterial varchar(15) not null,
 	idProducto varchar(15) not null,
