@@ -16,7 +16,7 @@ public class Main extends Application{
         //stage.getIcons().add(new Image("images/icon.jpg"));
         stage.setTitle("Login");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
     }
 
