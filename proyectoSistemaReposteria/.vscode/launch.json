@@ -6,11 +6,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Main",
+            "name": "Launch Java Program",
             "request": "launch",
             "mainClass": "model.Main",
-            "projectName": "proyectoSistemaReposteria_19041c1c",
-            "vmArgs": "--module-path C:/Users/Manuel/Documents/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path C:/LibreariasJava/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }
