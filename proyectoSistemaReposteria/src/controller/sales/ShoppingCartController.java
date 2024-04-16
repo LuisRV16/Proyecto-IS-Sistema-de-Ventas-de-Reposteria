@@ -8,7 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class ShoppingCarController {
+public class ShoppingCartController {
 
     @FXML
     private Button btnGoBack;
@@ -39,6 +39,10 @@ public class ShoppingCarController {
     @FXML
     void proceedToPay(ActionEvent event) {
 
+    }
+
+    public void inic() {
+        
     }
 
 }
