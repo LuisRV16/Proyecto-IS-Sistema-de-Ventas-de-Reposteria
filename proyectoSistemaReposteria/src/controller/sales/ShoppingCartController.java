@@ -13,10 +13,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+<<<<<<< HEAD:proyectoSistemaReposteria/src/controller/sales/ShoppingCarController.java
 public class ShoppingCarController {
     Stage stage;
     @FXML
     private AnchorPane anchorPane;
+=======
+public class ShoppingCartController {
+>>>>>>> f481e41c9cd24ac78fced9cd41c51b6842251ef2:proyectoSistemaReposteria/src/controller/sales/ShoppingCartController.java
 
     @FXML
     private Button btnGoBack;
@@ -52,6 +56,7 @@ public class ShoppingCarController {
 
     }
 
+<<<<<<< HEAD:proyectoSistemaReposteria/src/controller/sales/ShoppingCarController.java
     @FXML
     void fullScreen(ActionEvent event){
         ObservableList<Screen> screens = Screen.getScreens();//Get list of Screens
@@ -67,4 +72,10 @@ public class ShoppingCarController {
     void fullStage(Stage stage){
         stage.setFullScreen(true);
     }
+=======
+    public void inic() {
+        
+    }
+
+>>>>>>> f481e41c9cd24ac78fced9cd41c51b6842251ef2:proyectoSistemaReposteria/src/controller/sales/ShoppingCartController.java
 }
