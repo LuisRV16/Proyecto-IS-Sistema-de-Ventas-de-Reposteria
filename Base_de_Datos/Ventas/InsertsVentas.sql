@@ -36,3 +36,4 @@ exec addProduct
 	@productImage = NULL
 
 select * from producto
+delete from producto
