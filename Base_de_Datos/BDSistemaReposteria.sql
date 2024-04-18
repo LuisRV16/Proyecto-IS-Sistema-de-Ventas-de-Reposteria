@@ -1,6 +1,7 @@
 
 use master
 drop database if exists sistemaReposteria
+drop database sistemaReposteria
 
 create database sistemaReposteria
 
