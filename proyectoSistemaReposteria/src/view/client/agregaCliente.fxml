@@ -6,114 +6,127 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="620.0" prefWidth="1180.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="400.0" prefWidth="185.0">
+            <VBox prefHeight="620.0" prefWidth="236.0">
                <children>
-                  <Label fx:id="lblNombre" text="Nombre">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblApellido1" text="Paterno">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblApellido2" text="Materno">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblTelefono" text="Teléfono">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblCorreo" text="E-mail">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblCalle" text="Calle">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblInterior" text="Interior">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblExterior" text="Exterior">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblCP" text="Código Postal">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblColonia" text="Colonia">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblCiudad" text="Ciudad">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblEstado" text="Estado">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblNombre" prefWidth="236.0" text="Nombre">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblApellido2" prefWidth="236.0" text="Materno">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblApellido1" prefHeight="25.0" prefWidth="236.0" text="Paterno">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblTelefono" prefHeight="25.0" prefWidth="236.0" text="Teléfono">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblCorreo" prefHeight="25.0" prefWidth="236.0" text="E-mail">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblCalle" prefHeight="25.0" prefWidth="236.0" text="Calle">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblInterior" prefHeight="25.0" prefWidth="236.0" text="Interior">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblExterior" prefHeight="25.0" prefWidth="236.0" text="Exterior">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblCP" prefHeight="25.0" prefWidth="236.0" text="Código Postal">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblColonia" prefHeight="25.0" prefWidth="236.0" text="Colonia">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblCiudad" prefHeight="25.0" prefWidth="236.0" text="Ciudad">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="25.0" prefWidth="236.0">
+                     <children>
+                        <Label fx:id="lblEstado" prefHeight="25.0" prefWidth="236.0" text="Estado">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
                </children>
             </VBox>
-            <VBox prefHeight="400.0" prefWidth="271.0">
+            <VBox prefHeight="400.0" prefWidth="590.0">
                <children>
                   <TextField fx:id="txtNombre" promptText="Ingrese nombre">
                      <VBox.margin>
@@ -236,4 +249,20 @@
          </children>
       </HBox>
    </center>
+   <top>
+      <Pane prefHeight="50.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="1280.0" text="Datos del cliente" />
+         </children>
+      </Pane>
+   </top>
+   <left>
+      <Pane prefHeight="620.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <Pane prefHeight="50.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <right>
+      <Pane prefHeight="620.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>
