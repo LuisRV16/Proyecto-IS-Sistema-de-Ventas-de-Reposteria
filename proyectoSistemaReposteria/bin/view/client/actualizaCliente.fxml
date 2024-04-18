@@ -15,7 +15,7 @@
          <children>
             <VBox prefHeight="400.0" prefWidth="185.0">
                <children>
-                  <Label fx:id="lblNombre" text="Nombre">
+                  <Label fx:id="lblUpNombre" text="Nombre">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -23,7 +23,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblApellido1" text="Paterno">
+                  <Label fx:id="lblUpApellido1" text="Paterno">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -31,7 +31,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblApellido2" text="Materno">
+                  <Label fx:id="lblUpApellido2" text="Materno">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -39,7 +39,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblTelefono" text="Teléfono">
+                  <Label fx:id="lblUpTelefono" text="Teléfono">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -47,7 +47,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblCorreo" text="E-mail">
+                  <Label fx:id="lblUpCorreo" text="E-mail">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -55,7 +55,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblCalle" text="Calle">
+                  <Label fx:id="lblUpCalle" text="Calle">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -63,7 +63,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblInterior" text="Interior">
+                  <Label fx:id="lblUpInterior" text="Interior">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblExterior" text="Exterior">
+                  <Label fx:id="lblUpExterior" text="Exterior">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -79,7 +79,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblCP" text="Código Postal">
+                  <Label fx:id="lblUpCP" text="Código Postal">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -87,7 +87,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblColonia" text="Colonia">
+                  <Label fx:id="lblUpColonia" text="Colonia">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -95,7 +95,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblCiudad" text="Ciudad">
+                  <Label fx:id="lblUpCiudad" text="Ciudad">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -103,7 +103,7 @@
                         <Insets left="50.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblEstado" text="Estado">
+                  <Label fx:id="lblUpEstado" text="Estado">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -115,7 +115,7 @@
             </VBox>
             <VBox prefHeight="400.0" prefWidth="271.0">
                <children>
-                  <TextField fx:id="txtNombre" promptText="Ingrese nombre">
+                  <TextField fx:id="txtUpNombre" editable="false">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -123,7 +123,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtPaterno" promptText="Ingrese apelilido paterno">
+                  <TextField fx:id="txtUpPaterno" editable="false">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -131,7 +131,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtMaterno" promptText="Ingrese apellido materno">
+                  <TextField fx:id="txtUpMaterno" editable="false">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -139,7 +139,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtTelefono" promptText="Ingrese teléfono personal">
+                  <TextField fx:id="txtUpTelefono" promptText="Ingrese teléfono personal">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -147,7 +147,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtCorreo" promptText="Ingrese su correo electrónico">
+                  <TextField fx:id="txtUpCorreo" promptText="Ingrese su correo electrónico">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -155,7 +155,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtCalle" promptText="Nombre de calle">
+                  <TextField fx:id="txtUpCalle" promptText="Nombre de calle">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -163,7 +163,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtInterior" promptText="N° interior de edificio (opcional)">
+                  <TextField fx:id="txtUpInterior" promptText="N° interior de edificio (opcional)">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -171,7 +171,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtExterior" promptText="N° exterior domiciliario">
+                  <TextField fx:id="txtUpExterior" promptText="N° exterior domiciliario">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -179,7 +179,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtCP" promptText="Ingrese Código Postal">
+                  <TextField fx:id="txtUpCP" promptText="Ingrese Código Postal">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -187,7 +187,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtColonia" promptText="Colonia en la que habita">
+                  <TextField fx:id="txtUpColonia" promptText="Colonia en la que habita">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -195,7 +195,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtCiudad" promptText="Ciudad en la que habita">
+                  <TextField fx:id="txtUpCiudad" promptText="Ciudad en la que habita">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -203,7 +203,7 @@
                         <Font name="Arial" size="11.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtEstado" promptText="Estado en la que habita">
+                  <TextField fx:id="txtUpEstado" promptText="Estado en la que habita">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -213,7 +213,7 @@
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="saveButton" mnemonicParsing="false" text="Guardar">
+                        <Button fx:id="updateButton" mnemonicParsing="false" text="Actualizar">
                            <font>
                               <Font name="Bell MT" size="14.0" />
                            </font>
