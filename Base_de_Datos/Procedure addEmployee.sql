@@ -26,24 +26,16 @@ as
 begin
 	declare @id varchar(15)
 
-	create table #tempRandomId (randomId varchar(15))
-	
-	insert into  #tempRandomId (randomId) exec getRandomId
+	exec getRandomId @length = 15, @randomId = @id output
 
-	select top 1 @id = randomId from #tempRandomId
-
-	while exists (select * from empleado where idEmpleado like @id)
+	while exists (select * from empleado where idEmpleado = @id)
 	begin
-		delete from #tempRandomId
-		insert into  #tempRandomId (randomId) exec getRandomId
-		select top 1 @id = randomId from #tempRandomId
+		exec getRandomId @length = 15, @randomId = @id output
 	end
-
-	drop table #tempRandomId
 
 	insert into empleado
 		(idEmpleado, nombre, apellido1, apellido2, puesto, salario, idSupervisor, rfc, curp, nss,
-		 fechaContratacion, fechaDeNacimiento, sexo, estadoCivil, estatus, correo, numeroInterior,
+		 fechaContratacion, fechaDeNacimiento, sexo, estadoCivil, estatus, correo, calle, numeroInterior,
 		 numeroExterior, codigoPostal, colonia, ciudad, estado)
 	values
 		(@id, @name, @lastName1, @lastName2, @position, @salary, @idSupervisor, @rfc, @curp, @nss,
