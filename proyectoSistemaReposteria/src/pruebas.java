@@ -1,5 +1,15 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+<<<<<<< HEAD
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.LinkedHashSet;
+
+public class pruebas {
+    public static void main(String[] args) {
+        String nombreArchivo = "src/materiaPrima.txt"; // Nombre del archivo a leer
+=======
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,6 +25,7 @@ import model.SQLConnection;
 public class pruebas {
     public static void main(String[] args) {
         /*String nombreArchivo = "src/materiaPrima.txt"; // Nombre del archivo a leer
+>>>>>>> 2f7963f584570144f5c9e8f14cbcf0aaf4166e72
         LinkedHashSet<String> conjunto = new LinkedHashSet<>();
 
         String textoFinal = "";
@@ -39,6 +50,8 @@ public class pruebas {
 
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
+<<<<<<< HEAD
+=======
         }*/
 
         SQLConnection connector = new SQLConnection();
@@ -85,6 +98,7 @@ public class pruebas {
             }
         } else {
             System.out.println("Error");
+>>>>>>> 2f7963f584570144f5c9e8f14cbcf0aaf4166e72
         }
     }
 }

@@ -2,55 +2,51 @@ package model;
 
 import java.io.IOException;
 
-import controller.sales.ShoppingCartController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
         ObservableList<Screen> screenSizes = Screen.getScreens();
-        screenSizes.forEach(screen -> {
-            System.out.println(screen.getBounds());
-        });
-
-        Parent root = FXMLLoader.load(getClass().getResource("/view/product/product.fxml"));
-        Parent root2 = FXMLLoader.load(getClass().getResource("/view/sales/ShoppingCart.fxml"));
+        Stage secondStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/view/client/agregaCliente.fxml"));
+        Parent root2 = FXMLLoader.load(getClass().getResource("/view/sales/ShopCart.fxml"));
         Scene scene = new Scene(root);
         Scene scene2 = new Scene(root2);
         stage.setTitle("1");
         stage.setScene(scene);
-        stage.setResizable(true);
-        stage.show();
-
+        secondStage.setTitle("2");
+        secondStage.setScene(scene2);
+        stage.setResizable(false);
         if (screenSizes.size() > 1) {
             Rectangle2D bounds = screenSizes.get(1).getVisualBounds();
-            
-            Stage secondStage = new Stage();
-            secondStage.setTitle("2");
-            secondStage.setScene(scene2);
             secondStage.setX(bounds.getMinX());
             secondStage.setY(bounds.getMinY());
             secondStage.setMaximized(true);
             secondStage.setResizable(false);
-            secondStage.show();
+            stage.setMaximized(true);
+            stage.setResizable(false);
+        }else{
+            secondStage.setResizable(true);
         }
-
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setMaximized(true);
+        
+        // secondStage.show();
+        stage.show();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch(args);  
     }
 
 }

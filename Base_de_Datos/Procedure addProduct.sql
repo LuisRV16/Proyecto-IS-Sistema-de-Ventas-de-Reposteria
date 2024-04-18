@@ -16,7 +16,11 @@ begin
 
 	exec getRandomId @length = 15, @randomId = @id output
 
+<<<<<<< HEAD
+	while exists (select * from empleado where idEmpleado = @id)
+=======
 	while exists (select * from producto where idProducto = @id)
+>>>>>>> 2f7963f584570144f5c9e8f14cbcf0aaf4166e72
 	begin
 		exec getRandomId @length = 15, @randomId = @id output
 	end

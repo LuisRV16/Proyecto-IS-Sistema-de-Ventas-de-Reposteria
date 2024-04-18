@@ -35,5 +35,9 @@ exec addProduct
 	@normalOrPersonalized = 'stock',
 	@productImage = NULL
 
+<<<<<<< HEAD
+select * from producto
+=======
 select * from producto
 delete from producto
+>>>>>>> 2f7963f584570144f5c9e8f14cbcf0aaf4166e72
