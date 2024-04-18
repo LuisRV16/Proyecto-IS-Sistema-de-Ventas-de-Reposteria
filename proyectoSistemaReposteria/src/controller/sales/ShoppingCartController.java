@@ -51,20 +51,4 @@ public class ShoppingCartController {
     void proceedToPay(ActionEvent event) {
 
     }
-
-    @FXML
-    void fullScreen(ActionEvent event){
-        ObservableList<Screen> screens = Screen.getScreens();//Get list of Screens
-        Rectangle2D bounds = screens.get(0).getVisualBounds();
-        iniciar(stage);
-    }
-
-    public void iniciar(Stage stage){
-        stage.setFullScreen(true);
-        this.stage = stage;
-    }
-
-    void fullStage(Stage stage){
-        stage.setFullScreen(true);
-    }
 }
