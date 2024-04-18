@@ -2,7 +2,7 @@ package model;
 
 import java.io.IOException;
 
-import controller.sales.ShoppingCarController;
+import controller.sales.ShoppingCartController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +26,7 @@ public class Main extends Application {
         });
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/product/product.fxml"));
-        Parent root2 = FXMLLoader.load(getClass().getResource("/view/sales/ShoppingCar.fxml"));
+        Parent root2 = FXMLLoader.load(getClass().getResource("/view/sales/ShoppingCart.fxml"));
         Scene scene = new Scene(root);
         Scene scene2 = new Scene(root2);
         stage.setTitle("1");
@@ -34,7 +34,7 @@ public class Main extends Application {
         stage.setResizable(true);
         stage.show();
 
-        if (screenSizes.size() > 0) {
+        if (screenSizes.size() > 1) {
             Rectangle2D bounds = screenSizes.get(1).getVisualBounds();
             
             Stage secondStage = new Stage();

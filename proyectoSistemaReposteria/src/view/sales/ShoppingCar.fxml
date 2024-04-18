@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="620.0" maxWidth="1080.0" minHeight="620.0" minWidth="1080.0" prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sales.ShoppingCarController">
+<AnchorPane fx:id="anchorPane" maxHeight="620.0" maxWidth="1080.0" minHeight="620.0" minWidth="1080.0" prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sales.ShoppingCartController">
    <children>
       <ScrollPane fx:id="scrollShopCar" layoutX="95.0" layoutY="64.0" prefHeight="400.0" prefWidth="500.0">
          <content>

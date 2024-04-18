@@ -1,5 +1,6 @@
 create procedure getRandomId
-	@length int
+	@length int,
+	@randomId varchar(20) output
 as
 begin
 	declare @id varchar(20) = ''
@@ -18,5 +19,5 @@ begin
 		set @counter = @counter + 1
 	end
 	drop table #tempRandomCharResult
-	select @id as randomId
+	set @randomId = @id
 end
