@@ -6,7 +6,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Button fx:id="addButton" mnemonicParsing="false" text="Agregar Personas" BorderPane.alignment="TOP_LEFT">
@@ -20,7 +19,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="9.0" prefHeight="200.0" prefWidth="560.0">
+                  <VBox layoutX="9.0" prefHeight="329.0" prefWidth="560.0">
                      <children>
                         <HBox prefHeight="115.0" prefWidth="560.0">
                            <children>
