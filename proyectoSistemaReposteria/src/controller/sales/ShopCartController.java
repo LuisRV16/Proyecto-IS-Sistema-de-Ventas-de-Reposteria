@@ -1,31 +1,27 @@
 package controller.sales;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 
-public class ShoppingCartController {
-    Stage stage;
+public class ShopCartController {
+
     @FXML
     private AnchorPane anchorPane;
+
+    @FXML
+    private Button btnFullScreen;
 
     @FXML
     private Button btnGoBack;
 
     @FXML
     private Button btnProceedPay;
-
-    @FXML
-    private Button btnFullScreen;
 
     @FXML
     private Label lblFinalPrice;
@@ -43,6 +39,11 @@ public class ShoppingCartController {
     private VBox vboxProducts;
 
     @FXML
+    void fullScreen(ActionEvent event) {
+
+    }
+
+    @FXML
     void goBack(ActionEvent event) {
 
     }
@@ -51,4 +52,5 @@ public class ShoppingCartController {
     void proceedToPay(ActionEvent event) {
 
     }
+
 }
