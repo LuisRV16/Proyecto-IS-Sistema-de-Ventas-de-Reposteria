@@ -79,9 +79,15 @@ public class Main extends Application {
         con.setUser("sa");
         con.setPassword("sasa");
         
+<<<<<<< HEAD
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/client/menuCliente.fxml"));
         Parent root = loader.load();
         MenuClienteController controller = loader.getController();
+=======
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/product/product.fxml"));
+        Parent root = loader.load();
+        ProductController controller = loader.getController();
+>>>>>>> 4e3f8fa425f28709c69ffdb3a3b81c20943ab2b4
         // Manda la conexion a la base de datos
         controller.setCon(con.getConnection());
         controller.inic();
