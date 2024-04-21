@@ -1,14 +1,5 @@
 package controller.product;
 
-<<<<<<< HEAD
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
-=======
 import java.io.ByteArrayInputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -40,7 +31,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
->>>>>>> 4e3f8fa425f28709c69ffdb3a3b81c20943ab2b4
 
 public class ProductController {
 
@@ -59,8 +49,6 @@ public class ProductController {
     @FXML
     private VBox vboxPreCart;
 
-<<<<<<< HEAD
-=======
     private Connection con;
 
     private ArrayList<String> productosEnCarrito;
@@ -253,7 +241,6 @@ public class ProductController {
         this.con = con;
     }
 
->>>>>>> 4e3f8fa425f28709c69ffdb3a3b81c20943ab2b4
     @FXML
     void busqueda(ActionEvent event) {
 
