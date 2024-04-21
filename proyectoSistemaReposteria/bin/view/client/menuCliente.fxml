@@ -7,25 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.client.MenuClienteController">
-   <top>
-      <Button fx:id="addButton" mnemonicParsing="false" text="Agregar Personas" BorderPane.alignment="TOP_LEFT">
-         <BorderPane.margin>
-            <Insets left="10.0" top="10.0" />
-         </BorderPane.margin>
-      </Button>
-   </top>
+<BorderPane id="backPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.client.MenuClienteController">
    <center>
       <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <content>
-          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+          <AnchorPane id="paneBackDeg" prefHeight="200.0" prefWidth="540.0">
                <children>
-                  <VBox fx:id="vboxClients" layoutX="9.0" prefHeight="200.0" prefWidth="560.0">
+                  <VBox fx:id="vboxClients" prefHeight="200.0" prefWidth="540.0">
                      <children>
-                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="560.0">
+                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="540.0">
                            <children>
                               <Label fx:id="lblNombrePersona" text="Nombre de Persona">
                                  <font>
@@ -45,7 +39,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="560.0">
+                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="540.0">
                            <children>
                               <Label fx:id="lblNombrePersona1" text="Nombre de Persona">
                                  <font>
@@ -75,4 +69,20 @@
          </BorderPane.margin>
       </ScrollPane>
    </center>
+   <right>
+      <Pane prefHeight="200.0" prefWidth="350.0" BorderPane.alignment="CENTER" />
+   </right>
+   <left>
+      <Pane prefHeight="200.0" prefWidth="350.0" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <Pane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <top>
+      <Pane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="addButton" layoutX="799.0" layoutY="10.0" mnemonicParsing="false" text="Agregar Cliente" />
+         </children>
+      </Pane>
+   </top>
 </BorderPane>

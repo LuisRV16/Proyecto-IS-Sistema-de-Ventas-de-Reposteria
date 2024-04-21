@@ -1,19 +1,62 @@
 /*Paneles------------------------------------------*/
 #pane{
     -fx-border-radius: 5px;
-    -fx-border-width: 2px;
+    -fx-border-width: 1.5px;
     -fx-border-color: rgb(117, 117, 117);
     -fx-background-color: rgb(245, 245, 245);
 }
 #backPane{
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #dfeffc, #ffffff);
-
+    /*-fx-background-color: linear-gradient(from 50% 50% to 100% 100%, #3ebfbb, #ffffff);*/
+    /*-fx-background-color: #EED09D;*/
+    -fx-background-color: #AF794D;
 }
+#backPaneWhite{
+    /*-fx-background-color: linear-gradient(from 50% 50% to 100% 100%, #3ebfbb, #ffffff);*/
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+}
+#panePrimary{
+    -fx-background-color: #3EC1BC;
+    -fx-background-radius: 10px;
+}
+#panePrimaryDeg{
+    -fx-background-color: #3ec1bd9e;
+    -fx-background-radius: 10px;
+}
+#paneBackDeg{
+    /*-fx-background-color: #eed09d84;*/
+    -fx-background-color: #d9a560aa;
+    -fx-background-radius: 10px;
+}
+#paneAccent{
+    -fx-border-color: #d581ee;
+    -fx-background-color: #C963E8;
+    -fx-background-radius: 1.5px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1.5px;
+}
+
 /*Label------------------------------------------*/
 .label{
     -fx-font-size:16;
     -fx-font-family: "Helvetica";
     -fx-font-style: normal;
+}
+#labelTitle{
+    -fx-font-size:28;
+    -fx-font-family: "Segoe";
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffd166;
+}
+#labelSmallTitle{
+    -fx-font-size:24;
+    -fx-font-family: "Segoe";
+    -fx-font-weight: normal;
+}
+.outline#labelTitle .text {
+    
+    -fx-stroke: firebrick;
+    -fx-stroke-width: 2px;
 }
 /*Botones------------------------------------------*/
 .button{
@@ -23,7 +66,8 @@
     -fx-font-family: "Helvetica";
     -fx-font-weight: bold;
     -fx-text-fill: rgb(241, 241, 241);
-    -fx-background-color: rgb(44, 149, 214);
+    /*-fx-background-color: rgb(44, 149, 214);*/
+    -fx-background-color: #006666;
     -fx-background-insets: 0, 1;
 }
 .button:hover{
