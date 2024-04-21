@@ -35,9 +35,14 @@ exec addProduct
 	@normalOrPersonalized = 'stock',
 	@productImage = NULL
 
-<<<<<<< HEAD
 select * from producto
-=======
-select * from producto
-delete from producto
->>>>>>> 2f7963f584570144f5c9e8f14cbcf0aaf4166e72
+select * from empleado
+select * from almacen
+select * from clientes
+
+
+
+update producto set precioVenta = 25.55 where nombre = 'Brownie'
+
+delete from empleado where idEmpleado = ''
+delete from producto where idProducto = ''

@@ -15,11 +15,7 @@ AS
 BEGIN
     DECLARE @id varchar(15)
 
-	create table #tempRandomId (randomId varchar(15))
-	
-	insert into  #tempRandomId (randomId) exec getRandomId
-
-	select top 1 @id = randomId from #tempRandomId
+	exec getRandomId @length = 15, @randomId = @id output
 
 	IF NOT EXISTS (
         SELECT @id
