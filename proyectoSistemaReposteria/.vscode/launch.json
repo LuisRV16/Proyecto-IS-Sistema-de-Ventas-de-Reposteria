@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LabelTachadoJavaFx",
+            "request": "launch",
+            "mainClass": "model.LabelTachadoJavaFx",
+            "projectName": "proyectoSistemaReposteria_a3a3a2c6"
+        },
+        {
+            "type": "java",
+            "name": "LabelTachadoJavaFx",
+            "request": "launch",
+            "mainClass": "LabelTachadoJavaFx",
+            "projectName": "proyectoSistemaReposteria_a3a3a2c6"
+        },
+        {
+            "type": "java",
+            "name": "pruebas",
+            "request": "launch",
+            "mainClass": "pruebas",
+            "projectName": "proyectoSistemaReposteria_a3a3a2c6"
+        },
+        {
+            "type": "java",
             "name": "pruebas",
             "request": "launch",
             "mainClass": "pruebas",
