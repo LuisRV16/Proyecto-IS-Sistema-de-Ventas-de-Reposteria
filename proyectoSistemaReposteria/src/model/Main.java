@@ -21,7 +21,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/view/client/agregaCliente.fxml"));
         Parent root2 = FXMLLoader.load(getClass().getResource("/view/sales/ShopCart.fxml"));
         Scene scene = new Scene(root);
-        // Scene scene2 = new Scene(root2);
+        Scene scene2 = new Scene(root2);
         stage.setTitle("1");
         stage.setScene(scene);
         secondStage.setTitle("2");
@@ -41,7 +41,7 @@ public class Main extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setMaximized(true);
         
-        // secondStage.show();
+        secondStage.show();
         stage.show();
     }
 
