@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.client.MenuClienteController">
    <top>
       <Button fx:id="addButton" mnemonicParsing="false" text="Agregar Personas" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
@@ -21,11 +21,11 @@
    <center>
       <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+          <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="9.0" prefHeight="200.0" prefWidth="560.0">
+                  <VBox fx:id="vboxClients" layoutX="9.0" prefHeight="200.0" prefWidth="560.0">
                      <children>
-                        <HBox prefHeight="115.0" prefWidth="560.0">
+                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="560.0">
                            <children>
                               <Label fx:id="lblNombrePersona" text="Nombre de Persona">
                                  <font>
@@ -36,6 +36,26 @@
                                  </HBox.margin>
                               </Label>
                               <Button fx:id="updateButton" mnemonicParsing="false" text="Actualizar">
+                                 <font>
+                                    <Font name="Bodoni MT" size="19.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="100.0" top="30.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="560.0">
+                           <children>
+                              <Label fx:id="lblNombrePersona1" text="Nombre de Persona">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="26.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="35.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button fx:id="updateButton1" mnemonicParsing="false" text="Actualizar">
                                  <font>
                                     <Font name="Bodoni MT" size="19.0" />
                                  </font>

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.product.ProductController">
    <children>
       <Pane prefHeight="720.0" prefWidth="852.0">
          <children>
@@ -18,44 +20,60 @@
                <top>
                   <Pane prefHeight="50.0" prefWidth="832.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TextField layoutY="4.0" maxHeight="37.0" maxWidth="250.0" minHeight="37.0" minWidth="250.0" prefHeight="37.0" prefWidth="250.0" promptText="Buscar">
+                        <TextField fx:id="txtBuscar" layoutY="4.0" maxHeight="37.0" maxWidth="250.0" minHeight="37.0" minWidth="250.0" onAction="#busqueda" prefHeight="37.0" prefWidth="250.0" promptText="Buscar">
                            <font>
                               <Font name="Arial" size="20.0" />
                            </font>
                         </TextField>
-                        <ComboBox layoutX="582.0" layoutY="5.0" maxHeight="37.0" maxWidth="250.0" minHeight="37.0" minWidth="250.0" prefHeight="37.0" prefWidth="250.0" promptText="Ordenar" />
+                        <ComboBox fx:id="comboOrdenar" layoutX="582.0" layoutY="5.0" maxHeight="37.0" maxWidth="250.0" minHeight="37.0" minWidth="250.0" onAction="#ordenamiento" prefHeight="37.0" prefWidth="250.0" promptText="Ordenar" />
                      </children>
                   </Pane>
                </top>
                <center>
-                  <ScrollPane prefHeight="650.0" prefWidth="832.0" BorderPane.alignment="CENTER">
+                  <ScrollPane fx:id="spProductos" prefHeight="650.0" prefWidth="832.0" BorderPane.alignment="CENTER">
                     <content>
-                        <FlowPane prefHeight="650.0" prefWidth="817.0">
-                           <children>
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cyan;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: pink;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cyan;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: pink;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cyan;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: pink;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cyan;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: pink;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;" />
-                           </children>
-                        </FlowPane>
+                        <FlowPane fx:id="flowPaneProductos" prefHeight="650.0" prefWidth="817.0" />
                     </content>
                   </ScrollPane>
                </center>
             </BorderPane>
          </children>
       </Pane>
-      <Pane layoutX="852.0" prefHeight="720.0" prefWidth="428.0" />
+      <Pane layoutX="861.0" prefHeight="720.0" prefWidth="428.0">
+         <children>
+            <ScrollPane layoutX="31.0" layoutY="35.0" prefHeight="536.0" prefWidth="368.0">
+               <content>
+                  <VBox fx:id="vboxPreCart" prefHeight="531.0" prefWidth="366.0">
+                     <children>
+                        <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="366.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="188.0" text="Nombre del Producto">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Button alignment="CENTER" layoutX="188.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0" text="-">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Button>
+                              <Label alignment="CENTER" layoutX="248.0" prefHeight="49.0" prefWidth="59.0" text="999" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button alignment="CENTER" layoutX="306.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0" text="+">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Button>
+                              <Label alignment="CENTER" layoutY="50.0" prefHeight="50.0" prefWidth="366.0" text="Producto 1 SubTotal" textAlignment="CENTER" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children></Pane>
    </children>
 </AnchorPane>
