@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -125,6 +126,19 @@ public class ProductController {
                 btnAgregar.setBackground(new Background(new BackgroundFill(Color.AQUA, new CornerRadii(10), Insets.EMPTY)));
                 btnAgregar.setLayoutX(115);
                 btnAgregar.setLayoutY(165);
+
+                EventHandler<ActionEvent> eventHandler = new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent arg0) {
+                        addProductoCart(resVarchar);
+                    }
+
+                    private void addProductoCart(String nombreProducto) {
+                        
+                    }
+                    
+                };
 
 
                 panelProducto.getChildren().add(imagen);
