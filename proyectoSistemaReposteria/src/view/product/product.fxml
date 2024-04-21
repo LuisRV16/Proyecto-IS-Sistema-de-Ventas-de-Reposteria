@@ -51,27 +51,23 @@
                      <children>
                         <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="366.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="188.0" text="Nombre del Producto">
+                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="237.0" text="Nombre del Producto">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Button alignment="CENTER" layoutX="188.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0" text="-">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Button>
-                              <Label alignment="CENTER" layoutX="248.0" prefHeight="49.0" prefWidth="59.0" text="999" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Button alignment="CENTER" layoutX="306.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0" text="+">
-                                 <font>
-                                    <Font name="System Bold Italic" size="22.0" />
-                                 </font>
-                              </Button>
                               <Label alignment="CENTER" layoutY="50.0" prefHeight="50.0" prefWidth="366.0" text="Producto 1 SubTotal" textAlignment="CENTER" />
+                              <Button alignment="CENTER" layoutX="323.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="43.0" text="-">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                              <Label alignment="CENTER" layoutX="280.0" layoutY="8.0" prefHeight="35.0" prefWidth="43.0" text="999" textAlignment="CENTER" />
+                              <Button alignment="CENTER" layoutX="237.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="43.0" text="+">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </Pane>
                      </children>
