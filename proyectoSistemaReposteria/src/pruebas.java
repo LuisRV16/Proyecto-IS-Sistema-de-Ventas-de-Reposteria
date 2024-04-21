@@ -49,6 +49,14 @@ public class pruebas {
         Connection con = connector.getConnection();
 
         addProduct("src/images/brownies.jpeg", con, "Brownie", 100, "Delicioso brownie de chocolate", 15, 25.0f, 0, "dulce", "stock");
+        addProduct("src/images/gelatina1.jpg", con, "Gelatina mosaico", 500, "Deliciosa gelatina mosaico", 10, 100.0f, 0, "dulce", "stock");
+        addProduct("src/images/gelatina2.jpg", con, "Gelatina de fresa", 500, "Deliciosa gelatina de fresa", 10, 100.0f, 0, "dulce", "stock");
+        addProduct("src/images/muffinChocolate.jpg", con, "Muffin de chocolate", 100, "Delicioso muffin de chocolate", 20, 20.0f, 0, "dulce", "stock");
+        addProduct("src/images/muffinChocolateDoble.jpg", con, "Muffin de chocolate doble", 100, "Delicioso muffin de chocolate doble", 20, 30.0f, 0, "dulce", "stock");
+        addProduct("src/images/pastel1.jpg", con, "Pastel de colores con betún", 800, "Delicioso pastel", 15, 150.0f, 0, "pastel", "stock");
+        addProduct("src/images/pastel2.jpg", con, "Pastel de chocolate con chocolate", 800, "Delicioso pastel", 15, 200.0f, 0, "pastel", "stock");
+        addProduct("src/images/pastel3.jpg", con, "Pastel de 3 leches", 800, "Delicioso pastel", 15, 180.0f, 0, "pastel", "stock");
+        addProduct("src/images/payDeQueso.jpg", con, "Pay de Queso", 400, "Delicioso pay de quesoooooooooo", 30, 80.0f, 0, "dulce", "stock");
         
     }
 
