@@ -15,11 +15,11 @@
    <center>
       <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <content>
-          <AnchorPane id="paneBackDeg" prefHeight="200.0" prefWidth="540.0">
+          <AnchorPane prefHeight="200.0" prefWidth="540.0">
                <children>
                   <VBox fx:id="vboxClients" prefHeight="200.0" prefWidth="540.0">
                      <children>
-                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="540.0">
+                        <HBox id="paneBackDeg" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="540.0">
                            <children>
                               <Label fx:id="lblNombrePersona" text="Nombre de Persona">
                                  <font>
@@ -39,7 +39,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="540.0">
+                        <HBox id="paneBackDeg" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="540.0">
                            <children>
                               <Label fx:id="lblNombrePersona1" text="Nombre de Persona">
                                  <font>

@@ -12,9 +12,9 @@
 
 <BorderPane id="backPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.client.AddClientController">
    <center>
-      <Pane id="pane" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <Pane id="backPaneWhite" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="620.0" prefWidth="600.0">
+            <HBox id="paneBackDeg" prefHeight="620.0" prefWidth="600.0">
                <children>
                   <VBox prefHeight="620.0" prefWidth="200.0">
                      <children>
@@ -303,14 +303,14 @@
                         </TextField>
                         <HBox prefHeight="129.0" prefWidth="400.0">
                            <children>
-                              <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="GUARDAR">
+                              <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="AGREGAR">
                                  <font>
                                     <Font name="Bell MT" size="14.0" />
                                  </font>
                               </Button>
                            </children>
                            <padding>
-                              <Insets top="15.0" />
+                              <Insets top="10.0" />
                            </padding>
                            <VBox.margin>
                               <Insets left="20.0" />
@@ -338,7 +338,8 @@
    <top>
       <Pane prefHeight="50.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="50.0" prefWidth="1280.0" text="Datos del cliente" />
+            <Label id="labelTitle" alignment="CENTER" prefHeight="50.0" prefWidth="1280.0" text="Datos del cliente" />
+            <Pane id="paneAccent" layoutX="515.0" layoutY="35.0" prefHeight="5.0" prefWidth="250.0" />
          </children>
       </Pane>
    </top>
