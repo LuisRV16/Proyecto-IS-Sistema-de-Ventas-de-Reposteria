@@ -81,6 +81,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/product/product.fxml"));
         Parent root = loader.load();
         ProductController controller = loader.getController();
+        
         // Manda la conexion a la base de datos
         controller.setCon(con.getConnection());
         controller.inic();

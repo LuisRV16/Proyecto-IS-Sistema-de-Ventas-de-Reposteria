@@ -35,10 +35,16 @@ import javafx.scene.text.Text;
 public class ProductController {
 
     @FXML
+    private Button btnGoToCart;
+
+    @FXML
     private ComboBox<?> comboOrdenar;
 
     @FXML
     private FlowPane flowPaneProductos;
+
+    @FXML
+    private Label lblSubtotal;
 
     @FXML
     private ScrollPane spProductos;
@@ -54,6 +60,8 @@ public class ProductController {
     private ArrayList<String> productosEnCarrito;
 
     private HashMap<String, Integer> cantidadProducto;
+
+    private float subtotalF;
 
     public void inic() {
 
@@ -115,8 +123,8 @@ public class ProductController {
                 precioVenta.setLayoutX(10);
                 precioVenta.setLayoutY(145);
 
-                // precioNormal.setVisible(descFloat > 0 ? true : false);
-                // descuento.setVisible(descFloat > 0 ? true : false);
+                precioNormal.setVisible(descFloat > 0 ? true : false);
+                descuento.setVisible(descFloat > 0 ? true : false);
 
                 int existencia = resultados.getInt(5);
                 Label stock = new Label("Stock: " + existencia);
@@ -169,6 +177,48 @@ public class ProductController {
                             btnQuitar.setLayoutX(237);
                             btnQuitar.setLayoutY(8);
 
+                            EventHandler<ActionEvent> eventHandlerBtnQuitar = new EventHandler<ActionEvent>() {
+
+                                @Override
+                                public void handle(ActionEvent arg0) {
+                                    int cant = cantidadProducto.get(nombreProducto);
+                                    int index = productosEnCarrito.indexOf(nombreProducto);
+                                    subtotalF -= precio;
+
+                                    if (cant == 1) {
+                                        vboxPreCart.getChildren().remove(index);
+                                        productosEnCarrito.remove(nombreProducto);
+                                        cantidadProducto.remove(nombreProducto);
+
+                                        if (vboxPreCart.getChildren().isEmpty()) lblSubtotal.setText("Subtotal:");
+
+                                    } else {
+                                        cantidadProducto.replace(nombreProducto, cant - 1);
+                                        cant = cantidadProducto.get(nombreProducto);
+                                        float precioNuevo = precio * ((float)cant);
+ 
+                                        Pane panel = (Pane)vboxPreCart.getChildren().get(index);
+                                        Label lbl = (Label)panel.getChildren().get(2);
+                                        Label lbl2 =  (Label)panel.getChildren().get(4);
+
+                                        lbl.setText(cant+"");
+                                        lbl2.setText(nombreProducto + " Subtotal: $" + df.format(precioNuevo));
+                                        panel.getChildren().set(2, lbl);
+                                        panel.getChildren().set(4, lbl2);
+                                        vboxPreCart.getChildren().set(index, panel);
+                                    }
+
+                                    if (vboxPreCart.getChildren().isEmpty())
+                                        lblSubtotal.setText("Subtotal:");
+                                    else
+                                        lblSubtotal.setText("Subtotal: $" + df.format(subtotalF));
+
+                                }
+                                
+                            };
+
+                            btnQuitar.setOnAction(eventHandlerBtnQuitar);
+
                             Label cantidadProduct = new Label(cantidadProducto.get(nombreProducto)+"");
                             cantidadProduct.setMinWidth(43);
                             cantidadProduct.setMinHeight(35);
@@ -183,6 +233,35 @@ public class ProductController {
                             btnAnadir.setFont(new Font("Arial", 12));
                             btnAnadir.setLayoutX(323);
                             btnAnadir.setLayoutY(8);
+
+                            EventHandler<ActionEvent> eventHandlerBtnAnadir = new EventHandler<ActionEvent>() {
+
+                                @Override
+                                public void handle(ActionEvent arg0) {
+                                    int cant = cantidadProducto.get(nombreProducto);
+                                    cantidadProducto.replace(nombreProducto, cant + 1);
+                                    cant = cantidadProducto.get(nombreProducto);
+
+                                    int index = productosEnCarrito.indexOf(nombreProducto);
+                                    float precioNuevo = precio * ((float)cant);
+                                    subtotalF += precioNuevo - precio * ((float)cant-1);
+
+                                    Pane panel = (Pane)vboxPreCart.getChildren().get(index);
+                                    Label lbl = (Label)panel.getChildren().get(2);
+                                    Label lbl2 =  (Label)panel.getChildren().get(4);
+
+                                    lbl.setText(cant+"");
+                                    lbl2.setText(nombreProducto + " Subtotal: $" + df.format(precioNuevo));
+                                    panel.getChildren().set(2, lbl);
+                                    panel.getChildren().set(4, lbl2);
+                                    vboxPreCart.getChildren().set(index, panel);
+
+                                    lblSubtotal.setText("Subtotal: $" + df.format(subtotalF));
+                                }
+                                
+                            };
+
+                            btnAnadir.setOnAction(eventHandlerBtnAnadir);
 
                             Label subtotal = new Label(nombreProducto + " Subtotal: $" + df.format(precio));
                             subtotal.setMinWidth(366);
@@ -199,19 +278,30 @@ public class ProductController {
                             panelProduct.getChildren().add(subtotal);
 
                             vboxPreCart.getChildren().add(panelProduct);
+
+                            subtotalF += precio;
+
                         } else {
                             int cant = cantidadProducto.get(nombreProducto);
                             cantidadProducto.replace(nombreProducto, cant + 1);
                             cant = cantidadProducto.get(nombreProducto);
 
-                            int index = vboxPreCart.getChildren().indexOf(panelProduct);
+                            int index = productosEnCarrito.indexOf(nombreProducto);
+                            float precioNuevo = precio * ((float)cant);
+                            subtotalF += precioNuevo - precio * ((float)cant-1);
+
                             Pane panel = (Pane)vboxPreCart.getChildren().get(index);
                             Label lbl = (Label)panel.getChildren().get(2);
-                            vboxPreCart.getChildren().set(index, btnAgregar);
-                        }
+                            Label lbl2 =  (Label)panel.getChildren().get(4);
 
+                            lbl.setText(cant+"");
+                            lbl2.setText(nombreProducto + " Subtotal: $" + df.format(precioNuevo));
+                            panel.getChildren().set(2, lbl);
+                            panel.getChildren().set(4, lbl2);
+                            vboxPreCart.getChildren().set(index, panel);
+                        }
+                        lblSubtotal.setText("Subtotal: $" + df.format(subtotalF));
                     }
-                    
                 };
 
                 btnAgregar.setOnAction(eventHandlerBtnAgregar);
@@ -243,6 +333,11 @@ public class ProductController {
 
     @FXML
     void busqueda(ActionEvent event) {
+
+    }
+
+    @FXML
+    void goToCart(ActionEvent event) {
 
     }
 

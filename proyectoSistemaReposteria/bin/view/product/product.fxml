@@ -43,39 +43,15 @@
          <children>
             <ScrollPane layoutX="31.0" layoutY="35.0" prefHeight="536.0" prefWidth="368.0">
                <content>
-                  <VBox fx:id="vboxPreCart" prefHeight="531.0" prefWidth="366.0">
-                     <children>
-                        <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="366.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="237.0" text="Nombre del Producto">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" layoutY="50.0" prefHeight="50.0" prefWidth="366.0" text="Producto 1 SubTotal" textAlignment="CENTER" />
-                              <Button alignment="CENTER" layoutX="323.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="43.0" text="-">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Button>
-                              <Label alignment="CENTER" layoutX="280.0" layoutY="8.0" prefHeight="35.0" prefWidth="43.0" text="999" textAlignment="CENTER" />
-                              <Button alignment="CENTER" layoutX="237.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="43.0" text="+">
-                                 <font>
-                                    <Font name="System Bold Italic" size="16.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </Pane>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="vboxPreCart" prefHeight="531.0" prefWidth="366.0" />
                </content>
             </ScrollPane>
-            <Button layoutX="155.0" layoutY="636.0" mnemonicParsing="false" text="Ir a Caja">
+            <Button fx:id="btnGoToCart" layoutX="155.0" layoutY="636.0" mnemonicParsing="false" onAction="#goToCart" text="Ir a Caja">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Label layoutX="48.0" layoutY="588.0" text="Subtotal:">
+            <Label fx:id="lblSubtotal" layoutX="48.0" layoutY="588.0" text="Subtotal:">
                <font>
                   <Font size="24.0" />
                </font>
