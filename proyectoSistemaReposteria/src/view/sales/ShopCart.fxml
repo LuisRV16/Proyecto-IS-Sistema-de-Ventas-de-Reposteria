@@ -4,33 +4,39 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="620.0" maxWidth="1080.0" minHeight="620.0" minWidth="1080.0" prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sales.ShopCartController">
+<AnchorPane id="backPane" fx:id="anchorPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sales.ShopCartController">
    <children>
-      <ScrollPane fx:id="scrollShopCar" layoutX="95.0" layoutY="64.0" prefHeight="400.0" prefWidth="500.0">
+      <ScrollPane fx:id="scrollShopCar" layoutX="20.0" layoutY="75.0" prefHeight="550.0" prefWidth="1240.0">
          <content>
-            <VBox fx:id="vboxProducts" prefHeight="590.0" prefWidth="851.0" />
+            <VBox fx:id="vboxProducts" prefHeight="550.0" prefWidth="1220.0" />
          </content>
       </ScrollPane>
-      <Pane fx:id="paneFinalPrice" layoutX="700.0" layoutY="64.0" prefHeight="200.0" prefWidth="283.0" style="-fx-background-color: green;">
-         <children>
-            <Button fx:id="btnProceedPay" layoutX="89.0" layoutY="161.0" mnemonicParsing="false" onAction="#proceedToPay" text="Proceder al Pago" />
-            <Label fx:id="lblFinalPrice" layoutX="2.0" layoutY="73.0" text="Info del Subtotal">
-               <font>
-                  <Font size="38.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Button fx:id="btnGoBack" layoutX="43.0" layoutY="27.0" mnemonicParsing="false" onAction="#goBack" text="Regresar al Form Productos" />
-      <Label fx:id="lblPriceColumn" layoutX="835.0" layoutY="18.0" text="Precio">
+      <Button fx:id="btnGoBack" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="160.0" text="Regresar a Productos">
          <font>
-            <Font size="29.0" />
+            <Font size="18.0" />
+         </font></Button>
+      <Label fx:id="lblSubtotal" layoutX="235.0" layoutY="549.0" minHeight="38.0" minWidth="200.0">
+         <font>
+            <Font size="26.0" />
          </font>
       </Label>
-      <Button fx:id="btnFullScreen" layoutX="253.0" layoutY="27.0" mnemonicParsing="false" onAction="#fullScreen" text="Button" />
+      <Label fx:id="lblIva" layoutX="445.0" layoutY="549.0" minHeight="38.0" minWidth="200.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTotal" layoutX="665.0" layoutY="549.0" minHeight="38.0" minWidth="200.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnPagar" layoutX="1160.0" layoutY="645.0" mnemonicParsing="false" onAction="#goToPay" prefHeight="35.0" prefWidth="100.0" text="PAGAR">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
