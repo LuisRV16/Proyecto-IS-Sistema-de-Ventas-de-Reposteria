@@ -1,13 +1,19 @@
 package controller.client;
 
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import controller.mainMenu.MenuController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
@@ -17,11 +23,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class MenuClienteController {
 
     @FXML
     private Button addButton;
+
+    @FXML
+    private Button btnGoBack;
 
     @FXML
     private Label lblNombrePersona;
@@ -40,6 +50,24 @@ public class MenuClienteController {
 
     
     private Connection con;
+
+    @FXML
+    void goBack(ActionEvent event) {
+        Stage stage = (Stage) btnGoBack.getScene().getWindow(); // Obtener la ventana actual
+            stage.close();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainMenu/menu.fxml"));
+            MenuController controller = loader.getController();
+            Parent root;
+            try {
+                root = loader.load();
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
 
     public void inic() {
         

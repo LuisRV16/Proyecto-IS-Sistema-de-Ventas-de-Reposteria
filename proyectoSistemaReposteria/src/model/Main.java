@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 
+import controller.mainMenu.LoginFrameController;
 import controller.product.ProductController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -78,13 +79,10 @@ public class Main extends Application {
         con.setUser("sa");
         con.setPassword("sasa");
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/product/product.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login/login.fxml"));
         Parent root = loader.load();
-        ProductController controller = loader.getController();
+        LoginFrameController controller = loader.getController();
         
-        // Manda la conexion a la base de datos
-        controller.setCon(con.getConnection());
-        controller.inic();
         // Inicializa todos los componentes requeridos
         Scene scene = new Scene(root);
         stage.setTitle("Prueba");

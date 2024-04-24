@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import controller.mainMenu.MenuController;
 import controller.sales.ShopCartController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,11 +38,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.SQLConnection;
 
 public class ProductController {
 
     @FXML
     private Button btnGoToCart;
+
+    @FXML
+    private Button btnGoBack;
 
     @FXML
     private ComboBox<?> comboOrdenar;
@@ -70,6 +75,24 @@ public class ProductController {
     private HashMap<String, byte[]> imagenProducto = new HashMap<>();
 
     private float subtotalF;
+
+    @FXML
+    void goBack(ActionEvent event) {
+        Stage stage = (Stage) btnGoBack.getScene().getWindow(); // Obtener la ventana actual
+            stage.close();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainMenu/menu.fxml"));
+            MenuController controller = loader.getController();
+            Parent root;
+            try {
+                root = loader.load();
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
 
     public void setProductosEnCarrito(ArrayList<String> productosEnCarrito) {
         this.productosEnCarrito = productosEnCarrito;

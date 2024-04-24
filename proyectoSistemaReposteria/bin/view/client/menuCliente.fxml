@@ -82,6 +82,7 @@
       <Pane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addButton" layoutX="799.0" layoutY="10.0" mnemonicParsing="false" text="Agregar Cliente" />
+            <Button fx:id="btnGoBack" layoutX="220.0" layoutY="13.0" mnemonicParsing="false" onAction="#goBack" text="Regresar" />
          </children>
       </Pane>
    </top>
