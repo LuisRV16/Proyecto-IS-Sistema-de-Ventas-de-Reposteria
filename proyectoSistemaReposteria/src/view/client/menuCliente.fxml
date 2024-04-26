@@ -2,14 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane id="backPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.client.MenuClienteController">
    <center>
@@ -17,50 +14,7 @@
         <content>
           <AnchorPane prefHeight="200.0" prefWidth="540.0">
                <children>
-                  <VBox fx:id="vboxClients" prefHeight="200.0" prefWidth="540.0">
-                     <children>
-                        <HBox id="paneBackDeg" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="540.0">
-                           <children>
-                              <Label fx:id="lblNombrePersona" text="Nombre de Persona">
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="26.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="20.0" top="35.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Button fx:id="updateButton" mnemonicParsing="false" text="Actualizar">
-                                 <font>
-                                    <Font name="Bodoni MT" size="19.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="100.0" top="30.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox id="paneBackDeg" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="540.0">
-                           <children>
-                              <Label fx:id="lblNombrePersona1" text="Nombre de Persona">
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="26.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="20.0" top="35.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Button fx:id="updateButton1" mnemonicParsing="false" text="Actualizar">
-                                 <font>
-                                    <Font name="Bodoni MT" size="19.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="100.0" top="30.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="vboxClients" prefHeight="200.0" prefWidth="540.0" />
                </children>
             </AnchorPane>
         </content>
@@ -81,7 +35,8 @@
    <top>
       <Pane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addButton" layoutX="799.0" layoutY="10.0" mnemonicParsing="false" text="Agregar Cliente" />
+            <Button fx:id="addButton" layoutX="799.0" layoutY="10.0" mnemonicParsing="false" onAction="#goToAddCustomer" text="Agregar Cliente" />
+            <Button fx:id="btnGoBack" layoutX="220.0" layoutY="13.0" mnemonicParsing="false" onAction="#goBack" text="Regresar" />
          </children>
       </Pane>
    </top>

@@ -12,8 +12,10 @@ public class SQLConnection {
 
     private String password;
 
+    private Connection con;
+
     public Connection getConnection() {
-        Connection con = null;
+        con = null;
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -21,7 +23,6 @@ public class SQLConnection {
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Error: " + e.getMessage());
         }
-
         return con;
     }
 

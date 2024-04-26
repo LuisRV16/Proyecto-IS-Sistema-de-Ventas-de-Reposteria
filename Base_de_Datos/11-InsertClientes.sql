@@ -11,6 +11,7 @@ EXEC addClient 'Sara', 'López', 'González', '321987654', 'saralopez@example.com'
 EXEC addClient 'Samuel', 'García', 'Martínez', '456123789', 'samuelgarcia@example.com', 'Calle Secundaria', '280', '2900', '89012', 'Colonia Bella', 'Ciudad Grande', 'Estado BB';
 EXEC addClient 'Emma', 'Hernández', 'Rodríguez', '789456123', 'emmahernandez@example.com', 'Avenida Norte', '290', '3000', '65432', 'Colonia Central', 'Ciudad Mediana', 'Estado CC';
 EXEC addClient 'Mateo', 'Martínez', 'Gómez', '123789456', 'mateomartinez@example.com', 'Calle Sur', '300', '3100', '21098', 'Colonia Histórica', 'Ciudad Pequeña', 'Estado DD';
+EXEC addClient 'Albus Percival Wulfric', 'Brian', 'Dumbledore', '123789456', 'mateomartinez@example.com', 'Calle Sur', '300', '3100', '21098', 'Colonia Histórica', 'Ciudad Pequeña', 'Estado DD';
 
 
 select * from clientes

@@ -35,7 +35,7 @@
                         </Pane>
                         <Pane prefHeight="30.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="lblApellido2" prefHeight="30.0" prefWidth="200.0" text="Apellido Materno">
+                              <Label fx:id="lblApellido1" prefHeight="30.0" prefWidth="200.0" text="Apellido Paterno">
                                  <font>
                                     <Font name="Arial" size="15.0" />
                                  </font>
@@ -50,7 +50,7 @@
                         </Pane>
                         <Pane prefHeight="30.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="lblApellido1" prefHeight="30.0" prefWidth="200.0" text="Apellido Paterno">
+                              <Label fx:id="lblApellido2" prefHeight="30.0" prefWidth="200.0" text="Apellido Materno">
                                  <font>
                                     <Font name="Arial" size="15.0" />
                                  </font>
@@ -303,7 +303,7 @@
                         </TextField>
                         <HBox prefHeight="129.0" prefWidth="400.0">
                            <children>
-                              <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="AGREGAR">
+                              <Button fx:id="saveButton" mnemonicParsing="false" onAction="#addClient" prefHeight="40.0" prefWidth="160.0" text="AGREGAR">
                                  <font>
                                     <Font name="Bell MT" size="14.0" />
                                  </font>
@@ -318,7 +318,7 @@
                         </HBox>
                         <HBox prefHeight="129.0" prefWidth="400.0">
                            <children>
-                              <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="CANCELAR">
+                              <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="160.0" text="CANCELAR">
                                  <font>
                                     <Font name="Bell MT" size="14.0" />
                                  </font>

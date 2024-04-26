@@ -10,7 +10,8 @@ CREATE PROCEDURE addClient
     @postalCode varchar(5),
     @colony varchar(30),
     @city varchar(30),
-    @state varchar(30)
+    @state varchar(30),
+	@msg varchar(61) output
 AS
 BEGIN
     DECLARE @id varchar(15)
@@ -31,15 +32,15 @@ BEGIN
 
         IF @@ERROR = 0
         BEGIN
-            PRINT 'Cliente insertado correctamente con ID aleatorio.'
+            set @msg = 'Cliente insertado correctamente con ID aleatorio.'
         END
         ELSE
         BEGIN
-            PRINT 'Ha ocurrido un error al insertar el cliente con ID aleatorio.'
+            set @msg 'Ha ocurrido un error al insertar el cliente con ID aleatorio.'
         END
     END
     ELSE
     BEGIN
-        PRINT 'El cliente ya existe.'
+        set @msg 'El cliente ya existe.'
     END
 END

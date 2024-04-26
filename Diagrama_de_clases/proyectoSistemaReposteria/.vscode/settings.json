@@ -1,0 +1,25 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\LibreriasJava\\JDBC SQL Server\\sqljdbc_12.2\\enu\\mssql-jdbc-12.2.0.jre11.jar",
+        "c:\\LibreriasJava\\javafx-sdk-22\\lib\\javafx.base.jar",
+        "c:\\LibreriasJava\\javafx-sdk-22\\lib\\javafx.controls.jar",
+        "c:\\LibreriasJava\\javafx-sdk-22\\lib\\javafx.fxml.jar",
+        "c:\\LibreriasJava\\javafx-sdk-22\\lib\\javafx.graphics.jar",
+        "c:\\LibreriasJava\\javafx-sdk-22\\lib\\javafx.media.jar",
+        "c:\\LibreriasJava\\javafx-sdk-22\\lib\\javafx.swing.jar",
+        "c:\\LibreriasJava\\javafx-sdk-22\\lib\\javafx.web.jar",
+        "c:\\LibreriasJava\\javafx-sdk-22\\lib\\javafx-swt.jar",
+        "c:\\Users\\Manuel\\Documents\\SQLServerJava\\sqljdbc_12.2\\enu\\mssql-jdbc-12.2.0.jre11.jar",
+        "c:\\Users\\Manuel\\Documents\\javafx-sdk-22\\lib\\javafx.base.jar",
+        "c:\\Users\\Manuel\\Documents\\javafx-sdk-22\\lib\\javafx.controls.jar",
+        "c:\\Users\\Manuel\\Documents\\javafx-sdk-22\\lib\\javafx.fxml.jar",
+        "c:\\Users\\Manuel\\Documents\\javafx-sdk-22\\lib\\javafx.graphics.jar",
+        "c:\\Users\\Manuel\\Documents\\javafx-sdk-22\\lib\\javafx.media.jar",
+        "c:\\Users\\Manuel\\Documents\\javafx-sdk-22\\lib\\javafx.swing.jar",
+        "c:\\Users\\Manuel\\Documents\\javafx-sdk-22\\lib\\javafx.web.jar",
+        "c:\\Users\\Manuel\\Documents\\javafx-sdk-22\\lib\\javafx-swt.jar"
+    ]
+}
