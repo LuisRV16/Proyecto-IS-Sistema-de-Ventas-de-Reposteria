@@ -36,11 +36,11 @@ BEGIN
         END
         ELSE
         BEGIN
-            set @msg 'Ha ocurrido un error al insertar el cliente con ID aleatorio.'
+            set @msg = 'Ha ocurrido un error al insertar el cliente con ID aleatorio.'
         END
     END
     ELSE
     BEGIN
-        set @msg 'El cliente ya existe.'
+        set @msg = 'El cliente ya existe.'
     END
 END
