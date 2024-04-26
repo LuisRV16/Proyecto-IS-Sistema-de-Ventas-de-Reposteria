@@ -88,66 +88,63 @@ public class MenuClienteController {
                 String apellido1 = resultados.getString(3);
                 String apellido2 = resultados.getString(4);
 
-                HBox panel = new HBox();
-                panel.setMinWidth(540);
-                panel.setMinHeight(115);
-                panel.setAlignment(Pos.CENTER_LEFT);
-                panel.setFillHeight(true);
-                panel.setId("paneBackDeg");
+                if (!nombre.equals("Generico")) {
+                    HBox panel = new HBox();
+                    panel.setMinWidth(540);
+                    panel.setMinHeight(115);
+                    panel.setAlignment(Pos.CENTER_LEFT);
+                    panel.setFillHeight(true);
+                    panel.setId("paneBackDeg");
 
-                Label lblNombre = new Label(nombre + " " + apellido1 + " " + apellido2);
-                lblNombre.setFont(new Font("Berlin Sans FB", 26));
-                lblNombre.setGraphicTextGap(4);
-                lblNombre.setMinWidth(300);
+                    Label lblNombre = new Label(nombre + " " + apellido1 + " " + apellido2);
+                    lblNombre.setFont(new Font("Berlin Sans FB", 26));
+                    lblNombre.setGraphicTextGap(4);
+                    lblNombre.setMinWidth(300);
 
-                Button btnUpdate = new Button("Actualizar");
-                btnUpdate.setFont(new Font("Bodoni MT", 19));
-                btnUpdate.setGraphicTextGap(4);
-                btnUpdate.setAlignment(Pos.CENTER_LEFT);
+                    Button btnUpdate = new Button("Actualizar");
+                    btnUpdate.setFont(new Font("Bodoni MT", 19));
+                    btnUpdate.setGraphicTextGap(4);
+                    btnUpdate.setAlignment(Pos.CENTER_LEFT);
 
-                EventHandler<ActionEvent> eventHandler = new EventHandler<ActionEvent>() {
+                    EventHandler<ActionEvent> eventHandler = new EventHandler<ActionEvent>() {
 
-                    @Override
-                    public void handle(ActionEvent arg0) {
+                        @Override
+                        public void handle(ActionEvent arg0) {
 
-                        try {
-                            Stage stage = (Stage) btnUpdate.getScene().getWindow();
-                            stage.close();
+                            try {
+                                Stage stage = (Stage) btnUpdate.getScene().getWindow();
+                                stage.close();
 
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/client/actualizaCliente.fxml"));
-                            Parent root = loader.load();
+                                FXMLLoader loader = new FXMLLoader(
+                                        getClass().getResource("/view/client/actualizaCliente.fxml"));
+                                Parent root = loader.load();
 
-                            UpdateClientController controller = loader.getController();
-                            controller.setCon(con);
-                            controller.setNombre(nombre);
-                            controller.setApellido1(apellido1);
-                            controller.setApellido2(apellido2);
+                                UpdateClientController controller = loader.getController();
+                                controller.setCon(con);
+                                controller.setNombre(nombre);
+                                controller.setApellido1(apellido1);
+                                controller.setApellido2(apellido2);
 
-                            stage = new Stage();
-                            stage.setScene(new Scene(root));
-                            stage.show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                                stage = new Stage();
+                                stage.setScene(new Scene(root));
+                                stage.show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
+                    };
+                    btnUpdate.setOnAction(eventHandler);
 
-                    }
-
-                };
-
-                btnUpdate.setOnAction(eventHandler);
-
-                panel.getChildren().add(lblNombre);
-                panel.getChildren().add(btnUpdate);
-                HBox.setMargin(panel.getChildren().get(0), new Insets(35));
-                HBox.setMargin(panel.getChildren().get(1), new Insets(30));
-                vboxClients.getChildren().add(panel);
-
+                    panel.getChildren().add(lblNombre);
+                    panel.getChildren().add(btnUpdate);
+                    HBox.setMargin(panel.getChildren().get(0), new Insets(35));
+                    HBox.setMargin(panel.getChildren().get(1), new Insets(30));
+                    vboxClients.getChildren().add(panel);
+                }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public void setCon(Connection con) {

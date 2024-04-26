@@ -2,10 +2,7 @@ package controller.sales;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Types;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -299,7 +296,34 @@ public class ShopCartController {
 
     @FXML
     void goToPay(ActionEvent event) {
+        try {
+            Stage stage = (Stage) btnPagar.getScene().getWindow();
+            stage.close();
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sales/PaymentMethod.fxml"));
+            Parent root = loader.load();
+            PaymentMethodController controller = loader.getController();
+
+            controller.setCon(con);
+            controller.setProductosEnCarrito(productosEnCarrito);
+            controller.setCantidadProducto(cantidadProducto);
+            controller.setPrecioProducto(precioProducto);
+            controller.setExistenciaProducto(existenciaProducto);
+            controller.setImagenProducto(imagenProducto);
+            controller.setSubtotalF(subtotalF);
+            controller.setIva(iva);
+            controller.setTotal(total);
+            controller.inic();
+
+            stage = new Stage();
+            stage.setTitle("Prueba");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

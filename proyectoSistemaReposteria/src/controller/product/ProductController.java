@@ -37,7 +37,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.SQLConnection;
 
 public class ProductController {
 
