@@ -67,99 +67,76 @@ public class Main extends Application {
     // stage.show();
     // }
 
-    // @Override
-    // public void start(Stage stage) throws IOException {
-
-    // SQLConnection con = new SQLConnection();
-    // con.setUser("sa");
-    // con.setPassword("sasa");
-
-    // FXMLLoader loader = new
-    // FXMLLoader(getClass().getResource("/view/product/product.fxml"));
-    // Parent root = loader.load();
-    // ProductController controller = loader.getController();
-    // // Manda la conexion a la base de datos
-    // controller.setCon(con.getConnection());
-    // controller.inic();
-    // // Inicializa todos los componentes requeridos
-    // Scene scene = new Scene(root);
-    // stage.setTitle("Prueba");
-    // stage.setScene(scene);
-    // stage.setResizable(false);
-    // stage.show();
-    // }
-
-    // public static void main(String[] args) {
-    // launch(args);
-    // }
-
-    // @Override
-    // public void start(Stage stage) throws IOException {
-
-    // FXMLLoader loader = new
-    // FXMLLoader(getClass().getResource("/view/login/login.fxml"));
-    // Parent root = loader.load();
-
-    // // Inicializa todos los componentes requeridos
-    // Scene scene = new Scene(root);
-    // stage.setTitle("Prueba");
-    // stage.setScene(scene);
-    // stage.setResizable(true);
-    // stage.show();
-    private static final int FRAME_WIDTH = 200;
-    private static final int FRAME_HEIGHT = 400;
-    private static final Color FILL_COLOR = Color.GREEN;
-    private static final Duration FILL_DURATION = Duration.seconds(1);
-
     @Override
-    public void start(Stage primaryStage) {
-        StackPane root = new StackPane();
+    public void start(Stage stage) throws IOException {
 
-        Rectangle frame = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT, Color.WHITE);
-        Rectangle fill = new Rectangle(FRAME_WIDTH, 0, FILL_COLOR);
+        FXMLLoader loader = new
+        FXMLLoader(getClass().getResource("/view/login/login.fxml"));
+        Parent root = loader.load();
 
-        root.getChildren().addAll(frame, fill);
-
-        KeyValue keyValue = new KeyValue(fill.heightProperty(), FRAME_HEIGHT);
-        KeyFrame keyFrame = new KeyFrame(FILL_DURATION, keyValue);
-
-        Timeline timeline = new Timeline(keyFrame);
-        timeline.setCycleCount(1);
-
-        fill.heightProperty().addListener((obs, oldValue, newValue) -> {
-            fill.setTranslateY((FRAME_HEIGHT - newValue.doubleValue()) / 2);
-        });
-
-        Scene scene = new Scene(root, FRAME_WIDTH, FRAME_HEIGHT);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Gradual Vertical Fill Frame");
-        primaryStage.show();
-
-        timeline.play();
-
-        timeline.setOnFinished(e -> {
-            Polygon checkmark = new Polygon(
-                    0, 0,
-                    35, 40,
-                    120, -40,
-                    135, -20,
-                    35, 70,
-                    -15, 15
-            );
-            checkmark.setFill(Color.WHITE);
-            checkmark.setStroke(Color.GREEN);
-            checkmark.setStrokeWidth(2);
-            root.getChildren().add(checkmark);
-
-            Circle circle = new Circle(40, 10, 90);
-            circle.setFill(Color.TRANSPARENT);
-            circle.setStroke(Color.WHITE);
-            circle.setStrokeWidth(2);
-
-            root.getChildren().add(circle);
-        });
-
+        // Inicializa todos los componentes requeridos
+        Scene scene = new Scene(root);
+        stage.setTitle("Prueba");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
+    /////////////////////////////////////////////////////
+    // private static final int FRAME_WIDTH = 200;
+    // private static final int FRAME_HEIGHT = 400;
+    // private static final Color FILL_COLOR = Color.GREEN;
+    // private static final Duration FILL_DURATION = Duration.seconds(1);
+
+    // @Override
+    // public void start(Stage primaryStage) {
+    //     StackPane root = new StackPane();
+
+    //     Rectangle frame = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT, Color.WHITE);
+    //     Rectangle fill = new Rectangle(FRAME_WIDTH, 0, FILL_COLOR);
+
+    //     root.getChildren().addAll(frame, fill);
+
+    //     KeyValue keyValue = new KeyValue(fill.heightProperty(), FRAME_HEIGHT);
+    //     KeyFrame keyFrame = new KeyFrame(FILL_DURATION, keyValue);
+
+    //     Timeline timeline = new Timeline(keyFrame);
+    //     timeline.setCycleCount(1);
+
+    //     fill.heightProperty().addListener((obs, oldValue, newValue) -> {
+    //         fill.setTranslateY((FRAME_HEIGHT - newValue.doubleValue()) / 2);
+    //     });
+
+    //     Scene scene = new Scene(root, FRAME_WIDTH, FRAME_HEIGHT);
+    //     primaryStage.setScene(scene);
+    //     primaryStage.setTitle("Gradual Vertical Fill Frame");
+    //     primaryStage.show();
+
+    //     timeline.play();
+
+    //     timeline.setOnFinished(e -> {
+    //         Polygon checkmark = new Polygon(
+    //                 0, 0,
+    //                 35, 40,
+    //                 120, -40,
+    //                 135, -20,
+    //                 35, 70,
+    //                 -15, 15
+    //         );
+    //         checkmark.setFill(Color.WHITE);
+    //         checkmark.setStroke(Color.GREEN);
+    //         checkmark.setStrokeWidth(2);
+    //         root.getChildren().add(checkmark);
+
+    //         Circle circle = new Circle(40, 10, 90);
+    //         circle.setFill(Color.TRANSPARENT);
+    //         circle.setStroke(Color.WHITE);
+    //         circle.setStrokeWidth(2);
+
+    //         root.getChildren().add(circle);
+    //     });
+
+    // }
+    /////////////////////////////////////////////////////
 
     // @Override
     // public void start(Stage primaryStage) {

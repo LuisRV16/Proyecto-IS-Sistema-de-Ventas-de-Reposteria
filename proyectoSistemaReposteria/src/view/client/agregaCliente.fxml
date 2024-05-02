@@ -65,6 +65,18 @@
                         </Pane>
                         <Pane prefHeight="30.0" prefWidth="200.0">
                            <children>
+                              <Label fx:id="lblRFC" prefHeight="30.0" prefWidth="200.0" text="RFC">
+                                 <font>
+                                    <Font name="Arial" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="30.0" prefWidth="200.0">
+                           <children>
                               <Label fx:id="lblTelefono" prefHeight="30.0" prefWidth="200.0" text="Teléfono">
                                  <font>
                                     <Font name="Arial" size="15.0" />
@@ -221,10 +233,15 @@
                               <Font name="Arial" size="11.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="txtMaterno" prefHeight="30.0" prefWidth="200.0" promptText="Ingrese apellido materno">
+                        <TextField fx:id="txtMaterno" prefHeight="30.0" prefWidth="200.0" promptText="Ingrese apellido materno (opcional)">
                            <VBox.margin>
                               <Insets right="20.0" top="10.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Arial" size="11.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="txtRFC" prefHeight="30.0" prefWidth="370.0" promptText="Ingrese RFC">
                            <font>
                               <Font name="Arial" size="11.0" />
                            </font>

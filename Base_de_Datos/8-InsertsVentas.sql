@@ -23,26 +23,3 @@ exec addEmployee
 	@colony = 'Golondrinas',
 	@city = 'Tampico',
 	@state = 'Tamaulipas'
-
-exec addProduct
-	@name = 'Brownie',
-	@weight = 100, -- peso en gramos
-	@description = 'Delicioso brownie de chocolate',
-	@stock = 15,
-	@normalPrice = 25.0,
-	@discount = 0.0, -- solo valores entre 0 y 1
-	@kindOfProduct = 'dulce',
-	@normalOrPersonalized = 'stock',
-	@productImage = NULL
-
-select * from producto
-select * from empleado
-select * from almacen
-select * from clientes
-
-
-
-update producto set precioVenta = 25.55 where nombre = 'Brownie'
-
-delete from empleado where idEmpleado = ''
-delete from producto where idProducto = ''

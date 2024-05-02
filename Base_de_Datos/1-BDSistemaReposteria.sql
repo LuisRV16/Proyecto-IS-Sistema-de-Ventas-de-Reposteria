@@ -31,7 +31,7 @@ create table empleado (
 )
 
 create table telefonoEmpleado (
-	telefono varchar(15) not null,
+	telefono varchar(10) not null,
 	idEmpleado varchar(15) not null,
 	primary key (telefono, idEmpleado),
 	foreign key (idEmpleado) references empleado(idEmpleado)
@@ -42,7 +42,8 @@ create table clientes (
 	nombre varchar(40) not null,
 	apellido1 varchar(20) not null,
 	apellido2 varchar(20),
-	telefono varchar(15) not null,
+	rfc varchar(13) not null,
+	telefono varchar(10) not null,
 	correo varchar(255) not null,
 	calle varchar(30) not null,
     numeroInterior varchar(5) not null,
@@ -80,9 +81,9 @@ create table producto (
 	peso int not null, -- el peso del producto en gramos
 	descripcion varchar(400) not null,
 	existencia int,
-	precioNormal float not null,
-	descuento float,
-	precioVenta float not null,
+	precioNormal decimal(10,2) not null,
+	descuento decimal(10,2),
+	precioVenta decimal(10,2) not null,
 	tipoDeProducto varchar(6) check (tipoDeProducto in ('pastel', 'dulce')) not null,
 	normalOrPersonalizado varchar(13) check (normalOrPersonalizado in ('stock', 'personalizado')) not null,
 	imagenDelProducto varbinary(max)
@@ -123,7 +124,7 @@ create table proveedor (
 
 create table telefonoProveedor (
 	idProveedor varchar(15) not null,
-	telefono varchar(15) not null,
+	telefono varchar(10) not null,
 	primary key (idProveedor, telefono),
 	foreign key (idProveedor) references proveedor(idProveedor)
 )

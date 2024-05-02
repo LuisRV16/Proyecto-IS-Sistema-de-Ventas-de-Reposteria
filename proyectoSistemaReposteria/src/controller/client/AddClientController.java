@@ -30,6 +30,9 @@ public class AddClientController {
     private Label lblApellido2;
 
     @FXML
+    private Label lblRFC;
+
+    @FXML
     private Label lblCP;
 
     @FXML
@@ -87,6 +90,9 @@ public class AddClientController {
     private TextField txtInterior;
 
     @FXML
+    private TextField txtRFC;
+
+    @FXML
     private TextField txtMaterno;
 
     @FXML
@@ -109,6 +115,7 @@ public class AddClientController {
         String nombre = txtNombre.getText();
         String apellido1 = txtPaterno.getText();
         String apellido2 = txtMaterno.getText();
+        String rfc = txtRFC.getText();
         String telefono = txtTelefono.getText();
         String email = txtCorreo.getText();
         String calle = txtCalle.getText();
@@ -123,77 +130,37 @@ public class AddClientController {
         alert.setHeaderText(null);
         alert.setTitle("Error");
 
-        if (nombre.isEmpty()) {
-            alert.setContentText("Ingrese un nombre en el campo de texto");
-            alert.showAndWait();
-            return;
-        } else if (apellido1.isEmpty()) {
-            alert.setContentText("Ingrese un apellido paterno en el campo de texto");
-            alert.showAndWait();
-            return;
-        } else if (telefono.isEmpty()) {
-            alert.setContentText("Ingrese un numero de telefono en el campo de texto");
-            alert.showAndWait();
-            return;
-        } else if (email.isEmpty()) {
-            alert.setContentText("Ingrese un correo en el campo de texto");
-            alert.showAndWait();
-            return;
-        } else if (numInterior.isEmpty()) {
-            numExterior = "S/N";
-        } else if (numExterior.isEmpty()) {
-            alert.setContentText("Ingrese un numero exterior en el campo de texto");
-            alert.showAndWait();
-            return;
-        } else if (codPost.isEmpty()) {
-            alert.setContentText("Ingrese un codigo postal en el campo de texto");
-            alert.showAndWait();
-            return;
-        } else if (colonia.isEmpty()) {
-            alert.setContentText("Ingrese una colonia en el campo de texto");
-            alert.showAndWait();
-            return;
-        } else if (ciudad.isEmpty()) {
-            alert.setContentText("Ingrese una ciudad en el campo de texto");
-            alert.showAndWait();
-            return;
-        } else if (estado.isEmpty()) {
-            alert.setContentText("Ingrese un estado en el campo de texto");
-            alert.showAndWait();
-            return;
-        }
-
-        String sql = "{call addClient(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call addClient(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
         try (CallableStatement statement = con.prepareCall(sql)) {
             statement.setString(1, nombre);
             statement.setString(2, apellido1);
             statement.setString(3, apellido2);
-            statement.setString(4, telefono);
-            statement.setString(5, email);
-            statement.setString(6, calle);
-            statement.setString(7, numInterior);
-            statement.setString(8, numExterior);
-            statement.setString(9, codPost);
-            statement.setString(10, colonia);
-            statement.setString(11, ciudad);
-            statement.setString(12, estado);
-            statement.registerOutParameter(13, Types.VARCHAR);
+            statement.setString(4, rfc);
+            statement.setString(5, telefono);
+            statement.setString(6, email);
+            statement.setString(7, calle);
+            statement.setString(8, numInterior);
+            statement.setString(9, numExterior);
+            statement.setString(10, codPost);
+            statement.setString(11, colonia);
+            statement.setString(12, ciudad);
+            statement.setString(13, estado);
+            statement.registerOutParameter(14, Types.VARCHAR);
 
             statement.execute();
 
-            String msg = statement.getString(13);
+            String msg = statement.getString(14);
             alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
             alert.setTitle("Mensaje");
-            if (msg.equals("Ha ocurrido un error al insertar el cliente con ID aleatorio.")
-                || msg.equals("El cliente ya existe.")) {
+            if (!msg.equals("Cliente insertado correctamente.")) {
                 clean();
             }
             alert.setContentText(msg);
             alert.showAndWait();
 
-            if (msg.equals("Cliente insertado correctamente con ID aleatorio.")) {
+            if (msg.equals("Cliente insertado correctamente.")) {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmación");
                 alert.setHeaderText(null);
@@ -242,6 +209,7 @@ public class AddClientController {
         txtNombre.setText("");
         txtPaterno.setText("");
         txtMaterno.setText("");
+        txtRFC.setText("");
         txtTelefono.setText("");
         txtCorreo.setText("");
         txtCalle.setText("");
