@@ -46,6 +46,7 @@ public class MenuClienteController {
 
             AddClientController controller = loader.getController();
             controller.setCon(con);
+            controller.inic();
 
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
@@ -124,6 +125,7 @@ public class MenuClienteController {
                                 controller.setNombre(nombre);
                                 controller.setApellido1(apellido1);
                                 controller.setApellido2(apellido2);
+                                controller.inic();
 
                                 stage = new Stage();
                                 stage.setScene(new Scene(root));

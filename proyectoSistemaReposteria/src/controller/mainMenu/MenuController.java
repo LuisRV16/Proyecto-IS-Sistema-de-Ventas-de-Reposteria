@@ -65,7 +65,7 @@ public class MenuController {
         try {
             Stage stage = (Stage) btnClientes.getScene().getWindow(); // Obtener la ventana actual
             stage.close();
-
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/client/menuCliente.fxml"));
             Parent root = loader.load();
             

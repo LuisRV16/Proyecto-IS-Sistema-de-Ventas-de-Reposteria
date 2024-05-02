@@ -1,20 +1,29 @@
 package controller.client;
 
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 
 public class UpdateClientController {
 
+    @FXML
+    private Button btnSaveButton;
+    
     @FXML
     private Button cancelButton;
 
@@ -52,10 +61,10 @@ public class UpdateClientController {
     private Label lblNombre;
 
     @FXML
-    private Label lblTelefono;
+    private Label lblRFC;
 
     @FXML
-    private Button saveButton;
+    private Label lblTelefono;
 
     @FXML
     private TextField txtCP;
@@ -91,6 +100,9 @@ public class UpdateClientController {
     private TextField txtPaterno;
 
     @FXML
+    private TextField txtRFC;
+
+    @FXML
     private TextField txtTelefono;
 
     private String nombre;
@@ -117,30 +129,192 @@ public class UpdateClientController {
         this.con = con;
     }
 
+    public void inic() {
+        txtTelefono.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 15) {
+                return change;
+            }
+            return null;
+        }));
+        txtPaterno.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 20) {
+                return change;
+            }
+            return null;
+        }));
+        txtNombre.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 40) {
+                return change;
+            }
+            return null;
+        }));
+        txtMaterno.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 20) {
+                return change;
+            }
+            return null;
+        }));
+        txtRFC.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 13) {
+                return change;
+            }
+            return null;
+        }));
+        txtInterior.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 5) {
+                return change;
+            }
+            return null;
+        }));
+        txtExterior.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 6) {
+                return change;
+            }
+            return null;
+        }));
+        txtEstado.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 30) {
+                return change;
+            }
+            return null;
+        }));
+        txtCorreo.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 255) {
+                return change;
+            }
+            return null;
+        }));
+        txtColonia.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 30) {
+                return change;
+            }
+            return null;
+        }));
+        txtCiudad.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 30) {
+                return change;
+            }
+            return null;
+        }));
+        txtCalle.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 30) {
+                return change;
+            }
+            return null;
+        }));
+        txtCP.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 5) {
+                return change;
+            }
+            return null;
+        }));
+
+        txtNombre.setText(nombre);
+        txtPaterno.setText(apellido1);
+        txtMaterno.setText(apellido2);
+
+        String sql = "{call getClientByName(?, ?, ?)}";
+
+        try (CallableStatement statement = con.prepareCall(sql)) {
+
+            statement.setString(1, nombre);
+            statement.setString(2, apellido1);
+            statement.setString(3, apellido2);
+
+            ResultSet resultados = statement.executeQuery();
+
+            while (resultados.next()) {
+                String rfc = resultados.getString(5);
+                String phone = resultados.getString(6);
+                String email = resultados.getString(7);
+                String street = resultados.getString(8);
+                String interiorNumber = resultados.getString(9);
+                String outdoorNumber = resultados.getString(10);
+                String postalCode = resultados.getString(11);
+                String colony = resultados.getString(12);
+                String city = resultados.getString(13);
+                String state = resultados.getString(14);
+
+                txtNombre.setText(nombre);
+                txtPaterno.setText(apellido1);
+                txtMaterno.setText(apellido2);
+                txtRFC.setText(rfc);
+                txtTelefono.setText(phone);
+                txtCorreo.setText(email);
+                txtCalle.setText(street);
+                txtInterior.setText(interiorNumber);
+                txtExterior.setText(outdoorNumber);
+                txtColonia.setText(colony);
+                txtCP.setText(postalCode);
+                txtCiudad.setText(city);
+                txtEstado.setText(state);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void goBack(ActionEvent event) {
         try {
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             stage.close();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/client/menuCliente.fxml"));
-            Parent root = loader.load();
-
-            MenuClienteController controller = loader.getController();
-            controller.setCon(con);
-            controller.inic();
-
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.show();
+            goBack();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    void update(ActionEvent event) {
-        System.out.println(nombre + apellido1 + apellido2);
+    void update(ActionEvent event) {        
+        String sql = "{call updateClient(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+
+        try (CallableStatement statement = con.prepareCall(sql)) {
+            statement.setString(1, nombre);
+            statement.setString(2, apellido1);
+            statement.setString(3, apellido2);
+            statement.setString(4, txtTelefono.getText());
+            statement.setString(5, txtCorreo.getText());
+            statement.setString(6, txtCalle.getText());
+            statement.setString(7, txtInterior.getText());
+            statement.setString(8, txtExterior.getText());
+            statement.setString(9, txtCP.getText());
+            statement.setString(10, txtColonia.getText());
+            statement.setString(11, txtCiudad.getText());
+            statement.setString(12, txtEstado.getText());
+            statement.registerOutParameter(13, Types.VARCHAR);
+
+            statement.execute();
+
+            String msg = statement.getString(13);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setTitle("Mensaje");
+            alert.setContentText(msg);
+            alert.showAndWait();
+
+            if (msg.equals("Datos del cliente actualizados correctamente.")) {
+                Stage stage = (Stage) btnSaveButton.getScene().getWindow();
+                stage.close();
+                goBack();
+            }
+
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void goBack() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/client/menuCliente.fxml"));
+        Parent root = loader.load();
+
+        MenuClienteController controller = loader.getController();
+        controller.setCon(con);
+        controller.inic();
+
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
     }
 
 }

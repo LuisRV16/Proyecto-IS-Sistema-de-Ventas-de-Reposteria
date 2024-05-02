@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 
 public class AddClientController {
@@ -108,6 +109,87 @@ public class AddClientController {
 
     public void setCon(Connection con) {
         this.con = con;
+    }
+
+    public void inic() {
+        txtTelefono.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 15) {
+                return change;
+            }
+            return null;
+        }));
+        txtPaterno.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 20) {
+                return change;
+            }
+            return null;
+        }));
+        txtNombre.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 40) {
+                return change;
+            }
+            return null;
+        }));
+        txtMaterno.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 20) {
+                return change;
+            }
+            return null;
+        }));
+        txtRFC.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 13) {
+                return change;
+            }
+            return null;
+        }));
+        txtInterior.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 5) {
+                return change;
+            }
+            return null;
+        }));
+        txtExterior.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 6) {
+                return change;
+            }
+            return null;
+        }));
+        txtEstado.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 30) {
+                return change;
+            }
+            return null;
+        }));
+        txtCorreo.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 255) {
+                return change;
+            }
+            return null;
+        }));
+        txtColonia.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 30) {
+                return change;
+            }
+            return null;
+        }));
+        txtCiudad.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 30) {
+                return change;
+            }
+            return null;
+        }));
+        txtCalle.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 30) {
+                return change;
+            }
+            return null;
+        }));
+        txtCP.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 5) {
+                return change;
+            }
+            return null;
+        }));
     }
 
     @FXML
