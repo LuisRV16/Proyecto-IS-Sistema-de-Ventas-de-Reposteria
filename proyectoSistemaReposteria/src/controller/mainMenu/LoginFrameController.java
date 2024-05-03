@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.SQLConnection;
@@ -20,7 +22,13 @@ public class LoginFrameController {
     private Button btnLogin;
 
     @FXML
-    private TextField lblPassword;
+    private CheckBox ckBoxShowPassword;
+
+    @FXML
+    private PasswordField pwdPassword;
+
+    @FXML
+    private TextField txtPassword;
 
     @FXML
     private TextField lblUser;
@@ -29,7 +37,7 @@ public class LoginFrameController {
     void goToMenu(ActionEvent event) {
 
         String user = lblUser.getText();
-        String password = lblPassword.getText();
+        String password = pwdPassword.isVisible() ? pwdPassword.getText() : txtPassword.getText();
 
         SQLConnection sqlCon = new SQLConnection();
         sqlCon.setUser(user);
@@ -78,8 +86,19 @@ public class LoginFrameController {
             e.printStackTrace();
         }
 
-        // Manda la conexion a la base de datos
-        // Inicializa todos los componentes requeridos
+    }
+
+    @FXML
+    void showPassword(ActionEvent event) {
+        if (pwdPassword.isVisible()) {
+            pwdPassword.setVisible(false);
+            txtPassword.setText(pwdPassword.getText());
+            txtPassword.setVisible(true);
+        } else {
+            txtPassword.setVisible(false);
+            pwdPassword.setText(txtPassword.getText());
+            pwdPassword.setVisible(true);
+        }
     }
 
 }

@@ -216,6 +216,7 @@ public class ProductController {
                             cont ++;
                         }
                     }
+                    
                 };
 
                 btnAgregar.setOnAction(eventHandlerBtnAgregar);
