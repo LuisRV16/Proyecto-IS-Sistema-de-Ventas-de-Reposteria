@@ -9,15 +9,19 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.function.UnaryOperator;
 
 import controller.mainMenu.MenuController;
 import controller.sales.ShopCartController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -64,6 +68,8 @@ public class ProductController {
     @FXML
     private VBox vboxPreCart;
 
+    private DecimalFormat df = new DecimalFormat("#.00");
+
     private Connection con;
 
     private ArrayList<String> productosEnCarrito = new ArrayList<>();
@@ -75,6 +81,8 @@ public class ProductController {
     private HashMap<String, Float> precioProducto = new HashMap<>();
 
     private HashMap<String, byte[]> imagenProducto = new HashMap<>();
+
+    ObservableList<Pane> panels;
 
     private float subtotalF;
 
@@ -108,130 +116,32 @@ public class ProductController {
 
     public void inic() {
 
+        panels = FXCollections.observableArrayList();
         btnGoToCart.setDisable(true);
-
         String sql = "{call getProduct}";
 
         try (CallableStatement statement = con.prepareCall(sql)) {
             ResultSet resultados = statement.executeQuery();
 
             while (resultados.next()) {
-                Pane panelProducto = new Pane();
-
-                panelProducto.setMinWidth(200);
-                panelProducto.setMinHeight(200);
-                panelProducto.setMaxHeight(200);
-                panelProducto.setMaxWidth(200);
-                panelProducto.setBackground(
-                        new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(10), new Insets(3))));
-
-                byte[] datosImagen = resultados.getBytes(11);
-
+                byte[] datosImagen = resultados.getBytes(10);
                 Image image = new Image(new ByteArrayInputStream(datosImagen));
-
-                ImageView imagen = new ImageView();
-                imagen.setImage(image);
-                imagen.setFitWidth(100);
-                imagen.setFitHeight(100);
-                imagen.setLayoutX(50);
-                imagen.setLayoutY(25);
-
                 String resVarchar = resultados.getString(2);
-
-                Label nombreProducto = new Label(resVarchar);
-                if (resVarchar.length() > 25) {
-                    nombreProducto.setId("labelProductosXL");
-                }
-                nombreProducto.setFont(new Font("Arial", 12));
-                nombreProducto.setAlignment(Pos.CENTER);
-                nombreProducto.setMinWidth(panelProducto.getMinWidth());
-                nombreProducto.setLayoutX(0);
-                nombreProducto.setLayoutY(125);
-
                 imagenProducto.put(resVarchar, datosImagen);
 
-                DecimalFormat df = new DecimalFormat("#.00");
-
                 float resFloat = resultados.getFloat(6);
-                Text precioNormal = new Text("$" + df.format(resFloat));
-                precioNormal.setStyle("-fx-strikethrough: true;");
-                precioNormal.setFont(new Font("Arial", 12));
-                precioNormal.setLayoutX(80);
-                precioNormal.setLayoutY(157);
-
                 float descFloat = resultados.getFloat(7);
-                Label descuento = new Label(((int) descFloat * 100) + "%");
-                descuento.setFont(new Font("Arial", 15));
-                descuento.setTextFill(Color.GREEN);
-                descuento.setBackground(
-                        new Background(new BackgroundFill(Color.GREENYELLOW, new CornerRadii(7), Insets.EMPTY)));
-                descuento.setLayoutX(150);
-                descuento.setLayoutY(145);
 
                 float precioFinal = resultados.getFloat(8);
                 precioProducto.put(resVarchar, precioFinal);
 
-                Label precioVenta = new Label("$" + df.format(precioFinal));
-                precioVenta.setFont(new Font("Arial", 12));
-                precioVenta.setLayoutX(10);
-                precioVenta.setLayoutY(145);
-
-                precioNormal.setVisible(descFloat > 0 ? true : false);
-                descuento.setVisible(descFloat > 0 ? true : false);
-
                 int existencia = resultados.getInt(5);
                 existenciaProducto.put(resVarchar, existencia);
-                Label stock = new Label("Stock: " + existencia);
-                stock.setFont(new Font("Arial", 12));
-                stock.setLayoutX(10);
-                stock.setLayoutY(165);
 
-                if (existencia == 0) {
-                    stock.setTextFill(Color.BROWN);
-                    stock.setBackground(
-                            new Background(new BackgroundFill(Color.ORANGE, new CornerRadii(7), Insets.EMPTY)));
-                } else {
-                    stock.setTextFill(Color.BLACK);
-                    stock.setBackground(
-                            new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(7), Insets.EMPTY)));
-                }
-
-                Button btnAgregar = new Button("Agregar");
-                btnAgregar.setDisable(existencia == 0 ? true : false);
-                btnAgregar.setBackground(
-                        new Background(new BackgroundFill(Color.AQUA, new CornerRadii(10), Insets.EMPTY)));
-                btnAgregar.setLayoutX(115);
-                btnAgregar.setLayoutY(165);
-
-                EventHandler<ActionEvent> eventHandlerBtnAgregar = new EventHandler<ActionEvent>() {
-
-                    int cont = 0;
-
-                    @Override
-                    public void handle(ActionEvent arg0) {
-                        if (cont != existencia) {
-                            addProductoCart(resVarchar, precioFinal, existencia);
-                            if (btnGoToCart.isDisable())
-                                btnGoToCart.setDisable(false);
-                            cont ++;
-                        }
-                    }
-                    
-                };
-
-                btnAgregar.setOnAction(eventHandlerBtnAgregar);
-
-                panelProducto.getChildren().add(imagen);
-                panelProducto.getChildren().add(nombreProducto);
-                panelProducto.getChildren().add(precioVenta);
-                panelProducto.getChildren().add(precioNormal);
-                panelProducto.getChildren().add(descuento);
-                panelProducto.getChildren().add(stock);
-                panelProducto.getChildren().add(btnAgregar);
-
-                flowPaneProductos.getChildren().add(panelProducto);
+                panels.add(setPane(creatPane(), image, resVarchar, resFloat, descFloat, precioFinal, existencia));
             }
 
+            flowPaneProductos.getChildren().addAll(panels);
             resultados.close();
 
             if (!productosEnCarrito.isEmpty()) {
@@ -286,6 +196,138 @@ public class ProductController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private Pane creatPane() {
+        Pane panelProducto = new Pane();
+
+        panelProducto.setMinWidth(200);
+        panelProducto.setMinHeight(200);
+        panelProducto.setMaxHeight(200);
+        panelProducto.setMaxWidth(200);
+        panelProducto.setBackground(
+                new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(10), new Insets(3))));
+
+        ImageView imagen = new ImageView(); //0
+
+        imagen.setFitWidth(100);
+        imagen.setFitHeight(100);
+        imagen.setLayoutX(50);
+        imagen.setLayoutY(25);
+
+        Label nombreProducto = new Label(); //1
+
+        nombreProducto.setFont(new Font("Arial", 12));
+        nombreProducto.setAlignment(Pos.CENTER);
+        nombreProducto.setMinWidth(panelProducto.getMinWidth());
+        nombreProducto.setLayoutX(0);
+        nombreProducto.setLayoutY(125);
+
+        Text precioNormal = new Text(); //2
+
+        precioNormal.setStyle("-fx-strikethrough: true;");
+        precioNormal.setFont(new Font("Arial", 12));
+        precioNormal.setLayoutX(80);
+        precioNormal.setLayoutY(161);
+
+        Label descuento = new Label(); //3
+
+        descuento.setFont(new Font("Arial", 15));
+        descuento.setTextFill(Color.GREEN);
+        descuento.setBackground(
+                new Background(new BackgroundFill(Color.GREENYELLOW, new CornerRadii(7), Insets.EMPTY)));
+        descuento.setLayoutX(150);
+        descuento.setLayoutY(139);
+
+        Label precioVenta = new Label(); //4
+
+        precioVenta.setFont(new Font("Arial", 12));
+        precioVenta.setLayoutX(10);
+        precioVenta.setLayoutY(145);
+
+        Label stock = new Label(); //5
+
+        stock.setFont(new Font("Arial", 12));
+        stock.setLayoutX(10);
+        stock.setLayoutY(165);
+
+        Button btnAgregar = new Button("Agregar"); //6
+
+        btnAgregar.setBackground(
+                new Background(new BackgroundFill(Color.AQUA, new CornerRadii(10), Insets.EMPTY)));
+        btnAgregar.setLayoutX(115);
+        btnAgregar.setLayoutY(165);
+
+        panelProducto.getChildren().addAll(imagen, nombreProducto, precioNormal, descuento, precioVenta, stock, btnAgregar);
+
+        return panelProducto;
+    }
+
+    private Pane setPane(Pane panelProd, Image image, String resVarchar, float resFloat, float descFloat, float precioFinal, int existencia) {
+
+        ImageView iv = (ImageView) panelProd.getChildren().get(0);
+        iv.setImage(image);
+        panelProd.getChildren().set(0, iv);
+
+        Label label = (Label) panelProd.getChildren().get(1);
+        label.setText(resVarchar);
+        if (resVarchar.length() > 25)
+            label.setId("labelProductosXL");
+        panelProd.getChildren().set(1, label);
+
+        Text text = (Text) panelProd.getChildren().get(2);
+        text.setText("$" + df.format(resFloat));
+        text.setVisible(descFloat > 0 ? true : false);
+        panelProd.getChildren().set(2, text);
+
+        label = (Label) panelProd.getChildren().get(3);
+        label.setText(((int) (descFloat * 100)) + "%");
+        label.setVisible(descFloat > 0 ? true : false);
+        panelProd.getChildren().set(3, label);
+
+        label = (Label) panelProd.getChildren().get(4);
+        label.setText("$" + df.format(precioFinal));
+        panelProd.getChildren().set(4, label);
+
+        label = (Label) panelProd.getChildren().get(5);
+        label.setText("Stock: " + existencia);
+
+        if (existencia == 0) {
+            label.setTextFill(Color.BROWN);
+            label.setBackground(
+                    new Background(new BackgroundFill(Color.ORANGE, new CornerRadii(7), Insets.EMPTY)));
+        } else {
+            label.setTextFill(Color.BLACK);
+            label.setBackground(
+                    new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(7), Insets.EMPTY)));
+        }
+
+        panelProd.getChildren().set(5, label);
+
+        Button btn = (Button) panelProd.getChildren().get(6);
+        btn.setDisable(existencia == 0 ? true : false);
+
+        EventHandler<ActionEvent> eventHandlerBtnAgregar = new EventHandler<ActionEvent>() {
+
+            int cont = 0;
+
+            @Override
+            public void handle(ActionEvent arg0) {
+                if (cont != existencia) {
+                    addProductoCart(resVarchar, precioFinal, existencia);
+                    if (btnGoToCart.isDisable())
+                        btnGoToCart.setDisable(false);
+                    cont ++;
+                }
+            }
+            
+        };
+
+        btn.setOnAction(eventHandlerBtnAgregar);
+
+        panelProd.getChildren().set(6, btn);
+
+        return panelProd;
     }
 
     private void addProductoCart(String nombreProducto, float precio, int existencia) {
@@ -562,7 +604,6 @@ public class ProductController {
                     lblSubtotal.setText("Subtotal: $" + df.format(subtotalF));
                 }
             }
-
         };
 
         btnAnadir.setOnAction(eventHandlerBtnAnadir);
@@ -580,11 +621,8 @@ public class ProductController {
         panelProduct.getChildren().add(cantidadProduct);
         panelProduct.getChildren().add(btnAnadir);
         panelProduct.getChildren().add(subtotal);
-
         vboxPreCart.getChildren().add(panelProduct);
-
         subtotalF += precio * ((float) cantidad);
-
         lblSubtotal.setText("Subtotal: $" + df.format(subtotalF));
 
     }

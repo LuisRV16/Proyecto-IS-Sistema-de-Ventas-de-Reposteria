@@ -1,17 +1,15 @@
-
 create database sistemaReposteria
 
 use sistemaReposteria
 
 create table empleado (
-    idEmpleado varchar(15) primary key,
+    rfc varchar(13) primary key,
     nombre varchar(40) not null,
     apellido1 varchar(20) not null,
     apellido2 varchar(20),
     puesto varchar(30) not null,
     salario decimal(10,2) not null,
-    idSupervisor varchar(15),
-    rfc varchar(13) not null,
+    idSupervisor varchar(13),
     curp varchar(18) not null,
     nss varchar(11) not null,
     fechaContratacion date not null,
@@ -27,22 +25,21 @@ create table empleado (
     colonia varchar(30) not null,
     ciudad varchar(30) not null,
     estado varchar(30) not null,
-	foreign key (idSupervisor) references empleado(idEmpleado)
+	foreign key (idSupervisor) references empleado(rfc)
 )
 
 create table telefonoEmpleado (
 	telefono varchar(10) not null,
-	idEmpleado varchar(15) not null,
+	idEmpleado varchar(13) not null,
 	primary key (telefono, idEmpleado),
-	foreign key (idEmpleado) references empleado(idEmpleado)
+	foreign key (idEmpleado) references empleado(rfc)
 )
 
-create table clientes (
-	idCliente varchar(15) primary key,
+create table cliente (
+	rfc varchar(13) primary key,
 	nombre varchar(40) not null,
 	apellido1 varchar(20) not null,
 	apellido2 varchar(20),
-	rfc varchar(13) not null,
 	telefono varchar(10) not null,
 	correo varchar(255) not null,
 	calle varchar(30) not null,
@@ -56,16 +53,15 @@ create table clientes (
 
 create table venta (
 	idVenta varchar(15) primary key,
-	fechaDelPedido datetime,
-	fechaDeEntrega datetime,
-	idCliente varchar(15) not null,
-	idEmpleado varchar(15) not null,
+	fechaDeVenta datetime not null,
+	idCliente varchar(13) not null,
+	idEmpleado varchar(13) not null,
+	subtotal decimal(10,2) not null, -- se obtiene de la suma de todas las ocurrencias de la tabla ventaProducto en las que coincida el idVenta
 	iva decimal(10,2) not null,
-	subtotal decimal(10,2), -- se obtiene de suma de todas las ocurrencias de la tabla ventaProducto en las que coincida el idVenta
-	total decimal(10,2), -- se obtiene de la suma de subtotal con el subtotal multiplicado por el iva
-	metodoPago varchar(18) check (metodoPago in ('efectivo', 'tarjeta de debito', 'tarjeta de credito')),
-	estadoDelPago varchar(10) check (estadoDelPago in ('pagado', 'pendiente', 'no pagado')) not null,
-	estadoDeEntrega varchar(18) check (estadoDeEntrega in ('entregado', 'en proceso', 'cancelado')) not null
+	total decimal(10,2) not null, -- se obtiene de la suma de subtotal con el subtotal multiplicado por el iva (0.16)
+	metodoPago varchar(18) check (metodoPago in ('efectivo', 'tarjeta de debito', 'tarjeta de credito')) not null
+	foreign key (idCliente) references cliente (rfc),
+	foreign key (idEmpleado) references empleado (rfc)
 )
 
 create table factura (
@@ -77,7 +73,7 @@ create table factura (
 
 create table producto (
 	idProducto varchar(15) primary key,
-	nombre varchar(40) not null,
+	nombre varchar(40) unique not null,
 	peso int not null, -- el peso del producto en gramos
 	descripcion varchar(400) not null,
 	existencia int,
@@ -85,7 +81,6 @@ create table producto (
 	descuento decimal(10,2),
 	precioVenta decimal(10,2) not null,
 	tipoDeProducto varchar(6) check (tipoDeProducto in ('pastel', 'dulce')) not null,
-	normalOrPersonalizado varchar(13) check (normalOrPersonalizado in ('stock', 'personalizado')) not null,
 	imagenDelProducto varbinary(max)
 )
 
@@ -93,7 +88,7 @@ create table ventaProducto (
 	idProducto varchar(15) not null,
 	idVenta varchar(15) not null,
 	cantidad int not null,
-	precio decimal(10,2) not null, -- atributo derivado, se obtiene de la tabla producto
+	precio decimal(10,2) not null,
 	subtotal decimal(10,2) not null -- atributo derivado, se obtiene de la multiplicacion de cantidad con precio
 	primary key (idProducto, idVenta),
 	foreign key (idProducto) references producto(idProducto),
@@ -102,7 +97,7 @@ create table ventaProducto (
 
 create table almacen (
 	idMaterial varchar(15) primary key,
-	nombre varchar(30) not null,
+	nombre varchar(30) unique not null,
 	cantidad int not null
 )
 
@@ -132,10 +127,10 @@ create table telefonoProveedor (
 create table compraProveedor (
 	idCompra varchar(15) primary key,
 	idProveedor varchar(15) not null,
-	fechaInicial datetime, -- puede ser la fecha en la que se realiza el pedido
-	fechaFinal datetime, -- fecha en la dentro del periodo de tiempo, ha sido entregado el pedido y se realizo el pago completo
-	iva decimal(10,2) not null,
+	fechaInicial datetime not null, -- puede ser la fecha en la que se realiza el pedido
+	fechaFinal datetime, -- fecha en la que dentro del periodo de tiempo, ha sido entregado el pedido y se realizo el pago completo
 	subtotal decimal(10,2),
+	iva decimal(10,2),
 	total decimal(10,2),
 	metodoPago varchar(18) check (metodoPago in ('efectivo', 'tarjeta de debito', 'tarjeta de credito')),
 	estadoDelPago varchar(10) check (estadoDelPago in ('pagado', 'pendiente', 'no pagado')) not null,
@@ -152,4 +147,3 @@ create table compraMaterial (
 	foreign key (idCompra) references compraProveedor(idCompra),
 	foreign key (idMaterial) references almacen(idMaterial)
 )
-

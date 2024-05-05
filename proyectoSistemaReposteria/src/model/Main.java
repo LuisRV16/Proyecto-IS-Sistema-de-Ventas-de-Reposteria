@@ -34,39 +34,6 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 
-    // @Override
-    // public void start(Stage stage) throws IOException {
-    // ObservableList<Screen> screenSizes = Screen.getScreens();
-    // Stage secondStage = new Stage();
-    // Parent root =
-    // FXMLLoader.load(getClass().getResource("/view/client/agregaCliente.fxml"));
-    // Parent root2 =
-    // FXMLLoader.load(getClass().getResource("/view/sales/ShopCart.fxml"));
-    // Scene scene = new Scene(root);
-    // // Scene scene2 = new Scene(root2);
-    // stage.setTitle("1");
-    // stage.setScene(scene);
-    // secondStage.setTitle("2");
-    // // secondStage.setScene(scene2);
-    // stage.setResizable(false);
-    // if (screenSizes.size() > 1) {
-    // Rectangle2D bounds = screenSizes.get(1).getVisualBounds();
-    // secondStage.setX(bounds.getMinX());
-    // secondStage.setY(bounds.getMinY());
-    // secondStage.setMaximized(true);
-    // secondStage.setResizable(false);
-    // stage.setMaximized(true);
-    // stage.setResizable(false);
-    // }else{
-    // secondStage.setResizable(true);
-    // }
-    // stage.initStyle(StageStyle.UNDECORATED);
-    // stage.setMaximized(true);
-
-    // // secondStage.show();
-    // stage.show();
-    // }
-
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -82,62 +49,6 @@ public class Main extends Application {
         stage.show();
         
     }
-    /////////////////////////////////////////////////////
-    // private static final int FRAME_WIDTH = 200;
-    // private static final int FRAME_HEIGHT = 400;
-    // private static final Color FILL_COLOR = Color.GREEN;
-    // private static final Duration FILL_DURATION = Duration.seconds(1);
-
-    // @Override
-    // public void start(Stage primaryStage) {
-    //     StackPane root = new StackPane();
-
-    //     Rectangle frame = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT, Color.WHITE);
-    //     Rectangle fill = new Rectangle(FRAME_WIDTH, 0, FILL_COLOR);
-
-    //     root.getChildren().addAll(frame, fill);
-
-    //     KeyValue keyValue = new KeyValue(fill.heightProperty(), FRAME_HEIGHT);
-    //     KeyFrame keyFrame = new KeyFrame(FILL_DURATION, keyValue);
-
-    //     Timeline timeline = new Timeline(keyFrame);
-    //     timeline.setCycleCount(1);
-
-    //     fill.heightProperty().addListener((obs, oldValue, newValue) -> {
-    //         fill.setTranslateY((FRAME_HEIGHT - newValue.doubleValue()) / 2);
-    //     });
-
-    //     Scene scene = new Scene(root, FRAME_WIDTH, FRAME_HEIGHT);
-    //     primaryStage.setScene(scene);
-    //     primaryStage.setTitle("Gradual Vertical Fill Frame");
-    //     primaryStage.show();
-
-    //     timeline.play();
-
-    //     timeline.setOnFinished(e -> {
-    //         Polygon checkmark = new Polygon(
-    //                 0, 0,
-    //                 35, 40,
-    //                 120, -40,
-    //                 135, -20,
-    //                 35, 70,
-    //                 -15, 15
-    //         );
-    //         checkmark.setFill(Color.WHITE);
-    //         checkmark.setStroke(Color.GREEN);
-    //         checkmark.setStrokeWidth(2);
-    //         root.getChildren().add(checkmark);
-
-    //         Circle circle = new Circle(40, 10, 90);
-    //         circle.setFill(Color.TRANSPARENT);
-    //         circle.setStroke(Color.WHITE);
-    //         circle.setStrokeWidth(2);
-
-    //         root.getChildren().add(circle);
-    //     });
-
-    // }
-    /////////////////////////////////////////////////////
 
     // @Override
     // public void start(Stage primaryStage) {

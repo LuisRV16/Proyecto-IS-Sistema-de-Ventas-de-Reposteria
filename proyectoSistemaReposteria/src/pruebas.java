@@ -48,29 +48,29 @@ public class pruebas {
 
         Connection con = connector.getConnection();
 
-        addProduct("src/images/brownies.jpeg", con, "Brownie", 100, "Delicioso brownie de chocolate", 15, 25.0f, 0, "dulce", "stock");
-        addProduct("src/images/gelatina1.jpg", con, "Gelatina mosaico", 500, "Deliciosa gelatina mosaico", 10, 100.0f, 0, "dulce", "stock");
-        addProduct("src/images/gelatina2.jpg", con, "Gelatina de fresa", 500, "Deliciosa gelatina de fresa", 10, 100.0f, 0, "dulce", "stock");
-        addProduct("src/images/muffinChocolate.jpg", con, "Muffin de chocolate", 100, "Delicioso muffin de chocolate", 20, 20.0f, 0, "dulce", "stock");
-        addProduct("src/images/muffinChocolateDoble.jpg", con, "Muffin de chocolate doble", 100, "Delicioso muffin de chocolate doble", 20, 30.0f, 0, "dulce", "stock");
-        addProduct("src/images/pastel1.jpg", con, "Pastel de colores con betún", 800, "Delicioso pastel", 15, 150.0f, 0, "pastel", "stock");
-        addProduct("src/images/pastel2.jpg", con, "Pastel de chocolate con chocolate", 800, "Delicioso pastel", 15, 200.0f, 0, "pastel", "stock");
-        addProduct("src/images/pastel3.jpg", con, "Pastel de 3 leches", 800, "Delicioso pastel", 15, 180.0f, 0, "pastel", "stock");
-        addProduct("src/images/payDeQueso.jpg", con, "Pay de Queso", 400, "Delicioso pay de quesoooooooooo", 30, 80.0f, 0, "dulce", "stock");
+        addProduct("src/images/brownies.jpeg", con, "Brownie", 100, "Delicioso brownie de chocolate", 15, 25.0f, 0.1f, "dulce");
+        addProduct("src/images/gelatina1.jpg", con, "Gelatina mosaico", 500, "Deliciosa gelatina mosaico", 10, 100.0f, 0, "dulce");
+        addProduct("src/images/gelatina2.jpg", con, "Gelatina de fresa", 500, "Deliciosa gelatina de fresa", 10, 100.0f, 0, "dulce");
+        addProduct("src/images/muffinChocolate.jpg", con, "Muffin de chocolate", 100, "Delicioso muffin de chocolate", 20, 20.0f, 0, "dulce");
+        addProduct("src/images/muffinChocolateDoble.jpg", con, "Muffin de chocolate doble", 100, "Delicioso muffin de chocolate doble", 20, 30.0f, 0, "dulce");
+        addProduct("src/images/pastel1.jpg", con, "Pastel de colores con betún", 800, "Delicioso pastel", 15, 150.0f, 0, "pastel");
+        addProduct("src/images/pastel2.jpg", con, "Pastel de chocolate con chocolate", 800, "Delicioso pastel", 15, 200.0f, 0, "pastel");
+        addProduct("src/images/pastel3.jpg", con, "Pastel de 3 leches", 800, "Delicioso pastel", 15, 180.0f, 0, "pastel");
+        addProduct("src/images/payDeQueso.jpg", con, "Pay de Queso", 400, "Delicioso pay de quesoooooooooo", 30, 80.0f, 0, "dulce");
         
     }
 
     public static void addProduct(String pathImage, Connection con,
                                   String name, int weight, String description,
                                   int stock, float normalPrice, float discount,
-                                  String typeOfProduct, String normalOrPersonalized)
+                                  String typeOfProduct)
     {
         if (con != null) {
             try {
                 File imageFile = new File(pathImage);
                 byte[] datosImagen = Files.readAllBytes(imageFile.toPath());
                 // Aquí tienes los datos binarios de la imagen en datosImagen[]
-                String sql = "{call addProduct(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+                String sql = "{call addProduct(?, ?, ?, ?, ?, ?, ?, ?)}";
 
                 try (PreparedStatement statement = con.prepareStatement(sql)) {
                     statement.setString(1, name);
@@ -80,8 +80,7 @@ public class pruebas {
                     statement.setFloat(5, normalPrice);
                     statement.setFloat(6, discount);
                     statement.setString(7, typeOfProduct);
-                    statement.setString(8, normalOrPersonalized);
-                    statement.setBytes(9, datosImagen);
+                    statement.setBytes(8, datosImagen);
                     statement.execute();
 
                     System.out.println("Imagen insertada correctamente");

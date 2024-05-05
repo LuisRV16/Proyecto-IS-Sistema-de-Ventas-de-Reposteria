@@ -64,6 +64,12 @@ public class PaymentMethodController {
 
     private float total;
 
+    private String name;
+
+    private String lastName1;
+
+    private String lastName2;
+
     @FXML
     void cardPayment(ActionEvent event) {
 
@@ -71,7 +77,30 @@ public class PaymentMethodController {
 
     @FXML
     void cashPayment(ActionEvent event) {
+        Stage stage = (Stage) btnCashPayment.getScene().getWindow();
+        stage.close();
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sales/CashPayment.fxml"));
+            Parent root = loader.load();
+
+            CashPaymentController controller = loader.getController();
+            controller.setCon(con);
+            controller.setProductosEnCarrito(productosEnCarrito);
+            controller.setCantidadProducto(cantidadProducto);
+            controller.setExistenciaProducto(existenciaProducto);
+            controller.setPrecioProducto(precioProducto);
+            controller.setImagenProducto(imagenProducto);
+            controller.setTotal(total);
+            controller.setPreviousStage(stage);
+            controller.inic();
+
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root));
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -148,6 +177,9 @@ public class PaymentMethodController {
         EventHandler<ActionEvent> eventH = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
+                name = btnGeneric.getText();
+                lastName1 = "Gen";
+                
                 lblClient.setText(btnGeneric.getText());
                 btnCashPayment.setDisable(false);
                 btnCardPayment.setDisable(false);
@@ -187,6 +219,10 @@ public class PaymentMethodController {
 
                         @Override
                         public void handle(ActionEvent arg0) {
+                            name = nombre;
+                            lastName1 = apellido1;
+                            lastName2 = apellido2;
+
                             lblClient.setText(nombre + " " + apellido1 + " " + apellido2);
                             btnCashPayment.setDisable(false);
                             btnCardPayment.setDisable(false);

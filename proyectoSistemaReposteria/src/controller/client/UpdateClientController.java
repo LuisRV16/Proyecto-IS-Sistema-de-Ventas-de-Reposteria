@@ -111,6 +111,8 @@ public class UpdateClientController {
 
     private String apellido2;
 
+    private String rfc;
+
     private Connection con;
 
     public void setNombre(String nombre) {
@@ -224,16 +226,16 @@ public class UpdateClientController {
             ResultSet resultados = statement.executeQuery();
 
             while (resultados.next()) {
-                String rfc = resultados.getString(5);
-                String phone = resultados.getString(6);
-                String email = resultados.getString(7);
-                String street = resultados.getString(8);
-                String interiorNumber = resultados.getString(9);
-                String outdoorNumber = resultados.getString(10);
-                String postalCode = resultados.getString(11);
-                String colony = resultados.getString(12);
-                String city = resultados.getString(13);
-                String state = resultados.getString(14);
+                rfc = resultados.getString(1);
+                String phone = resultados.getString(5);
+                String email = resultados.getString(6);
+                String street = resultados.getString(7);
+                String interiorNumber = resultados.getString(8);
+                String outdoorNumber = resultados.getString(9);
+                String postalCode = resultados.getString(10);
+                String colony = resultados.getString(11);
+                String city = resultados.getString(12);
+                String state = resultados.getString(13);
 
                 txtNombre.setText(nombre);
                 txtPaterno.setText(apellido1);
@@ -267,26 +269,24 @@ public class UpdateClientController {
 
     @FXML
     void update(ActionEvent event) {        
-        String sql = "{call updateClient(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call updateClient(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
         try (CallableStatement statement = con.prepareCall(sql)) {
-            statement.setString(1, nombre);
-            statement.setString(2, apellido1);
-            statement.setString(3, apellido2);
-            statement.setString(4, txtTelefono.getText());
-            statement.setString(5, txtCorreo.getText());
-            statement.setString(6, txtCalle.getText());
-            statement.setString(7, txtInterior.getText());
-            statement.setString(8, txtExterior.getText());
-            statement.setString(9, txtCP.getText());
-            statement.setString(10, txtColonia.getText());
-            statement.setString(11, txtCiudad.getText());
-            statement.setString(12, txtEstado.getText());
-            statement.registerOutParameter(13, Types.VARCHAR);
+            statement.setString(1, rfc);
+            statement.setString(2, txtTelefono.getText());
+            statement.setString(3, txtCorreo.getText());
+            statement.setString(4, txtCalle.getText());
+            statement.setString(5, txtInterior.getText());
+            statement.setString(6, txtExterior.getText());
+            statement.setString(7, txtCP.getText());
+            statement.setString(8, txtColonia.getText());
+            statement.setString(9, txtCiudad.getText());
+            statement.setString(10, txtEstado.getText());
+            statement.registerOutParameter(11, Types.VARCHAR);
 
             statement.execute();
 
-            String msg = statement.getString(13);
+            String msg = statement.getString(11);
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
             alert.setTitle("Mensaje");

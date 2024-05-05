@@ -1,16 +1,18 @@
 -- Definición de la función para generar un carácter aleatorio
 create procedure randomChar
+	@char char output
 as
 begin
-    declare @numero_aleatorio int
-    declare @caracter char
-    set @numero_aleatorio = round(rand() * 122, 0)
-    while not ((@numero_aleatorio >= 48 and @numero_aleatorio <= 57) or
-			   (@numero_aleatorio >= 65 and @numero_aleatorio <= 90) or
-			   (@numero_aleatorio >= 97 and @numero_aleatorio <= 122))
-    begin
-        set @numero_aleatorio = round(rand() * 122, 0)
-    end
-    set @caracter = char(@numero_aleatorio)
-    select @caracter
+    declare @random_number int
+
+    set @random_number = round(rand() * 122, 0)
+    while not ((@random_number >= 48 and @random_number <= 57) or
+			   (@random_number >= 65 and @random_number <= 90) or
+			   (@random_number >= 97 and @random_number <= 122))
+		begin
+			set @random_number = round(rand() * 122, 0)
+		end
+
+    set @char = char(@random_number)
+
 end

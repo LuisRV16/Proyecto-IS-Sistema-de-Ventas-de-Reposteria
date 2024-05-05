@@ -26,19 +26,12 @@ as
 begin
 	declare @id varchar(15)
 
-	exec getRandomId @length = 15, @randomId = @id output
-
-	while exists (select * from empleado where idEmpleado = @id)
-	begin
-		exec getRandomId @length = 15, @randomId = @id output
-	end
-
 	insert into empleado
-		(idEmpleado, nombre, apellido1, apellido2, puesto, salario, idSupervisor, rfc, curp, nss,
+		(rfc, nombre, apellido1, apellido2, puesto, salario, idSupervisor, curp, nss,
 		 fechaContratacion, fechaDeNacimiento, sexo, estadoCivil, estatus, correo, calle, numeroInterior,
 		 numeroExterior, codigoPostal, colonia, ciudad, estado)
 	values
-		(@id, @name, @lastName1, @lastName2, @position, @salary, @idSupervisor, @rfc, @curp, @nss,
+		(@rfc, @name, @lastName1, @lastName2, @position, @salary, @idSupervisor, @curp, @nss,
 		 @dateHire, @birthdate, @gender, @civilStatus, @status, @email, @street, @interiorNumber,
 		 @outdoorNumber, @postalCode, @colony, @city, @state)
 

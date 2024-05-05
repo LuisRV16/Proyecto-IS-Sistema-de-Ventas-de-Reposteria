@@ -4,5 +4,5 @@ create procedure getClientByName
 	@lastName2 varchar(20)
 as
 begin
-	select * from clientes where nombre = @name and apellido1 = @lastName1 and apellido2 = @lastName2
+	select * from cliente where nombre = @name and apellido1 = @lastName1 and apellido2 = @lastName2
 end

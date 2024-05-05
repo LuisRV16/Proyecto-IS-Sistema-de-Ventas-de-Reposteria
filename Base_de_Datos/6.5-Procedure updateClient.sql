@@ -1,7 +1,5 @@
 create procedure updateClient (
-    @name varchar(40),
-    @lastName1 varchar(20),
-    @lastName2 varchar(20),
+	@rfc varchar(13),
     @phone varchar(15),
     @email varchar(255),
     @street varchar(30),
@@ -16,7 +14,6 @@ create procedure updateClient (
 as
 begin
 
-	declare @id varchar(15) = (select idCliente from clientes where nombre = @name and apellido1 = @lastName1 and apellido2 = @lastName2)
 	declare @band bit = 1;
 
 	if @phone = ''
@@ -26,7 +23,7 @@ begin
 		end
 	else if len(@phone) < 10 or @phone like '%[^0-9]%'
 		begin
-			set @msg = 'Ingrese el número de teléfono correcto.\nEl numero de telefono se compone de 10 números.\nNo se permiten carácteres distintos a dígitos.'
+			set @msg = 'Ingrese el número de teléfono correcto.' + CHAR(13) + CHAR(10) + 'El numero de telefono se compone de 10 números.' + CHAR(13) + CHAR(10) + 'No se permiten carácteres distintos a dígitos.'
 			set @band = 0
 		end
 	else if @street = '' or replace(@street, ' ', '') = ''
@@ -46,7 +43,7 @@ begin
 		end
 	else if PATINDEX('%[^A-Z0-9]%', @interiorNumber) > 0
 		begin
-			set @msg = 'Ingrese un numero interior correcto.\nEl número interior puede estar compuesto por números y letras'
+			set @msg = 'Ingrese un numero interior correcto.' + CHAR(13) + CHAR(10) + 'El número interior puede estar compuesto por números y letras'
 			set @band = 0
 		end
 	else if @outdoorNumber = ''
@@ -56,12 +53,12 @@ begin
 		end
 	else if PATINDEX('%[^A-Z0-9]%', @outdoorNumber) > 0
 		begin
-			set @msg = 'Ingrese un numero interior correcto.\nEl número exterior puede estar compuesto por números y letras'
+			set @msg = 'Ingrese un numero interior correcto.' + CHAR(13) + CHAR(10) + 'El número exterior puede estar compuesto por números y letras'
 			set @band = 0
 		end
 	else if len(@postalCode) < 5 or @postalCode like '%[^0-9]%'
 		begin
-			set @msg = 'Ingrese el Código postal correcto.\nEl Código postal se compone de 5 números.\nNo se permiten carácteres distintos a dígitos.'
+			set @msg = 'Ingrese el Código postal correcto.' + CHAR(13) + CHAR(10) + 'El Código postal se compone de 5 números.' + CHAR(13) + CHAR(10) + 'No se permiten carácteres distintos a dígitos.'
 			set @band = 0
 		end
 	else if @colony = '' or replace(@colony, ' ', '') = ''
@@ -91,27 +88,27 @@ begin
 		end
 	else if charindex(' ', @email) > 0
 		begin
-			set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico no debe contener espacios en blanco.'
+			set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico no debe contener espacios en blanco.'
 			set @band = 0
 		end
 	else if left(@email, 1) like '.'
 		begin
-			set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico no debe inicar con .'
+			set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico no debe inicar con .'
 			set @band = 0
 		end
 	else if left(@email, 1) like '@'
 		begin
-			set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico no debe inicar con @'
+			set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico no debe inicar con @'
 			set @band = 0
 		end
 	else if right(@email, 1) like '.'
 		begin
-			set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico no debe terminar con .'
+			set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico no debe terminar con .'
 			set @band = 0
 		end
 	else if right(@email, 1) like '@'
 		begin
-			set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico no debe terminar con @'
+			set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico no debe terminar con @'
 			set @band = 0
 		end
 	else
@@ -135,12 +132,12 @@ begin
 
 			if @contador > 1
 				begin
-					set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico no debe contener una @ solamente.'
+					set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico no debe contener una @ solamente.'
 					set @band = 0
 				end
 			else if @contador = 0
 				begin
-					set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico debe contener una @.'
+					set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico debe contener una @.'
 					set @band = 0
 				end
 
@@ -148,17 +145,17 @@ begin
 				begin
 					if  substring(@email, charindex('@', @email) - 1, 1) = '.'
 						begin
-							set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico no debe tener un . antes del @'
+							set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico no debe tener un . antes del @'
 							set @band = 0
 						end
 					else if substring(@email, charindex('@', @email) + 1, 1) = '.'
 						begin
-							set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico no debe tener un . después del @'
+							set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico no debe tener un . después del @'
 							set @band = 0
 						end
 					else if charindex('.', substring(@email, charindex('@', @email) + 1, len(@email))) = 0
 						begin
-							set @msg = 'Ingrese el correo electrónico correctamente.\nEl correo electrónico debe contener la parte del dominio.'
+							set @msg = 'Ingrese el correo electrónico correctamente.' + CHAR(13) + CHAR(10) + 'El correo electrónico debe contener la parte del dominio.'
 							set @band = 0
 						end
 				end
@@ -173,7 +170,7 @@ begin
 
 							if @caracter in ('[', ']', '!', '#', '$', '%', '&', '\', '*', '+', '=', '?', '^', '|', '{', '}', char(34), '¿', '¡', '°', ';', ':', '/', '<', '>', '(', ')')
 								begin
-									set @msg = 'Carácter inválido en el Email.\nIngrese el Email correctamente.'
+									set @msg = 'Carácter inválido en el Email.' + CHAR(13) + CHAR(10) + 'Ingrese el Email correctamente.'
 									set @band = 0
 									break
 								end
@@ -185,7 +182,7 @@ begin
 
 	if @band = 1
 	begin
-		update clientes
+		update cliente
 		set
 			telefono = @phone,
 			correo = @email,
@@ -197,7 +194,7 @@ begin
 			ciudad = @city,
 			estado = @state
 		where
-			idCliente = @id
+			rfc = @rfc
 
 		set @msg = 'Datos del cliente actualizados correctamente.'
 	end

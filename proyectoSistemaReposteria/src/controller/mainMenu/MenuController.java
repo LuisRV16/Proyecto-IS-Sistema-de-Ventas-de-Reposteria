@@ -84,17 +84,18 @@ public class MenuController {
     @FXML
     void goToProduct(ActionEvent event) {
         try {
-            Stage stage = (Stage) btnProducto.getScene().getWindow(); // Obtener la ventana actual
-            stage.close();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/product/product.fxml"));
             Parent root = loader.load();
             ProductController controller = loader.getController();
             controller.setCon(con);
+            long l = System.nanoTime();
             controller.inic();
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
             newStage.show();
+
+            Stage stage = (Stage) btnProducto.getScene().getWindow(); // Obtener la ventana actual
+            stage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

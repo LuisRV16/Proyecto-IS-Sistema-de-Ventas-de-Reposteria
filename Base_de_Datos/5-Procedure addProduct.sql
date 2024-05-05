@@ -7,7 +7,6 @@ create procedure addProduct
 	@normalPrice float,
 	@discount float, -- solo valores entre 0 y 1
 	@kindOfProduct varchar(6),
-	@normalOrPersonalized varchar(13),
 	@productImage varbinary(max)
 as
 begin
@@ -25,10 +24,9 @@ begin
 
 	insert into producto
 		(idProducto, nombre, peso, descripcion, existencia, precioNormal, descuento, precioVenta, tipoDeProducto,
-		 normalOrPersonalizado, imagenDelProducto)
+		 imagenDelProducto)
 	values
-		(@id, @name, @weight, @description, @stock, @normalPrice, @discount, @salePrice, @kindOfProduct,
-		 @normalOrPersonalized, @productImage)
+		(@id, @name, @weight, @description, @stock, @normalPrice, @discount, @salePrice, @kindOfProduct, @productImage)
 
 	print 'Registro exitoso'
 

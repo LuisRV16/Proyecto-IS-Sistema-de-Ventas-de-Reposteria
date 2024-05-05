@@ -269,7 +269,6 @@ public class ShopCartController {
 
     @FXML
     void goBack(ActionEvent event) {
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/product/product.fxml"));
             Parent root = loader.load();
