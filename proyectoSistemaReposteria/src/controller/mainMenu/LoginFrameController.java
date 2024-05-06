@@ -1,7 +1,10 @@
 package controller.mainMenu;
 
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +35,12 @@ public class LoginFrameController {
 
     @FXML
     private TextField lblUser;
+
+    private String employeeName;
+
+    private String employeeLastName1;
+
+    private String employeeLastName2;
 
     @FXML
     void goToMenu(ActionEvent event) {
@@ -69,6 +78,19 @@ public class LoginFrameController {
         
         try {
 
+            CallableStatement statement = con.prepareCall("{call getEmployeeByUser(?, ?, ?, ?)}");
+
+            statement.setString(1, user);
+            statement.registerOutParameter(2, Types.VARCHAR);
+            statement.registerOutParameter(3, Types.VARCHAR);
+            statement.registerOutParameter(4, Types.VARCHAR);
+
+            statement.execute();
+
+            employeeName = statement.getString(2);
+            employeeLastName1 = statement.getString(3);
+            employeeLastName2 = statement.getString(4);
+
             Stage stage = (Stage) btnLogin.getScene().getWindow(); // Obtener la ventana actual
             stage.close();
 
@@ -77,12 +99,15 @@ public class LoginFrameController {
             
             MenuController controller = loader.getController();
             controller.setCon(con);
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
 
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
             newStage.show();
             
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
 

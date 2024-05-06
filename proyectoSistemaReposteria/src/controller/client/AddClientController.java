@@ -107,6 +107,12 @@ public class AddClientController {
 
     Connection con;
 
+    private String employeeName;
+
+    private String employeeLastName1;
+
+    private String employeeLastName2;
+
     public void setCon(Connection con) {
         this.con = con;
     }
@@ -278,6 +284,9 @@ public class AddClientController {
             MenuClienteController controller = loader.getController();
             controller.setCon(con);
             controller.inic();
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
 
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
@@ -285,6 +294,18 @@ public class AddClientController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setEmployeeLastName1(String employeeLastName1) {
+        this.employeeLastName1 = employeeLastName1;
+    }
+
+    public void setEmployeeLastName2(String employeeLastName2) {
+        this.employeeLastName2 = employeeLastName2;
     }
 
     private void clean() {

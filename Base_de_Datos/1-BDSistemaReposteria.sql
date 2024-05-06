@@ -28,6 +28,11 @@ create table empleado (
 	foreign key (idSupervisor) references empleado(rfc)
 )
 
+-- Se agrega a la tabla empleado el campo de nombreUsuario
+alter table empleado
+add nombreUsuario varchar(15) unique
+-- Permite nulos porque solo se crea un login para los cajeros
+
 create table telefonoEmpleado (
 	telefono varchar(10) not null,
 	idEmpleado varchar(13) not null,

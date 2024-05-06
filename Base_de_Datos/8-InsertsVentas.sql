@@ -1,5 +1,5 @@
 -- insercion de empleado
-
+declare @mesg varchar(100)
 exec addEmployee
 	@name = 'Ramiro',
 	@lastName1 = 'Zuñiga',
@@ -22,4 +22,7 @@ exec addEmployee
 	@postalCode = '94866',
 	@colony = 'Golondrinas',
 	@city = 'Tampico',
-	@state = 'Tamaulipas'
+	@state = 'Tamaulipas',
+	@pwd = 'zumr',
+	@msg = @mesg output
+select @mesg

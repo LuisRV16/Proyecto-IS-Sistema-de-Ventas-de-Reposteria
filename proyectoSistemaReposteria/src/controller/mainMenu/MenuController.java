@@ -25,28 +25,28 @@ public class MenuController {
     @FXML
     private Button btnClose;
 
-    private String nombre;
+    private String employeeName;
 
-    private String apellido1;
+    private String employeeLastName1;
 
-    private String apellido2;
+    private String employeeLastName2;
 
     Connection con;
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
-    }
-
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
-    }
-
     public void setCon(Connection con) {
         this.con = con;
+    }
+    
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setEmployeeLastName1(String employeeLastName1) {
+        this.employeeLastName1 = employeeLastName1;
+    }
+
+    public void setEmployeeLastName2(String employeeLastName2) {
+        this.employeeLastName2 = employeeLastName2;
     }
 
     @FXML
@@ -72,6 +72,9 @@ public class MenuController {
             MenuClienteController controller = loader.getController();
             controller.setCon(con);
             controller.inic();
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
             
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
@@ -87,9 +90,13 @@ public class MenuController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/product/product.fxml"));
             Parent root = loader.load();
             ProductController controller = loader.getController();
+
             controller.setCon(con);
-            long l = System.nanoTime();
             controller.inic();
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
+            
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
             newStage.show();

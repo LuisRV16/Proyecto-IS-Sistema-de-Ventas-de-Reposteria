@@ -70,6 +70,12 @@ public class ShopCartController {
 
     private float total;
 
+    private String employeeName;
+
+    private String employeeLastName1;
+
+    private String employeeLastName2;
+
     public void inic() {
 
         DecimalFormat df = new DecimalFormat("#####0.00");
@@ -266,6 +272,18 @@ public class ShopCartController {
     public void setImagenProducto(HashMap<String, byte[]> imagenProducto) {
         this.imagenProducto = imagenProducto;
     }
+    
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setEmployeeLastName1(String employeeLastName1) {
+        this.employeeLastName1 = employeeLastName1;
+    }
+
+    public void setEmployeeLastName2(String employeeLastName2) {
+        this.employeeLastName2 = employeeLastName2;
+    }
 
     @FXML
     void goBack(ActionEvent event) {
@@ -278,6 +296,9 @@ public class ShopCartController {
             controller.setProductosEnCarrito(productosEnCarrito);
             controller.setCantidadProducto(cantidadProducto);
             controller.inic();
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
 
             Stage stage = new Stage();
             stage.setTitle("Prueba");
@@ -309,6 +330,9 @@ public class ShopCartController {
             controller.setPrecioProducto(precioProducto);
             controller.setExistenciaProducto(existenciaProducto);
             controller.setImagenProducto(imagenProducto);
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
             controller.setSubtotalF(subtotalF);
             controller.setIva(iva);
             controller.setTotal(total);

@@ -64,11 +64,17 @@ public class PaymentMethodController {
 
     private float total;
 
-    private String name;
+    private String clientName;
 
-    private String lastName1;
+    private String clientLastName1;
 
-    private String lastName2;
+    private String clientLastName2;
+
+    private String employeeName;
+
+    private String employeeLastName1;
+
+    private String employeeLastName2;
 
     @FXML
     void cardPayment(ActionEvent event) {
@@ -91,7 +97,15 @@ public class PaymentMethodController {
             controller.setExistenciaProducto(existenciaProducto);
             controller.setPrecioProducto(precioProducto);
             controller.setImagenProducto(imagenProducto);
+            controller.setIva(iva);
+            controller.setSubtotal(subtotalF);
             controller.setTotal(total);
+            controller.setClientName(clientName);
+            controller.setClientLastName1(clientLastName1);
+            controller.setClientLastName2(clientLastName2);
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
             controller.setPreviousStage(stage);
             controller.inic();
 
@@ -120,6 +134,9 @@ public class PaymentMethodController {
             controller.setExistenciaProducto(existenciaProducto);
             controller.setPrecioProducto(precioProducto);
             controller.setImagenProducto(imagenProducto);
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
             controller.inic();
 
             Stage newStage = new Stage();
@@ -153,6 +170,18 @@ public class PaymentMethodController {
     public void setImagenProducto(HashMap<String, byte[]> imagenProducto) {
         this.imagenProducto = imagenProducto;
     }
+    
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setEmployeeLastName1(String employeeLastName1) {
+        this.employeeLastName1 = employeeLastName1;
+    }
+
+    public void setEmployeeLastName2(String employeeLastName2) {
+        this.employeeLastName2 = employeeLastName2;
+    }
 
     public void setIva(float iva) {
         this.iva = iva;
@@ -177,8 +206,8 @@ public class PaymentMethodController {
         EventHandler<ActionEvent> eventH = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
-                name = btnGeneric.getText();
-                lastName1 = "Gen";
+                clientName = btnGeneric.getText();
+                clientLastName1 = "Gen";
                 
                 lblClient.setText(btnGeneric.getText());
                 btnCashPayment.setDisable(false);
@@ -219,9 +248,9 @@ public class PaymentMethodController {
 
                         @Override
                         public void handle(ActionEvent arg0) {
-                            name = nombre;
-                            lastName1 = apellido1;
-                            lastName2 = apellido2;
+                            clientName = nombre;
+                            clientLastName1 = apellido1;
+                            clientLastName2 = apellido2;
 
                             lblClient.setText(nombre + " " + apellido1 + " " + apellido2);
                             btnCashPayment.setDisable(false);

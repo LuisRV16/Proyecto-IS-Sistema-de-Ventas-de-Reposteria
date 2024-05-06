@@ -1,6 +1,9 @@
 package controller.sales;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,13 +72,23 @@ public class CashPaymentController {
 
     private HashMap<String, byte[]> imagenProducto;
 
+    private float iva;
+
+    private float subtotal;
+
     private float total;
 
-    private String name;
+    private String clientName;
 
-    private String lastName1;
-    
-    private String lastName2;
+    private String clientLastName1;
+
+    private String clientLastName2;
+
+    private String employeeName;
+
+    private String employeeLastName1;
+
+    private String employeeLastName2;
 
     private Stage previousStage;
 
@@ -109,21 +122,41 @@ public class CashPaymentController {
     public void setImagenProducto(HashMap<String, byte[]> imagenProducto) {
         this.imagenProducto = imagenProducto;
     }
+    
+    public void setIva(float iva) {
+        this.iva = iva;
+    }
+
+    public void setSubtotal(float subtotal) {
+        this.subtotal = subtotal;
+    }
 
     public void setTotal(float total) {
         this.total = total;
     }
-    
-    public void setName(String name) {
-        this.name = name;
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
-    public void setLastName1(String lastName1) {
-        this.lastName1 = lastName1;
+    public void setClientLastName1(String clientLastName1) {
+        this.clientLastName1 = clientLastName1;
     }
 
-    public void setLastName2(String lastName2) {
-        this.lastName2 = lastName2;
+    public void setClientLastName2(String clientLastName2) {
+        this.clientLastName2 = clientLastName2;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setEmployeeLastName1(String employeeLastName1) {
+        this.employeeLastName1 = employeeLastName1;
+    }
+
+    public void setEmployeeLastName2(String employeeLastName2) {
+        this.employeeLastName2 = employeeLastName2;
     }
 
     public void setPreviousStage(Stage previousStage) {
@@ -178,57 +211,105 @@ public class CashPaymentController {
 
     @FXML
     void pay(ActionEvent event) {
-        double midX = panePayCom.getWidth()/2;
-        double midY = panePayCom.getHeight()/2;
 
-        Rectangle frame = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT, Color.WHITE);
-        Rectangle fill = new Rectangle(FRAME_WIDTH, 0, FILL_COLOR);
+        String sql = "{call addSale(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        try {
 
-        panePayCom.getChildren().addAll(frame, fill);
+            CallableStatement statement = con.prepareCall(sql);
 
-        KeyValue keyValue = new KeyValue(fill.heightProperty(), FRAME_HEIGHT);
-        KeyFrame keyFrame = new KeyFrame(FILL_DURATION, keyValue);
+            statement.setString(1, clientName);
+            statement.setString(2, clientLastName1);
+            statement.setString(3, clientLastName2);
+            statement.setString(4, employeeName);
+            statement.setString(5, employeeLastName1);
+            statement.setString(6, employeeLastName2);
+            statement.setFloat(7, iva);
+            statement.setFloat(8, subtotal);
+            statement.setFloat(9, total);
+            statement.setString(10, "efectivo");
+            statement.registerOutParameter(11, Types.VARCHAR);
 
-        Timeline timeline = new Timeline(keyFrame);
-        timeline.setCycleCount(1);
+            statement.execute();
 
-        fill.heightProperty().addListener((obs, oldValue, newValue) -> {
-            fill.setTranslateY((FRAME_HEIGHT - newValue.doubleValue()) / 2);
-        });
+            String msg = statement.getString(11);
+            String msg2;
 
-        timeline.play();
+            sql = "{call addSaleProduct(?, ?, ?, ?, ?)}";
+            statement = con.prepareCall(sql);
+            for (String nombreProducto : productosEnCarrito) {
 
-        timeline.setOnFinished(e -> {
-            Polygon checkmark = new Polygon(
-                    midX - 52.5, midY - 27.5, //1
-                    midX - 17.5, midY + 12.5, //2 
-                    midX + 67.5, midY - 67.5, //3
-                    midX + 82.5, midY - 47.5, //4
-                    midX - 17.5, midY + 42.5, //5
-                    midX - 67.5, midY - 12.5  //6
-            );
-            checkmark.setFill(Color.WHITE);
-            checkmark.setStroke(Color.GREEN);
-            checkmark.setStrokeWidth(2);
-            panePayCom.getChildren().add(checkmark);
+                int cantidad = cantidadProducto.get(nombreProducto);
+                float precio = precioProducto.get(nombreProducto);
+                float subtotal = precio * (float) cantidad;
 
-            Circle circle = new Circle(122.5, 162.5, 90);
-            circle.setFill(Color.TRANSPARENT);
-            circle.setStroke(Color.WHITE);
-            circle.setStrokeWidth(2);
+                statement.setString(1, nombreProducto);
+                statement.setInt(2, cantidad);
+                statement.setFloat(3, precio);
+                statement.setFloat(4, subtotal);
+                statement.registerOutParameter(5, Types.VARCHAR);
 
-            panePayCom.getChildren().add(circle);
+                statement.execute();
 
-            // Mostrar la ventana emergente después de agregar los elementos
-            Platform.runLater(() -> {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Compra terminada");
-                alert.setHeaderText(null);
-                alert.setContentText("Compra terminada.");
-                alert.showAndWait();
+                msg2 = statement.getString(5);
+            }
+
+            statement.close();
+
+            double midX = panePayCom.getWidth() / 2;
+            double midY = panePayCom.getHeight() / 2;
+
+            Rectangle frame = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT, Color.WHITE);
+            Rectangle fill = new Rectangle(FRAME_WIDTH, 0, FILL_COLOR);
+
+            panePayCom.getChildren().addAll(frame, fill);
+
+            KeyValue keyValue = new KeyValue(fill.heightProperty(), FRAME_HEIGHT);
+            KeyFrame keyFrame = new KeyFrame(FILL_DURATION, keyValue);
+
+            Timeline timeline = new Timeline(keyFrame);
+            timeline.setCycleCount(1);
+
+            fill.heightProperty().addListener((obs, oldValue, newValue) -> {
+                fill.setTranslateY((FRAME_HEIGHT - newValue.doubleValue()) / 2);
             });
 
-        });
+            timeline.play();
+
+            timeline.setOnFinished(e -> {
+                Polygon checkmark = new Polygon(
+                        midX - 52.5, midY - 27.5, // 1
+                        midX - 17.5, midY + 12.5, // 2
+                        midX + 67.5, midY - 67.5, // 3
+                        midX + 82.5, midY - 47.5, // 4
+                        midX - 17.5, midY + 42.5, // 5
+                        midX - 67.5, midY - 12.5 // 6
+                );
+                checkmark.setFill(Color.WHITE);
+                checkmark.setStroke(Color.GREEN);
+                checkmark.setStrokeWidth(2);
+                panePayCom.getChildren().add(checkmark);
+
+                Circle circle = new Circle(122.5, 162.5, 90);
+                circle.setFill(Color.TRANSPARENT);
+                circle.setStroke(Color.WHITE);
+                circle.setStrokeWidth(2);
+
+                panePayCom.getChildren().add(circle);
+
+                // Mostrar la ventana emergente después de agregar los elementos
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Compra terminada");
+                    alert.setHeaderText(null);
+                    alert.setContentText(msg);
+                    alert.showAndWait();
+
+                });
+
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

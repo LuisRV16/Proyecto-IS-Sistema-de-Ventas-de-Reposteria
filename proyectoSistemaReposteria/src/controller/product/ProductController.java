@@ -86,6 +86,12 @@ public class ProductController {
 
     private float subtotalF;
 
+    private String employeeName;
+
+    private String employeeLastName1;
+
+    private String employeeLastName2;
+
     @FXML
     void goBack(ActionEvent event) {
         try {
@@ -97,6 +103,9 @@ public class ProductController {
 
             MenuController controller = loader.getController();
             controller.setCon(con);
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
 
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
@@ -112,6 +121,18 @@ public class ProductController {
 
     public void setCantidadProducto(HashMap<String, Integer> cantidadProducto) {
         this.cantidadProducto = cantidadProducto;
+    }
+    
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setEmployeeLastName1(String employeeLastName1) {
+        this.employeeLastName1 = employeeLastName1;
+    }
+
+    public void setEmployeeLastName2(String employeeLastName2) {
+        this.employeeLastName2 = employeeLastName2;
     }
 
     public void inic() {
@@ -188,6 +209,9 @@ public class ProductController {
             controller.setExistenciaProducto(existenciaProducto);
             controller.setPrecioProducto(precioProducto);
             controller.setImagenProducto(imagenProducto);
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
             controller.inic();
 
             Stage newStage = new Stage();
@@ -631,5 +655,6 @@ public class ProductController {
     void ordenamiento(ActionEvent event) {
 
     }
+
 
 }
