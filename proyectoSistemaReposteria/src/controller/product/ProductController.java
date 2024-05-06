@@ -31,6 +31,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -43,6 +44,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ProductController {
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private Button btnGoToCart;
@@ -103,9 +106,6 @@ public class ProductController {
 
             MenuController controller = loader.getController();
             controller.setCon(con);
-            controller.setEmployeeName(employeeName);
-            controller.setEmployeeLastName1(employeeLastName1);
-            controller.setEmployeeLastName2(employeeLastName2);
 
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
@@ -194,10 +194,6 @@ public class ProductController {
 
     @FXML
     void goToCart(ActionEvent event) {
-
-        Stage stage = (Stage) btnGoToCart.getScene().getWindow(); // Obtener la ventana actual
-        stage.close(); // Esconder la ventana actual
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sales/ShopCart.fxml"));
             Parent root = loader.load();
@@ -213,10 +209,7 @@ public class ProductController {
             controller.setEmployeeLastName1(employeeLastName1);
             controller.setEmployeeLastName2(employeeLastName2);
             controller.inic();
-
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.show();
+            ap.getChildren().setAll(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -232,14 +225,14 @@ public class ProductController {
         panelProducto.setBackground(
                 new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(10), new Insets(3))));
 
-        ImageView imagen = new ImageView(); //0
+        ImageView imagen = new ImageView(); // 0
 
         imagen.setFitWidth(100);
         imagen.setFitHeight(100);
         imagen.setLayoutX(50);
         imagen.setLayoutY(25);
 
-        Label nombreProducto = new Label(); //1
+        Label nombreProducto = new Label(); // 1
 
         nombreProducto.setFont(new Font("Arial", 12));
         nombreProducto.setAlignment(Pos.CENTER);
@@ -247,14 +240,14 @@ public class ProductController {
         nombreProducto.setLayoutX(0);
         nombreProducto.setLayoutY(125);
 
-        Text precioNormal = new Text(); //2
+        Text precioNormal = new Text(); // 2
 
         precioNormal.setStyle("-fx-strikethrough: true;");
         precioNormal.setFont(new Font("Arial", 12));
         precioNormal.setLayoutX(80);
         precioNormal.setLayoutY(161);
 
-        Label descuento = new Label(); //3
+        Label descuento = new Label(); // 3
 
         descuento.setFont(new Font("Arial", 15));
         descuento.setTextFill(Color.GREEN);
@@ -263,31 +256,33 @@ public class ProductController {
         descuento.setLayoutX(150);
         descuento.setLayoutY(139);
 
-        Label precioVenta = new Label(); //4
+        Label precioVenta = new Label(); // 4
 
         precioVenta.setFont(new Font("Arial", 12));
         precioVenta.setLayoutX(10);
         precioVenta.setLayoutY(145);
 
-        Label stock = new Label(); //5
+        Label stock = new Label(); // 5
 
         stock.setFont(new Font("Arial", 12));
         stock.setLayoutX(10);
         stock.setLayoutY(165);
 
-        Button btnAgregar = new Button("Agregar"); //6
+        Button btnAgregar = new Button("Agregar"); // 6
 
         btnAgregar.setBackground(
                 new Background(new BackgroundFill(Color.AQUA, new CornerRadii(10), Insets.EMPTY)));
         btnAgregar.setLayoutX(115);
         btnAgregar.setLayoutY(165);
 
-        panelProducto.getChildren().addAll(imagen, nombreProducto, precioNormal, descuento, precioVenta, stock, btnAgregar);
+        panelProducto.getChildren().addAll(imagen, nombreProducto, precioNormal, descuento, precioVenta, stock,
+                btnAgregar);
 
         return panelProducto;
     }
 
-    private Pane setPane(Pane panelProd, Image image, String resVarchar, float resFloat, float descFloat, float precioFinal, int existencia) {
+    private Pane setPane(Pane panelProd, Image image, String resVarchar, float resFloat, float descFloat,
+            float precioFinal, int existencia) {
 
         ImageView iv = (ImageView) panelProd.getChildren().get(0);
         iv.setImage(image);
@@ -341,10 +336,10 @@ public class ProductController {
                     addProductoCart(resVarchar, precioFinal, existencia);
                     if (btnGoToCart.isDisable())
                         btnGoToCart.setDisable(false);
-                    cont ++;
+                    cont++;
                 }
             }
-            
+
         };
 
         btn.setOnAction(eventHandlerBtnAgregar);
@@ -655,6 +650,5 @@ public class ProductController {
     void ordenamiento(ActionEvent event) {
 
     }
-
 
 }

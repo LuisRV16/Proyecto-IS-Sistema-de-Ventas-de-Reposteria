@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.product.ProductController">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.product.ProductController">
    <children>
-      <Pane id="backPane" prefHeight="720.0" prefWidth="850.0">
+      <Pane id="backPane" prefHeight="620.0" prefWidth="850.0">
          <children>
-            <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="830.0">
+            <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="830.0">
                <top>
                   <Pane prefHeight="50.0" prefWidth="830.0" BorderPane.alignment="CENTER">
                      <children>
@@ -31,29 +31,29 @@
                   </Pane>
                </top>
                <center>
-                  <ScrollPane fx:id="spProductos" prefHeight="650.0" prefWidth="830.0" BorderPane.alignment="CENTER">
+                  <ScrollPane fx:id="spProductos" prefHeight="550.0" prefWidth="830.0" BorderPane.alignment="CENTER">
                     <content>
-                        <FlowPane fx:id="flowPaneProductos" prefHeight="650.0" prefWidth="810.0" />
+                        <FlowPane fx:id="flowPaneProductos" prefHeight="550.0" prefWidth="810.0" />
                     </content>
                   </ScrollPane>
                </center>
             </BorderPane>
          </children>
       </Pane>
-      <Pane id="backPane" layoutX="850.0" prefHeight="720.0" prefWidth="430.0">
+      <Pane id="backPane" layoutX="850.0" prefHeight="620.0" prefWidth="430.0">
          <children>
-            <ScrollPane layoutX="30.0" layoutY="10.0" prefHeight="500.0" prefWidth="370.0">
+            <ScrollPane layoutX="30.0" layoutY="10.0" prefHeight="450.0" prefWidth="370.0">
                <content>
                   <VBox fx:id="vboxPreCart" prefHeight="500.0" prefWidth="350.0" />
                </content>
             </ScrollPane>
-            <Button fx:id="btnGoToCart" layoutX="165.0" layoutY="580.0" mnemonicParsing="false" onAction="#goToCart" prefHeight="35.0" prefWidth="100.0" text="Ir a Caja">
+            <Button id="btnBig" fx:id="btnGoToCart" layoutX="115.0" layoutY="550.0" mnemonicParsing="false" onAction="#goToCart" prefHeight="35.0" prefWidth="200.0" text="Ir a Caja">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Pane id="backPaneWhite" layoutX="30.0" layoutY="520.0" prefHeight="50.0" prefWidth="370.0" />
-            <Pane id="paneBackDeg" layoutX="30.0" layoutY="520.0" prefHeight="50.0" prefWidth="370.0">
+            <Pane id="backPaneWhite" layoutX="30.0" layoutY="480.0" prefHeight="50.0" prefWidth="370.0" />
+            <Pane id="paneBackDeg" layoutX="30.0" layoutY="480.0" prefHeight="50.0" prefWidth="370.0">
                <children>
                   <Label id="labelSubtotalProducto" fx:id="lblSubtotal" prefHeight="50.0" prefWidth="370.0" text="Subtotal:">
                      <font>
@@ -65,11 +65,6 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="btnGoBack" layoutX="155.0" layoutY="653.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="100.0" text="Regresar">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
          </children></Pane>
    </children>
 </AnchorPane>

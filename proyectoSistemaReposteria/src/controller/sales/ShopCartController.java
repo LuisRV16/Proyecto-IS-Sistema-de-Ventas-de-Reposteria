@@ -272,7 +272,7 @@ public class ShopCartController {
     public void setImagenProducto(HashMap<String, byte[]> imagenProducto) {
         this.imagenProducto = imagenProducto;
     }
-    
+
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
@@ -295,19 +295,12 @@ public class ShopCartController {
             controller.setCon(con);
             controller.setProductosEnCarrito(productosEnCarrito);
             controller.setCantidadProducto(cantidadProducto);
-            controller.inic();
             controller.setEmployeeName(employeeName);
             controller.setEmployeeLastName1(employeeLastName1);
             controller.setEmployeeLastName2(employeeLastName2);
+            controller.inic();
 
-            Stage stage = new Stage();
-            stage.setTitle("Prueba");
-            stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.show();
-
-            stage = (Stage) btnGoBack.getScene().getWindow(); // Obtener la ventana actual
-            stage.close(); // Esconder la ventana actual
+            anchorPane.getChildren().setAll(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -317,9 +310,6 @@ public class ShopCartController {
     @FXML
     void goToPay(ActionEvent event) {
         try {
-            Stage stage = (Stage) btnPagar.getScene().getWindow();
-            stage.close();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sales/PaymentMethod.fxml"));
             Parent root = loader.load();
             PaymentMethodController controller = loader.getController();
@@ -330,19 +320,15 @@ public class ShopCartController {
             controller.setPrecioProducto(precioProducto);
             controller.setExistenciaProducto(existenciaProducto);
             controller.setImagenProducto(imagenProducto);
-            controller.setEmployeeName(employeeName);
-            controller.setEmployeeLastName1(employeeLastName1);
-            controller.setEmployeeLastName2(employeeLastName2);
             controller.setSubtotalF(subtotalF);
             controller.setIva(iva);
             controller.setTotal(total);
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
             controller.inic();
 
-            stage = new Stage();
-            stage.setTitle("Prueba");
-            stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.show();
+            anchorPane.getChildren().setAll(root);
 
         } catch (IOException e) {
             e.printStackTrace();

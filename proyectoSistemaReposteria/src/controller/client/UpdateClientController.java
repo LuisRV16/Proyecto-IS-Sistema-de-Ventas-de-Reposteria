@@ -17,9 +17,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class UpdateClientController {
+    @FXML
+    private BorderPane ap;
 
     @FXML
     private Button btnSaveButton;
@@ -115,6 +118,12 @@ public class UpdateClientController {
 
     private Connection con;
 
+    private String employeeName;
+
+    private String employeeLastName1;
+
+    private String employeeLastName2;
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -129,6 +138,18 @@ public class UpdateClientController {
 
     public void setCon(Connection con) {
         this.con = con;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setEmployeeLastName1(String employeeLastName1) {
+        this.employeeLastName1 = employeeLastName1;
+    }
+
+    public void setEmployeeLastName2(String employeeLastName2) {
+        this.employeeLastName2 = employeeLastName2;
     }
 
     public void inic() {
@@ -259,8 +280,6 @@ public class UpdateClientController {
     @FXML
     void goBack(ActionEvent event) {
         try {
-            Stage stage = (Stage) cancelButton.getScene().getWindow();
-            stage.close();
             goBack();
         } catch (IOException e) {
             e.printStackTrace();
@@ -294,8 +313,6 @@ public class UpdateClientController {
             alert.showAndWait();
 
             if (msg.equals("Datos del cliente actualizados correctamente.")) {
-                Stage stage = (Stage) btnSaveButton.getScene().getWindow();
-                stage.close();
                 goBack();
             }
 
@@ -310,11 +327,11 @@ public class UpdateClientController {
 
         MenuClienteController controller = loader.getController();
         controller.setCon(con);
+        controller.setEmployeeName(employeeName);
+        controller.setEmployeeLastName1(employeeLastName1);
+        controller.setEmployeeLastName2(employeeLastName2);
         controller.inic();
-
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene(root));
-        newStage.show();
+        ap.getChildren().setAll(root);
     }
 
 }

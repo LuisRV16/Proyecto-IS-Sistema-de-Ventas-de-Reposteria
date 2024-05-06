@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sales.PaymentMethodController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sales.PaymentMethodController">
    <children>
-      <Pane prefHeight="720.0" prefWidth="640.0">
+      <Pane prefHeight="620.0" prefWidth="640.0">
          <children>
-            <ScrollPane layoutX="70.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0">
+            <ScrollPane layoutX="70.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="500.0">
                <content>
                   <VBox fx:id="vboxClients" prefHeight="585.0" prefWidth="485.0" />
                </content>
@@ -25,14 +25,14 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="640.0" prefHeight="720.0" prefWidth="640.0">
+      <Pane layoutX="640.0" prefHeight="620.0" prefWidth="640.0">
          <children>
-            <Button fx:id="btnCashPayment" alignment="CENTER" disable="true" layoutX="105.0" layoutY="102.0" mnemonicParsing="false" onAction="#cashPayment" prefHeight="237.0" prefWidth="431.0" text="Efectivo">
+            <Button fx:id="btnCashPayment" alignment="CENTER" disable="true" layoutX="105.0" layoutY="67.0" mnemonicParsing="false" onAction="#cashPayment" prefHeight="237.0" prefWidth="431.0" text="Efectivo">
                <font>
                   <Font size="90.0" />
                </font>
             </Button>
-            <Button fx:id="btnCardPayment" alignment="CENTER" disable="true" layoutX="105.0" layoutY="381.0" mnemonicParsing="false" onAction="#cardPayment" prefHeight="237.0" prefWidth="431.0" text="Tarjeta de Crédito&#10;o Debito" textAlignment="CENTER">
+            <Button fx:id="btnCardPayment" alignment="CENTER" disable="true" layoutX="106.0" layoutY="338.0" mnemonicParsing="false" onAction="#cardPayment" prefHeight="237.0" prefWidth="431.0" text="Tarjeta de Crédito&#10;o Debito" textAlignment="CENTER">
                <font>
                   <Font size="46.0" />
                </font>

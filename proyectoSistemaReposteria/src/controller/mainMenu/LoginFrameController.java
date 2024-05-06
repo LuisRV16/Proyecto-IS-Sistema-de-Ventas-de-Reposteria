@@ -16,10 +16,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.SQLConnection;
 
 public class LoginFrameController {
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private Button btnLogin;
@@ -77,7 +80,6 @@ public class LoginFrameController {
         }
         
         try {
-
             CallableStatement statement = con.prepareCall("{call getEmployeeByUser(?, ?, ?, ?)}");
 
             statement.setString(1, user);
@@ -90,23 +92,18 @@ public class LoginFrameController {
             employeeName = statement.getString(2);
             employeeLastName1 = statement.getString(3);
             employeeLastName2 = statement.getString(4);
-
-            Stage stage = (Stage) btnLogin.getScene().getWindow(); // Obtener la ventana actual
-            stage.close();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainMenu/menu.fxml"));
-            Parent root = loader.load();
             
-            MenuController controller = loader.getController();
+            Parent root = null;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainMenu/menu2.fxml"));
+            root = loader.load();
+            
+            Menu2Controller controller = loader.getController();
             controller.setCon(con);
             controller.setEmployeeName(employeeName);
             controller.setEmployeeLastName1(employeeLastName1);
             controller.setEmployeeLastName2(employeeLastName2);
-
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.show();
-            
+            controller.inic();
+            ap.getChildren().setAll(root);
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }

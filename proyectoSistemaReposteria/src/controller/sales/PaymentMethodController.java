@@ -19,12 +19,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class PaymentMethodController {
+
+    @FXML
+    private AnchorPane anchorPane;
 
     @FXML
     private Button btnCardPayment;
@@ -119,10 +123,6 @@ public class PaymentMethodController {
 
     @FXML
     void goBack(ActionEvent event) {
-
-        Stage stage = (Stage) btnGoBack.getScene().getWindow(); // Obtener la ventana actual
-        stage.close(); // Esconder la ventana actual
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sales/ShopCart.fxml"));
             Parent root = loader.load();
@@ -139,9 +139,7 @@ public class PaymentMethodController {
             controller.setEmployeeLastName2(employeeLastName2);
             controller.inic();
 
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.show();
+            anchorPane.getChildren().setAll(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -170,18 +168,6 @@ public class PaymentMethodController {
     public void setImagenProducto(HashMap<String, byte[]> imagenProducto) {
         this.imagenProducto = imagenProducto;
     }
-    
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
-    }
-
-    public void setEmployeeLastName1(String employeeLastName1) {
-        this.employeeLastName1 = employeeLastName1;
-    }
-
-    public void setEmployeeLastName2(String employeeLastName2) {
-        this.employeeLastName2 = employeeLastName2;
-    }
 
     public void setIva(float iva) {
         this.iva = iva;
@@ -193,6 +179,18 @@ public class PaymentMethodController {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setEmployeeLastName1(String employeeLastName1) {
+        this.employeeLastName1 = employeeLastName1;
+    }
+
+    public void setEmployeeLastName2(String employeeLastName2) {
+        this.employeeLastName2 = employeeLastName2;
     }
 
     public void inic() {

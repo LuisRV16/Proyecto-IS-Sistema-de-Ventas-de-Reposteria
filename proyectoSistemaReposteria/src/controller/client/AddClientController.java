@@ -14,12 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class AddClientController {
+    @FXML
+    private BorderPane ap;
 
     @FXML
     private Button cancelButton;
@@ -82,7 +86,7 @@ public class AddClientController {
     private TextField txtCorreo;
 
     @FXML
-    private TextField txtEstado;
+    private ComboBox<String> txtEstado;
 
     @FXML
     private TextField txtExterior;
@@ -105,7 +109,16 @@ public class AddClientController {
     @FXML
     private TextField txtTelefono;
 
-    Connection con;
+    private final String[] estadosMexico = {
+        "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
+        "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", 
+        "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán", "Morelos", 
+        "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", 
+        "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", 
+        "Veracruz", "Yucatán", "Zacatecas"
+    };
+
+    private Connection con;
 
     private String employeeName;
 
@@ -115,6 +128,18 @@ public class AddClientController {
 
     public void setCon(Connection con) {
         this.con = con;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setEmployeeLastName1(String employeeLastName1) {
+        this.employeeLastName1 = employeeLastName1;
+    }
+
+    public void setEmployeeLastName2(String employeeLastName2) {
+        this.employeeLastName2 = employeeLastName2;
     }
 
     public void inic() {
@@ -160,12 +185,8 @@ public class AddClientController {
             }
             return null;
         }));
-        txtEstado.setTextFormatter(new TextFormatter<>(change -> {
-            if (change.getControlNewText().length() <= 30) {
-                return change;
-            }
-            return null;
-        }));
+        txtEstado.getItems().setAll(estadosMexico);
+
         txtCorreo.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getControlNewText().length() <= 255) {
                 return change;
@@ -212,7 +233,7 @@ public class AddClientController {
         String codPost = txtCP.getText();
         String colonia = txtColonia.getText();
         String ciudad = txtCiudad.getText();
-        String estado = txtEstado.getText();
+        String estado = txtEstado.getSelectionModel().getSelectedItem().toString();
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
@@ -242,6 +263,7 @@ public class AddClientController {
             alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
             alert.setTitle("Mensaje");
+            System.out.println(msg);
             if (!msg.equals("Cliente insertado correctamente.")) {
                 clean();
             }
@@ -273,55 +295,32 @@ public class AddClientController {
     }
 
     @FXML
-    void goBack(ActionEvent event) {
-        try {
-            Stage stage = (Stage) cancelButton.getScene().getWindow();
-            stage.close();
+    void goBack(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/client/menuCliente.fxml"));
+        Parent root = loader.load();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/client/menuCliente.fxml"));
-            Parent root = loader.load();
-
-            MenuClienteController controller = loader.getController();
-            controller.setCon(con);
-            controller.inic();
-            controller.setEmployeeName(employeeName);
-            controller.setEmployeeLastName1(employeeLastName1);
-            controller.setEmployeeLastName2(employeeLastName2);
-
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
-    }
-
-    public void setEmployeeLastName1(String employeeLastName1) {
-        this.employeeLastName1 = employeeLastName1;
-    }
-
-    public void setEmployeeLastName2(String employeeLastName2) {
-        this.employeeLastName2 = employeeLastName2;
+        MenuClienteController controller = loader.getController();
+        controller.setCon(con);
+        controller.inic();
+        controller.setEmployeeName(employeeName);
+        controller.setEmployeeLastName1(employeeLastName1);
+        controller.setEmployeeLastName2(employeeLastName2);
+        ap.getChildren().setAll(root);
     }
 
     private void clean() {
-        txtNombre.setText("");
-        txtPaterno.setText("");
-        txtMaterno.setText("");
-        txtRFC.setText("");
-        txtTelefono.setText("");
-        txtCorreo.setText("");
-        txtCalle.setText("");
-        txtInterior.setText("");
-        txtExterior.setText("");
-        txtCP.setText("");
-        txtColonia.setText("");
-        txtCiudad.setText("");
-        txtEstado.setText("");
+        // txtNombre.setText("");
+        // txtPaterno.setText("");
+        // txtMaterno.setText("");
+        // txtRFC.setText("");
+        // txtTelefono.setText("");
+        // txtCorreo.setText("");
+        // txtCalle.setText("");
+        // txtInterior.setText("");
+        // txtExterior.setText("");
+        // txtCP.setText("");
+        // txtColonia.setText("");
+        // txtCiudad.setText("");
     }
 
 }

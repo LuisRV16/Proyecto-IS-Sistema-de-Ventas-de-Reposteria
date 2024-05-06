@@ -17,12 +17,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MenuClienteController {
+    @FXML
+    private BorderPane ap;
 
     @FXML
     private Button addButton;
@@ -44,45 +47,15 @@ public class MenuClienteController {
     @FXML
     void goToAddCustomer(ActionEvent event) {
         try {
-            Stage stage = (Stage) addButton.getScene().getWindow();
-            stage.close();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/client/agregaCliente.fxml"));
             Parent root = loader.load();
-
             AddClientController controller = loader.getController();
             controller.setCon(con);
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
             controller.inic();
-            controller.setEmployeeName(employeeName);
-            controller.setEmployeeLastName1(employeeLastName1);
-            controller.setEmployeeLastName2(employeeLastName2);
-
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void goBack(ActionEvent event) {
-        try {
-            Stage stage = (Stage) btnGoBack.getScene().getWindow(); // Obtener la ventana actual
-            stage.close();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainMenu/menu.fxml"));
-            Parent root = loader.load();
-
-            MenuController controller = loader.getController();
-            controller.setCon(con);
-            controller.setEmployeeName(employeeName);
-            controller.setEmployeeLastName1(employeeLastName1);
-            controller.setEmployeeLastName2(employeeLastName2);
-
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.show();
+            ap.getChildren().setAll(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,11 +98,8 @@ public class MenuClienteController {
                         public void handle(ActionEvent arg0) {
 
                             try {
-                                Stage stage = (Stage) btnUpdate.getScene().getWindow();
-                                stage.close();
-
                                 FXMLLoader loader = new FXMLLoader(
-                                        getClass().getResource("/view/client/actualizaCliente.fxml"));
+                                getClass().getResource("/view/client/actualizaCliente.fxml"));
                                 Parent root = loader.load();
 
                                 UpdateClientController controller = loader.getController();
@@ -137,11 +107,11 @@ public class MenuClienteController {
                                 controller.setNombre(nombre);
                                 controller.setApellido1(apellido1);
                                 controller.setApellido2(apellido2);
+                                controller.setEmployeeName(employeeName);
+                                controller.setEmployeeLastName1(employeeLastName1);
+                                controller.setEmployeeLastName2(employeeLastName2);
                                 controller.inic();
-
-                                stage = new Stage();
-                                stage.setScene(new Scene(root));
-                                stage.show();
+                                ap.getChildren().setAll(root);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -176,5 +146,4 @@ public class MenuClienteController {
     public void setEmployeeLastName2(String employeeLastName2) {
         this.employeeLastName2 = employeeLastName2;
     }
-    
 }
