@@ -7,15 +7,12 @@ import java.sql.Types;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.UnaryOperator;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -66,11 +63,7 @@ public class CashPaymentController {
 
     private HashMap<String, Integer> cantidadProducto;
 
-    private HashMap<String, Integer> existenciaProducto;
-
     private HashMap<String, Float> precioProducto;
-
-    private HashMap<String, byte[]> imagenProducto;
 
     private float iva;
 
@@ -111,16 +104,8 @@ public class CashPaymentController {
         this.cantidadProducto = cantidadProducto;
     }
 
-    public void setExistenciaProducto(HashMap<String, Integer> existenciaProducto) {
-        this.existenciaProducto = existenciaProducto;
-    }
-
     public void setPrecioProducto(HashMap<String, Float> precioProducto) {
         this.precioProducto = precioProducto;
-    }
-
-    public void setImagenProducto(HashMap<String, byte[]> imagenProducto) {
-        this.imagenProducto = imagenProducto;
     }
     
     public void setIva(float iva) {

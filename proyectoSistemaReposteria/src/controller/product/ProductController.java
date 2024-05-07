@@ -355,6 +355,7 @@ public class ProductController {
 
         Pane panelProduct = new Pane();
         if (!productosEnCarrito.contains(nombreProducto)) {
+
             productosEnCarrito.add(nombreProducto);
             cantidadProducto.put(nombreProducto, 1);
 
@@ -489,6 +490,7 @@ public class ProductController {
             subtotalF += precio;
 
         } else {
+
             int cant = cantidadProducto.get(nombreProducto);
             cantidadProducto.replace(nombreProducto, cant + 1);
             cant = cantidadProducto.get(nombreProducto);

@@ -8,19 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import controller.client.UpdateClientController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -82,7 +79,37 @@ public class PaymentMethodController {
 
     @FXML
     void cardPayment(ActionEvent event) {
+        Stage stage = (Stage) btnCashPayment.getScene().getWindow();
+        stage.close();
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sales/CardPayment.fxml"));
+            Parent root = loader.load();
+
+            CardPaymentController controller = loader.getController();
+            controller.setCon(con);
+            controller.setProductosEnCarrito(productosEnCarrito);
+            controller.setCantidadProducto(cantidadProducto);
+            controller.setPrecioProducto(precioProducto);
+            controller.setIva(iva);
+            controller.setSubtotal(subtotalF);
+            controller.setTotal(total);
+            controller.setClientName(clientName);
+            controller.setClientLastName1(clientLastName1);
+            controller.setClientLastName2(clientLastName2);
+            controller.setEmployeeName(employeeName);
+            controller.setEmployeeLastName1(employeeLastName1);
+            controller.setEmployeeLastName2(employeeLastName2);
+            controller.setCardType("debito");
+
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root));
+            newStage.show();
+
+            controller.inic(); // inicio de la animacion despues de que se abra la vista
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -98,9 +125,7 @@ public class PaymentMethodController {
             controller.setCon(con);
             controller.setProductosEnCarrito(productosEnCarrito);
             controller.setCantidadProducto(cantidadProducto);
-            controller.setExistenciaProducto(existenciaProducto);
             controller.setPrecioProducto(precioProducto);
-            controller.setImagenProducto(imagenProducto);
             controller.setIva(iva);
             controller.setSubtotal(subtotalF);
             controller.setTotal(total);
@@ -232,7 +257,7 @@ public class PaymentMethodController {
             while (resultados.next()) {
                 String nombre = resultados.getString(2);
                 String apellido1 = resultados.getString(3);
-                String apellido2 = resultados.getString(4);
+                String apellido2 = (resultados.getString(4) != null ? resultados.getString(4) : "" );
 
                 if (!nombre.equals("Generico")) {
 

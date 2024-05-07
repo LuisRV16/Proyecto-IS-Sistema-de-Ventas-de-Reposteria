@@ -41,30 +41,12 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 
-    // @Override
-    // public void start(Stage stage) throws IOException {
-
-    //     FXMLLoader loader = new
-    //     FXMLLoader(getClass().getResource("/view/login/login.fxml"));
-    //     Parent root = loader.load();
-
-    //     // Inicializa todos los componentes requeridos
-    //     Scene scene = new Scene(root);
-    //     stage.setTitle("Prueba");
-    //     stage.setScene(scene);
-    //     stage.setResizable(false);
-    //     stage.show();
-        
-    // }
-
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sales/CardPayment.fxml"));
+        FXMLLoader loader = new
+        FXMLLoader(getClass().getResource("/view/login/login.fxml"));
         Parent root = loader.load();
-
-        CardPaymentController controller = loader.getController();
-        controller.inic();
 
         // Inicializa todos los componentes requeridos
         Scene scene = new Scene(root);
