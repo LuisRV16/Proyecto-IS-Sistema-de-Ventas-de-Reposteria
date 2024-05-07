@@ -72,7 +72,7 @@ public class MenuClienteController {
             while (resultados.next()) {
                 String nombre = resultados.getString(2);
                 String apellido1 = resultados.getString(3);
-                String apellido2 = resultados.getString(4);
+                String apellido2 = (resultados.getString(4) != null ? resultados.getString(4) : "" );
 
                 if (!nombre.equals("Generico")) {
                     HBox panel = new HBox();

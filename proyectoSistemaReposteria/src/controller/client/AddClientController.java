@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Estados;
 
 public class AddClientController {
     @FXML
@@ -77,16 +78,16 @@ public class AddClientController {
     private TextField txtCalle;
 
     @FXML
-    private TextField txtCiudad;
-
-    @FXML
     private TextField txtColonia;
 
     @FXML
     private TextField txtCorreo;
 
     @FXML
-    private ComboBox<String> txtEstado;
+    private ComboBox<String> comboEstado;
+
+    @FXML
+    private ComboBox<String> comboCiudades;
 
     @FXML
     private TextField txtExterior;
@@ -109,15 +110,42 @@ public class AddClientController {
     @FXML
     private TextField txtTelefono;
 
-    private final String[] estadosMexico = {
-        "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
-        "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", 
-        "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán", "Morelos", 
-        "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", 
-        "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", 
-        "Veracruz", "Yucatán", "Zacatecas"
-    };
+    private final Estados[] enumEstados = Estados.values();
 
+    private String[] estadosMexico = new String[32];
+
+    private String[] municipiosAguascalientes = enumEstados[0].getMunicipios();
+    private String[] municipiosBajaCalifornia = enumEstados[1].getMunicipios();
+    private String[] municipiosBajaCaliforniaSur = enumEstados[2].getMunicipios();
+    private String[] municipiosCampeche = enumEstados[3].getMunicipios();
+    private String[] municipiosCDMX = enumEstados[4].getMunicipios();
+    private String[] municipiosChiapas = enumEstados[5].getMunicipios();
+    private String[] municipiosChihuahua = enumEstados[6].getMunicipios();
+    private String[] municipiosCoahuila = enumEstados[7].getMunicipios();
+    private String[] municipiosColima = enumEstados[8].getMunicipios();
+    private String[] municipiosDurango = enumEstados[9].getMunicipios();
+    private String[] municipiosEdoMexico = enumEstados[10].getMunicipios();
+    private String[] municipiosGuanajuato = enumEstados[11].getMunicipios();
+    private String[] municipiosGuerrero = enumEstados[12].getMunicipios();
+    private String[] municipiosHidalgo = enumEstados[13].getMunicipios();
+    private String[] municipiosJalisco = enumEstados[14].getMunicipios();
+    private String[] municipiosMichoacan = enumEstados[15].getMunicipios();
+    private String[] municipiosMorelos = enumEstados[16].getMunicipios();
+    private String[] municipiosNayarit = enumEstados[17].getMunicipios();
+    private String[] municipiosNuevoLeon = enumEstados[18].getMunicipios();
+    private String[] municipiosOaxaca = enumEstados[19].getMunicipios();
+    private String[] municipiosPuebla = enumEstados[20].getMunicipios();
+    private String[] municipiosQueretaro = enumEstados[21].getMunicipios();
+    private String[] municipiosQuintanaRoo = enumEstados[22].getMunicipios();
+    private String[] municipiosSanLuisPotosi = enumEstados[23].getMunicipios();
+    private String[] municipiosSinaloa = enumEstados[24].getMunicipios();
+    private String[] municipiosSonora = enumEstados[25].getMunicipios();
+    private String[] municipiosTabasco = enumEstados[26].getMunicipios();
+    private String[] municipiosTamaulipas = enumEstados[27].getMunicipios();
+    private String[] municipiosTlaxcala = enumEstados[28].getMunicipios();
+    private String[] municipiosVeracruz = enumEstados[29].getMunicipios();
+    private String[] municipiosYucatan = enumEstados[30].getMunicipios();
+    private String[] municipiosZacatecas = enumEstados[31].getMunicipios();
     private Connection con;
 
     private String employeeName;
@@ -143,6 +171,10 @@ public class AddClientController {
     }
 
     public void inic() {
+
+        for (int i = 0; i < enumEstados.length; i++)
+            estadosMexico[i] = enumEstados[i].getNombre();
+
         txtTelefono.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getControlNewText().length() <= 15) {
                 return change;
@@ -185,7 +217,8 @@ public class AddClientController {
             }
             return null;
         }));
-        txtEstado.getItems().setAll(estadosMexico);
+
+        comboEstado.getItems().setAll(estadosMexico); // Asignacion de estados al comboBox de estados
 
         txtCorreo.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getControlNewText().length() <= 255) {
@@ -199,12 +232,7 @@ public class AddClientController {
             }
             return null;
         }));
-        txtCiudad.setTextFormatter(new TextFormatter<>(change -> {
-            if (change.getControlNewText().length() <= 30) {
-                return change;
-            }
-            return null;
-        }));
+
         txtCalle.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getControlNewText().length() <= 30) {
                 return change;
@@ -220,6 +248,48 @@ public class AddClientController {
     }
 
     @FXML
+    void enableCities(ActionEvent event) {
+        String estado = comboEstado.getSelectionModel().getSelectedItem();
+        String[] municipios = null;
+        switch (estado) {
+            case "Aguascalientes" -> municipios = municipiosAguascalientes;
+            case "Baja California" -> municipios = municipiosBajaCalifornia;
+            case "Baja California Sur" -> municipios = municipiosBajaCaliforniaSur;
+            case "Campeche" -> municipios = municipiosCampeche;
+            case "Ciudad de México" -> municipios = municipiosCDMX;
+            case "Chiapas" -> municipios = municipiosChiapas;
+            case "Chihuahua" -> municipios = municipiosChihuahua;
+            case "Coahuila" -> municipios = municipiosCoahuila;
+            case "Colima" -> municipios = municipiosColima;
+            case "Durango" -> municipios = municipiosDurango;
+            case "Estado de México" -> municipios = municipiosEdoMexico;
+            case "Guanajuato" -> municipios = municipiosGuanajuato;
+            case "Guerrero" -> municipios = municipiosGuerrero;
+            case "Hidalgo" -> municipios = municipiosHidalgo;
+            case "Jalisco" -> municipios = municipiosJalisco;
+            case "Michoacán" -> municipios = municipiosMichoacan;
+            case "Morelos" -> municipios = municipiosMorelos;
+            case "Nayarit" -> municipios = municipiosNayarit;
+            case "Nuevo León" -> municipios = municipiosNuevoLeon;
+            case "Oaxaca" -> municipios = municipiosOaxaca;
+            case "Puebla" -> municipios = municipiosPuebla;
+            case "Querétaro" -> municipios = municipiosQueretaro;
+            case "Quintana Roo" -> municipios = municipiosQuintanaRoo;
+            case "San Luis Potosí" -> municipios = municipiosSanLuisPotosi;
+            case "Sinaloa" -> municipios = municipiosSinaloa;
+            case "Sonora" -> municipios = municipiosSonora;
+            case "Tabasco" -> municipios = municipiosTabasco;
+            case "Tamaulipas" -> municipios = municipiosTamaulipas;
+            case "Tlaxcala" -> municipios = municipiosTlaxcala;
+            case "Veracruz" -> municipios = municipiosVeracruz;
+            case "Yucatán" -> municipios = municipiosYucatan;
+            case "Zacatecas" -> municipios = municipiosZacatecas;
+        }
+        comboCiudades.getItems().setAll(municipios);
+        comboCiudades.setDisable(false);
+    }
+
+    @FXML
     void addClient(ActionEvent event) {
         String nombre = txtNombre.getText();
         String apellido1 = txtPaterno.getText();
@@ -232,8 +302,10 @@ public class AddClientController {
         String numExterior = txtExterior.getText();
         String codPost = txtCP.getText();
         String colonia = txtColonia.getText();
-        String ciudad = txtCiudad.getText();
-        String estado = txtEstado.getSelectionModel().getSelectedItem().toString();
+        String ciudad = comboCiudades.getSelectionModel().getSelectedItem();
+        if (ciudad == null) ciudad = "";
+        String estado = comboEstado.getSelectionModel().getSelectedItem();
+        if (estado == null) estado = "";
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);

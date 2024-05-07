@@ -40,7 +40,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button id="salir" fx:id="btnClose1" layoutX="50.0" layoutY="540.0" mnemonicParsing="false" onAction="#close" prefHeight="50.0" prefWidth="150.0" text="Salir" />
+                  <Button id="salir" fx:id="btnClose" layoutX="50.0" layoutY="540.0" mnemonicParsing="false" onAction="#close" prefHeight="50.0" prefWidth="150.0" text="Salir" />
                </children>
             </AnchorPane>
          </children>

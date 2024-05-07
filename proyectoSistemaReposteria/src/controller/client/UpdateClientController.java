@@ -14,11 +14,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Estados;
 
 public class UpdateClientController {
     @FXML
@@ -26,9 +28,15 @@ public class UpdateClientController {
 
     @FXML
     private Button btnSaveButton;
-    
+
     @FXML
     private Button cancelButton;
+
+    @FXML
+    private ComboBox<String> comboCiudades;
+
+    @FXML
+    private ComboBox<String> comboEstados;
 
     @FXML
     private Label lblApellido1;
@@ -76,16 +84,10 @@ public class UpdateClientController {
     private TextField txtCalle;
 
     @FXML
-    private TextField txtCiudad;
-
-    @FXML
     private TextField txtColonia;
 
     @FXML
     private TextField txtCorreo;
-
-    @FXML
-    private TextField txtEstado;
 
     @FXML
     private TextField txtExterior;
@@ -124,6 +126,43 @@ public class UpdateClientController {
 
     private String employeeLastName2;
 
+    private final Estados[] enumEstados = Estados.values();
+
+    private String[] estadosMexico = new String[32];
+
+    private String[] municipiosAguascalientes = enumEstados[0].getMunicipios();
+    private String[] municipiosBajaCalifornia = enumEstados[1].getMunicipios();
+    private String[] municipiosBajaCaliforniaSur = enumEstados[2].getMunicipios();
+    private String[] municipiosCampeche = enumEstados[3].getMunicipios();
+    private String[] municipiosCDMX = enumEstados[4].getMunicipios();
+    private String[] municipiosChiapas = enumEstados[5].getMunicipios();
+    private String[] municipiosChihuahua = enumEstados[6].getMunicipios();
+    private String[] municipiosCoahuila = enumEstados[7].getMunicipios();
+    private String[] municipiosColima = enumEstados[8].getMunicipios();
+    private String[] municipiosDurango = enumEstados[9].getMunicipios();
+    private String[] municipiosEdoMexico = enumEstados[10].getMunicipios();
+    private String[] municipiosGuanajuato = enumEstados[11].getMunicipios();
+    private String[] municipiosGuerrero = enumEstados[12].getMunicipios();
+    private String[] municipiosHidalgo = enumEstados[13].getMunicipios();
+    private String[] municipiosJalisco = enumEstados[14].getMunicipios();
+    private String[] municipiosMichoacan = enumEstados[15].getMunicipios();
+    private String[] municipiosMorelos = enumEstados[16].getMunicipios();
+    private String[] municipiosNayarit = enumEstados[17].getMunicipios();
+    private String[] municipiosNuevoLeon = enumEstados[18].getMunicipios();
+    private String[] municipiosOaxaca = enumEstados[19].getMunicipios();
+    private String[] municipiosPuebla = enumEstados[20].getMunicipios();
+    private String[] municipiosQueretaro = enumEstados[21].getMunicipios();
+    private String[] municipiosQuintanaRoo = enumEstados[22].getMunicipios();
+    private String[] municipiosSanLuisPotosi = enumEstados[23].getMunicipios();
+    private String[] municipiosSinaloa = enumEstados[24].getMunicipios();
+    private String[] municipiosSonora = enumEstados[25].getMunicipios();
+    private String[] municipiosTabasco = enumEstados[26].getMunicipios();
+    private String[] municipiosTamaulipas = enumEstados[27].getMunicipios();
+    private String[] municipiosTlaxcala = enumEstados[28].getMunicipios();
+    private String[] municipiosVeracruz = enumEstados[29].getMunicipios();
+    private String[] municipiosYucatan = enumEstados[30].getMunicipios();
+    private String[] municipiosZacatecas = enumEstados[31].getMunicipios();
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -153,6 +192,10 @@ public class UpdateClientController {
     }
 
     public void inic() {
+
+        for (int i = 0; i < enumEstados.length; i++)
+            estadosMexico[i] = enumEstados[i].getNombre();
+
         txtTelefono.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getControlNewText().length() <= 15) {
                 return change;
@@ -195,12 +238,6 @@ public class UpdateClientController {
             }
             return null;
         }));
-        txtEstado.setTextFormatter(new TextFormatter<>(change -> {
-            if (change.getControlNewText().length() <= 30) {
-                return change;
-            }
-            return null;
-        }));
         txtCorreo.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getControlNewText().length() <= 255) {
                 return change;
@@ -208,12 +245,6 @@ public class UpdateClientController {
             return null;
         }));
         txtColonia.setTextFormatter(new TextFormatter<>(change -> {
-            if (change.getControlNewText().length() <= 30) {
-                return change;
-            }
-            return null;
-        }));
-        txtCiudad.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getControlNewText().length() <= 30) {
                 return change;
             }
@@ -258,6 +289,9 @@ public class UpdateClientController {
                 String city = resultados.getString(12);
                 String state = resultados.getString(13);
 
+                comboEstados.getItems().setAll(estadosMexico);
+                setCities(state);
+
                 txtNombre.setText(nombre);
                 txtPaterno.setText(apellido1);
                 txtMaterno.setText(apellido2);
@@ -269,12 +303,18 @@ public class UpdateClientController {
                 txtExterior.setText(outdoorNumber);
                 txtColonia.setText(colony);
                 txtCP.setText(postalCode);
-                txtCiudad.setText(city);
-                txtEstado.setText(state);
+                comboCiudades.getSelectionModel().select(city);
+                comboEstados.getSelectionModel().select(state);
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void enableCities(ActionEvent event) {
+        String estado = comboEstados.getSelectionModel().getSelectedItem();
+        setCities(estado);
     }
 
     @FXML
@@ -287,7 +327,7 @@ public class UpdateClientController {
     }
 
     @FXML
-    void update(ActionEvent event) {        
+    void update(ActionEvent event) {
         String sql = "{call updateClient(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
         try (CallableStatement statement = con.prepareCall(sql)) {
@@ -299,8 +339,8 @@ public class UpdateClientController {
             statement.setString(6, txtExterior.getText());
             statement.setString(7, txtCP.getText());
             statement.setString(8, txtColonia.getText());
-            statement.setString(9, txtCiudad.getText());
-            statement.setString(10, txtEstado.getText());
+            statement.setString(9, comboCiudades.getSelectionModel().getSelectedItem());
+            statement.setString(10, comboEstados.getSelectionModel().getSelectedItem());
             statement.registerOutParameter(11, Types.VARCHAR);
 
             statement.execute();
@@ -332,6 +372,45 @@ public class UpdateClientController {
         controller.setEmployeeLastName2(employeeLastName2);
         controller.inic();
         ap.getChildren().setAll(root);
+    }
+
+    private void setCities(String estado) {
+        String[] municipios = null;
+        switch (estado) {
+            case "Aguascalientes" -> municipios = municipiosAguascalientes;
+            case "Baja California" -> municipios = municipiosBajaCalifornia;
+            case "Baja California Sur" -> municipios = municipiosBajaCaliforniaSur;
+            case "Campeche" -> municipios = municipiosCampeche;
+            case "Ciudad de México" -> municipios = municipiosCDMX;
+            case "Chiapas" -> municipios = municipiosChiapas;
+            case "Chihuahua" -> municipios = municipiosChihuahua;
+            case "Coahuila" -> municipios = municipiosCoahuila;
+            case "Colima" -> municipios = municipiosColima;
+            case "Durango" -> municipios = municipiosDurango;
+            case "Estado de México" -> municipios = municipiosEdoMexico;
+            case "Guanajuato" -> municipios = municipiosGuanajuato;
+            case "Guerrero" -> municipios = municipiosGuerrero;
+            case "Hidalgo" -> municipios = municipiosHidalgo;
+            case "Jalisco" -> municipios = municipiosJalisco;
+            case "Michoacán" -> municipios = municipiosMichoacan;
+            case "Morelos" -> municipios = municipiosMorelos;
+            case "Nayarit" -> municipios = municipiosNayarit;
+            case "Nuevo León" -> municipios = municipiosNuevoLeon;
+            case "Oaxaca" -> municipios = municipiosOaxaca;
+            case "Puebla" -> municipios = municipiosPuebla;
+            case "Querétaro" -> municipios = municipiosQueretaro;
+            case "Quintana Roo" -> municipios = municipiosQuintanaRoo;
+            case "San Luis Potosí" -> municipios = municipiosSanLuisPotosi;
+            case "Sinaloa" -> municipios = municipiosSinaloa;
+            case "Sonora" -> municipios = municipiosSonora;
+            case "Tabasco" -> municipios = municipiosTabasco;
+            case "Tamaulipas" -> municipios = municipiosTamaulipas;
+            case "Tlaxcala" -> municipios = municipiosTlaxcala;
+            case "Veracruz" -> municipios = municipiosVeracruz;
+            case "Yucatán" -> municipios = municipiosYucatan;
+            case "Zacatecas" -> municipios = municipiosZacatecas;
+        }
+        comboCiudades.getItems().setAll(municipios);
     }
 
 }
