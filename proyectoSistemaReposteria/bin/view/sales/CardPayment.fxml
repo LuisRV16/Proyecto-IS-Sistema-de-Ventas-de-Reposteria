@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sales.CardPaymentController">
    <children>
-      <Pane fx:id="pane" layoutX="140.0" layoutY="10.0" prefHeight="700.0" prefWidth="1000.0" />
+      <Pane fx:id="pane" layoutX="140.0" layoutY="10.0" prefHeight="700.0" prefWidth="1000.0">
+         <children>
+            <SVGPath fx:id="svg1" content="M0,25 C0,25 25,12.5 50,25 M0,25 L5,35 C5,35 25,25 45,35 L50,25" fill="WHITE" layoutX="478.0" layoutY="209.0" stroke="BLACK" visible="false" />
+            <SVGPath fx:id="svg3" content="M0,25 C0,25 25,12.5 50,25 M0,25 L5,35 C5,35 25,25 45,35 L50,25" fill="WHITE" layoutX="517.0" layoutY="290.0" rotate="120.0" stroke="BLACK" visible="false" />
+            <SVGPath fx:id="svg2" content="M0,25 C0,25 25,12.5 50,25 M0,25 L5,35 C5,35 25,25 45,35 L50,25" fill="WHITE" layoutX="520.0" layoutY="237.0" rotate="65.0" stroke="BLACK" visible="false" />
+            <SVGPath fx:id="svg6" content="M0,25 C0,25 25,12.5 50,25 M0,25 L5,35 C5,35 25,25 45,35 L50,25" fill="WHITE" layoutX="431.0" layoutY="237.0" rotate="300.0" stroke="BLACK" visible="false" />
+            <SVGPath fx:id="svg4" content="M0,25 C0,25 25,12.5 50,25 M0,25 L5,35 C5,35 25,25 45,35 L50,25" fill="WHITE" layoutX="475.0" layoutY="314.0" rotate="180.0" stroke="BLACK" visible="false" />
+            <SVGPath fx:id="svg5" content="M0,25 C0,25 25,12.5 50,25 M0,25 L5,35 C5,35 25,25 45,35 L50,25" fill="WHITE" layoutX="432.0" layoutY="290.0" rotate="240.0" stroke="BLACK" visible="false" />
+            <Label fx:id="lblPIN" alignment="CENTER" layoutX="351.0" layoutY="368.0" text="Ingrese su PIN en la terminal" visible="false">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblProcessing" alignment="CENTER" layoutX="400.0" layoutY="368.0" text="Procesando Pago..." visible="false">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children></Pane>
    </children>
 </AnchorPane>

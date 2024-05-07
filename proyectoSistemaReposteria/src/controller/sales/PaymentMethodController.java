@@ -195,7 +195,7 @@ public class PaymentMethodController {
 
     public void inic() {
 
-        Button btnGeneric = new Button("Generico");
+        Button btnGeneric = new Button("Cliente no especificado");
         btnGeneric.setMinWidth(485);
         btnGeneric.setMinHeight(50);
         btnGeneric.setFont(new Font("Arial", 25));
@@ -204,7 +204,7 @@ public class PaymentMethodController {
         EventHandler<ActionEvent> eventH = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
-                clientName = btnGeneric.getText();
+                clientName = "Generico";
                 clientLastName1 = "Gen";
                 
                 lblClient.setText(btnGeneric.getText());

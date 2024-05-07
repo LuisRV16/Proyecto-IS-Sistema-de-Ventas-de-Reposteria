@@ -4,16 +4,42 @@ import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 public class CardPaymentController {
 
     @FXML
+    private Label lblPIN;
+
+    @FXML
+    private Label lblProcessing;
+
+    @FXML
     private Pane pane;
+
+    @FXML
+    private SVGPath svg1;
+
+    @FXML
+    private SVGPath svg2;
+
+    @FXML
+    private SVGPath svg3;
+
+    @FXML
+    private SVGPath svg4;
+
+    @FXML
+    private SVGPath svg5;
+
+    @FXML
+    private SVGPath svg6;
 
     public void inic() {
         // Crear una imagen de la terminal de tarjeta y la tarjeta de banco
