@@ -29,8 +29,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -54,7 +56,7 @@ public class ProductController {
     private Button btnGoBack;
 
     @FXML
-    private ComboBox<?> comboOrdenar;
+    private ComboBox<String> comboOrdenar;
 
     @FXML
     private FlowPane flowPaneProductos;
@@ -137,6 +139,17 @@ public class ProductController {
 
     public void inic() {
 
+        txtBuscar.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 40) {
+                return change;
+            }
+            return null;
+        }));
+
+        comboOrdenar.getItems().add("Todo");
+        comboOrdenar.getItems().add("Pastel");
+        comboOrdenar.getItems().add("Dulce");
+
         panels = FXCollections.observableArrayList();
         btnGoToCart.setDisable(true);
         String sql = "{call getProduct}";
@@ -188,8 +201,97 @@ public class ProductController {
     }
 
     @FXML
-    void busqueda(ActionEvent event) {
+    void busqueda(KeyEvent event) {
+        String s = txtBuscar.getText();
+        String o = comboOrdenar.getSelectionModel().getSelectedItem();
+        String sql = "{call searchProduct(?, ?)}";
+        ObservableList<Pane> wantedPanels = FXCollections.observableArrayList();
+        if (!s.equals("")) {
+            try (CallableStatement statement = con.prepareCall(sql)) {
+                statement.setString(1, s);
+                statement.setString(2, o);
+                ResultSet resultados = statement.executeQuery();
+    
+                while (resultados.next()) {
+                    byte[] datosImagen = resultados.getBytes(10);
+                    Image image = new Image(new ByteArrayInputStream(datosImagen));
+                    String resVarchar = resultados.getString(2);
+                    imagenProducto.put(resVarchar, datosImagen);
+    
+                    float resFloat = resultados.getFloat(6);
+                    float descFloat = resultados.getFloat(7);
+    
+                    float precioFinal = resultados.getFloat(8);
+                    precioProducto.put(resVarchar, precioFinal);
+    
+                    int existencia = resultados.getInt(5);
+                    existenciaProducto.put(resVarchar, existencia);
+    
+                    wantedPanels.add(setPane(creatPane(), image, resVarchar, resFloat, descFloat, precioFinal, existencia));
+                }
+    
+                flowPaneProductos.getChildren().setAll(wantedPanels);
+                resultados.close();
+    
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            if (comboOrdenar.getSelectionModel().getSelectedItem().equals(comboOrdenar.getItems().get(0))
+                || comboOrdenar.getSelectionModel().getSelectedItem() == null) {
+                flowPaneProductos.getChildren().setAll(panels);
+            } else {
+                order(s, o);
+            }
+        }
+        
+    }
 
+    @FXML
+    void ordenamiento(ActionEvent event) {
+        String s = txtBuscar.getText();
+        String o = comboOrdenar.getSelectionModel().getSelectedItem();
+        if (!o.equals(comboOrdenar.getItems().get(0))) {
+            order(s, o);
+        } else {
+            if (s.equals("")) {
+                flowPaneProductos.getChildren().setAll(panels);
+            }
+        }
+    }
+
+    private void order(String s, String o) {
+        ObservableList<Pane> wantedPanels = FXCollections.observableArrayList();
+        String sql = "{call orderProducts(?, ?)}";
+        try (CallableStatement statement = con.prepareCall(sql)) {
+            statement.setString(1, s);
+            statement.setString(2, o);
+            ResultSet resultados = statement.executeQuery();
+
+            while (resultados.next()) {
+                byte[] datosImagen = resultados.getBytes(10);
+                Image image = new Image(new ByteArrayInputStream(datosImagen));
+                String resVarchar = resultados.getString(2);
+                imagenProducto.put(resVarchar, datosImagen);
+
+                float resFloat = resultados.getFloat(6);
+                float descFloat = resultados.getFloat(7);
+
+                float precioFinal = resultados.getFloat(8);
+                precioProducto.put(resVarchar, precioFinal);
+
+                int existencia = resultados.getInt(5);
+                existenciaProducto.put(resVarchar, existencia);
+
+                wantedPanels.add(setPane(creatPane(), image, resVarchar, resFloat, descFloat, precioFinal, existencia));
+            }
+
+            flowPaneProductos.getChildren().setAll(wantedPanels);
+            resultados.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -645,11 +747,6 @@ public class ProductController {
         vboxPreCart.getChildren().add(panelProduct);
         subtotalF += precio * ((float) cantidad);
         lblSubtotal.setText("Subtotal: $" + df.format(subtotalF));
-
-    }
-
-    @FXML
-    void ordenamiento(ActionEvent event) {
 
     }
 

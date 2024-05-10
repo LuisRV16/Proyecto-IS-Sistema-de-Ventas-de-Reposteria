@@ -21,7 +21,7 @@
                <top>
                   <Pane prefHeight="50.0" prefWidth="830.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TextField fx:id="txtBuscar" maxHeight="40.0" maxWidth="250.0" minHeight="40.0" minWidth="250.0" onAction="#busqueda" prefHeight="40.0" prefWidth="250.0" promptText="Buscar">
+                        <TextField fx:id="txtBuscar" maxHeight="40.0" maxWidth="250.0" minHeight="40.0" minWidth="250.0" onKeyTyped="#busqueda" prefHeight="40.0" prefWidth="250.0" promptText="Buscar">
                            <font>
                               <Font name="Arial" size="20.0" />
                            </font>
