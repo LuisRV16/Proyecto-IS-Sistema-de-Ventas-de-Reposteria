@@ -18,3 +18,6 @@ grant exec on dbo.getIdClientByName to employee
 grant exec on dbo.getIdEmployeeByName to employee
 grant exec on addSale to employee
 grant exec on addSaleProduct to employee
+
+grant exec on searchProduct to employee
+grant exec on orderProducts to employee
