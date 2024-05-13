@@ -8,16 +8,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import controller.client.UpdateClientController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -31,19 +35,28 @@ public class PaymentMethodController {
     private Button btnCardPayment;
 
     @FXML
+    private Button btnCardPayment1;
+
+    @FXML
     private Button btnCashPayment;
 
     @FXML
     private Button btnGoBack;
 
     @FXML
-    private Label lblClient;
-
-    @FXML
     private Label lblVboxClients;
 
     @FXML
     private VBox vboxClients;
+
+    @FXML
+    private Label lblIva;
+
+    @FXML
+    private Label lblSubtotal;
+
+    @FXML
+    private Label lblTotal;
 
     private Connection con;
 
@@ -219,12 +232,17 @@ public class PaymentMethodController {
     }
 
     public void inic() {
-
+        lblIva.setText(lblIva.getText() + iva);
+        lblSubtotal.setText(lblSubtotal.getText() + subtotalF);
+        lblTotal.setText(lblTotal.getText() + total);
         Button btnGeneric = new Button("Cliente no especificado");
-        btnGeneric.setMinWidth(485);
+        btnGeneric.setMinWidth(480);
         btnGeneric.setMinHeight(50);
-        btnGeneric.setFont(new Font("Arial", 25));
+        btnGeneric.setId("btnGenerico");
         btnGeneric.setAlignment(Pos.CENTER);
+        Pane panel2 = new Pane();
+        panel2.setMinWidth(480);
+        panel2.setMinHeight(3);
 
         EventHandler<ActionEvent> eventH = new EventHandler<ActionEvent>() {
             @Override
@@ -232,9 +250,9 @@ public class PaymentMethodController {
                 clientName = "Generico";
                 clientLastName1 = "Gen";
                 
-                lblClient.setText(btnGeneric.getText());
                 btnCashPayment.setDisable(false);
                 btnCardPayment.setDisable(false);
+                btnCardPayment1.setDisable(false);
 
                 btnSelected.setDisable(false);
 
@@ -245,8 +263,7 @@ public class PaymentMethodController {
         };
 
         btnGeneric.setOnAction(eventH);
-
-        vboxClients.getChildren().add(btnGeneric);
+        vboxClients.getChildren().addAll(btnGeneric,panel2);
 
         String sql = "{call getClient}";
 
@@ -262,10 +279,13 @@ public class PaymentMethodController {
                 if (!nombre.equals("Generico")) {
 
                     Button btnClient = new Button(nombre + " " + apellido1 + " " + apellido2);
-                    btnClient.setMinWidth(485);
+                    btnClient.setMinWidth(480);
                     btnClient.setMinHeight(50);
-                    btnClient.setFont(new Font("Arial", 25));
+                    btnClient.setId("btnBigClient");
                     btnClient.setAlignment(Pos.CENTER);
+                    Pane panel = new Pane();
+                    panel.setMinWidth(480);
+                    panel.setMinHeight(3);
 
                     EventHandler<ActionEvent> eventHandler = new EventHandler<ActionEvent>() {
 
@@ -275,9 +295,9 @@ public class PaymentMethodController {
                             clientLastName1 = apellido1;
                             clientLastName2 = apellido2;
 
-                            lblClient.setText(nombre + " " + apellido1 + " " + apellido2);
                             btnCashPayment.setDisable(false);
                             btnCardPayment.setDisable(false);
+                            btnCardPayment1.setDisable(false);
 
                             btnSelected.setDisable(false);
 
@@ -288,9 +308,7 @@ public class PaymentMethodController {
                     };
 
                     btnClient.setOnAction(eventHandler);
-
-                    vboxClients.getChildren().add(btnClient);
-
+                    vboxClients.getChildren().addAll(btnClient, panel);
                 }
             }
         } catch (SQLException e) {

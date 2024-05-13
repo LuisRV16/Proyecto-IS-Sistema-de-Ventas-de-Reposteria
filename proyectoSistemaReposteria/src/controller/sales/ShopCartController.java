@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -77,7 +78,7 @@ public class ShopCartController {
     private String employeeLastName2;
 
     public void inic() {
-
+        vboxProducts.setSpacing(5);
         DecimalFormat df = new DecimalFormat("#####0.00");
 
         for (String nombre : productosEnCarrito) {
@@ -86,11 +87,9 @@ public class ShopCartController {
             float precio = precioProducto.get(nombre);
             byte[] imagen = imagenProducto.get(nombre);
 
-            Pane panelProducto = new Pane(), panel = new Pane();
+            Pane panelProducto = new Pane();
             panelProducto.setPrefSize(1214, 150);
             panelProducto.setMinSize(1214, 150);
-            panel.setMinWidth(1214);
-            panel.setMinHeight(3);
 
             ImageView image = new ImageView(new Image(new ByteArrayInputStream(imagen)));
             image.setLayoutX(15);
@@ -100,31 +99,32 @@ public class ShopCartController {
 
             Label nombreProducto = new Label(nombre);
             nombreProducto.setLayoutX(150);
-            nombreProducto.setLayoutY(15);
+            nombreProducto.setLayoutY(0);
             nombreProducto.setMinWidth(400);
-            nombreProducto.setMinHeight(120);
+            nombreProducto.setMinHeight(150);
             nombreProducto.setId("labelSmallTitle");
 
             Label cantidadL = new Label("Cantidad");
-            cantidadL.setLayoutX(565);
-            cantidadL.setLayoutY(35);
-            cantidadL.setMinSize(100, 35);
-            cantidadL.setPrefSize(100, 35);
+            cantidadL.setLayoutX(550);
+            cantidadL.setLayoutY(40);
+            cantidadL.setAlignment(Pos.CENTER);
+            cantidadL.setMinSize(105, 35);
+            cantidadL.setPrefSize(105, 35);
             cantidadL.setId("labelSmallTitle");
 
             Button btnMin = new Button("-");
-            btnMin.setLayoutX(565);
-            btnMin.setLayoutY(65);
-            btnMin.setAlignment(Pos.CENTER);
+            btnMin.setLayoutX(550);
+            btnMin.setLayoutY(75);
+            btnMin.setPadding(new Insets(0,0,3,0));
             btnMin.setMinSize(35, 35);
             btnMin.setPrefSize(35, 35);
 
             Label cantidadN = new Label(cantidad + "");
             cantidadN.setId("labelSmallTitle");
+            cantidadN.setMinSize(35, 35);
             cantidadN.setAlignment(Pos.CENTER);
-            cantidadN.setMinSize(30, 30);
-            cantidadN.setLayoutX(597.5);
-            cantidadN.setLayoutY(65);
+            cantidadN.setLayoutX(585);
+            cantidadN.setLayoutY(75);
 
             EventHandler<ActionEvent> eventHandlerBtnMin = new EventHandler<ActionEvent>() {
 
@@ -173,9 +173,9 @@ public class ShopCartController {
             Button btnMas = new Button("+");
             btnMas.setMinSize(35, 35);
             btnMas.setPrefSize(35, 35);
-            btnMas.setAlignment(Pos.CENTER);
-            btnMas.setLayoutX(625);
-            btnMas.setLayoutY(65);
+            btnMas.setPadding(new Insets(0,1,1,0));
+            btnMas.setLayoutX(620);
+            btnMas.setLayoutY(75);
 
             EventHandler<ActionEvent> eventHandlerBtnMas = new EventHandler<ActionEvent>() {
 
@@ -217,21 +217,25 @@ public class ShopCartController {
             subtotalF += subtotal;
 
             Label lblTotal = new Label("$" + df.format(subtotal));
-            lblTotal.setMinWidth(157);
-            lblTotal.setMinHeight(71);
-            lblTotal.setLayoutX(863);
-            lblTotal.setLayoutY(69);
-
-            Label lblPrecioU = new Label("Precio Unitario: $" + df.format(precio));
-            lblPrecioU.setMinWidth(300);
-            lblPrecioU.setMinHeight(71);
-            lblPrecioU.setLayoutX(1000);
-            lblPrecioU.setLayoutY(69);
+            lblTotal.setMinWidth(275);
+            lblTotal.setMinHeight(150);
+            lblTotal.setAlignment(Pos.CENTER);
+            lblTotal.setLayoutX(941);
+            lblTotal.setLayoutY(0);
+            lblTotal.setId("labelSmallTitle");
+            
+            Label lblPrecioU = new Label("$" + df.format(precio));
+            lblPrecioU.setMinWidth(275);
+            lblPrecioU.setMinHeight(150);
+            lblPrecioU.setAlignment(Pos.CENTER);
+            lblPrecioU.setLayoutX(666);
+            lblPrecioU.setLayoutY(0);
+            lblPrecioU.setId("labelSmallTitle");
 
             panelProducto.getChildren().addAll(image, nombreProducto, cantidadL, cantidadN, btnMin, btnMas, lblTotal, lblPrecioU);
             panelProducto.setId("paneBackDeg");
 
-            vboxProducts.getChildren().addAll(panelProducto, panel);
+            vboxProducts.getChildren().addAll(panelProducto);
         }
 
         iva = subtotalF * 0.16F;

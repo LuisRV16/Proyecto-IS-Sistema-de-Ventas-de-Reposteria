@@ -1,47 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sales.PaymentMethodController">
+<AnchorPane id="backPane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sales.PaymentMethodController">
    <children>
       <Pane prefHeight="620.0" prefWidth="640.0">
          <children>
-            <ScrollPane layoutX="70.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="500.0">
+            <Pane id="paneBackDeg" layoutX="220.0" layoutY="10.0" prefHeight="44.0" prefWidth="200.0">
+               <children>
+                  <Label id="labelSmallTitle" fx:id="lblVboxClients" alignment="CENTER" prefHeight="44.0" prefWidth="200.0" text="Clientes">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ScrollPane fitToWidth="true" layoutX="70.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="500.0">
                <content>
-                  <VBox fx:id="vboxClients" prefHeight="585.0" prefWidth="485.0" />
+                  <VBox id="backPaneWhite" fx:id="vboxClients" prefHeight="500.0" prefWidth="494.0" />
                </content>
             </ScrollPane>
-            <Button fx:id="btnGoBack" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Regresar" />
-            <Label fx:id="lblVboxClients" layoutX="268.0" layoutY="4.0" text="Clientes">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
+            <Button id="btnBig" fx:id="btnGoBack" layoutX="70.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBack" text="Regresar" />
          </children>
       </Pane>
       <Pane layoutX="640.0" prefHeight="620.0" prefWidth="640.0">
          <children>
-            <Button fx:id="btnCashPayment" alignment="CENTER" disable="true" layoutX="105.0" layoutY="67.0" mnemonicParsing="false" onAction="#cashPayment" prefHeight="237.0" prefWidth="431.0" text="Efectivo">
-               <font>
-                  <Font size="90.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnCardPayment" alignment="CENTER" disable="true" layoutX="106.0" layoutY="338.0" mnemonicParsing="false" onAction="#cardPayment" prefHeight="237.0" prefWidth="431.0" text="Tarjeta de Crédito&#10;o Debito" textAlignment="CENTER">
-               <font>
-                  <Font size="46.0" />
-               </font>
-            </Button>
-            <Label fx:id="lblClient" alignment="CENTER" layoutX="143.0" layoutY="37.0" minHeight="30.0" minWidth="356.0">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
+            <Pane id="paneBackDeg" layoutX="20.0" layoutY="20.0" prefHeight="580.0" prefWidth="600.0">
+               <children>
+                  <Pane id="backPaneWhite" layoutX="25.0" layoutY="275.0" prefHeight="80.0" prefWidth="550.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="14.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/VISA.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="120.0" layoutX="215.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/MASTERCARD.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="386.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/AMERICAN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Button id="btnBig" fx:id="btnCashPayment" alignment="CENTER" disable="true" layoutX="340.0" layoutY="136.0" mnemonicParsing="false" onAction="#cashPayment" prefHeight="84.0" prefWidth="235.0" text="Efectivo">
+                     <font>
+                        <Font size="90.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnBig" fx:id="btnCardPayment" alignment="CENTER" disable="true" layoutX="50.0" layoutY="375.0" mnemonicParsing="false" onAction="#cardPayment" prefHeight="80.0" prefWidth="500.0" text="Credito" textAlignment="CENTER">
+                     <font>
+                        <Font size="46.0" />
+                     </font>
+                  </Button>
+                  <Line endX="590.0" layoutY="250.0" startX="10.0" />
+                  <Button id="btnBig" fx:id="btnCardPayment1" alignment="CENTER" disable="true" layoutX="50.0" layoutY="475.0" mnemonicParsing="false" onAction="#cardPayment" prefHeight="80.0" prefWidth="500.0" text="Debito" textAlignment="CENTER">
+                     <font>
+                        <Font size="46.0" />
+                     </font>
+                  </Button>
+                  <Pane id="backPaneWhite" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label id="labelSubtotalProducto" fx:id="lblSubtotal" layoutX="10.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="38.0" minWidth="200.0" prefHeight="50.0" prefWidth="280.0" text="Subtotal: $">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label id="labelSubtotalProducto" fx:id="lblIva" layoutX="10.0" layoutY="75.0" minHeight="38.0" minWidth="200.0" prefHeight="50.0" prefWidth="280.0" text="IVA: $">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label id="labelSubtotalProducto" fx:id="lblTotal" layoutX="10.0" layoutY="135.0" minHeight="38.0" minWidth="200.0" prefHeight="50.0" prefWidth="280.0" text="Total: $">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ImageView fitHeight="105.0" fitWidth="110.0" layoutX="405.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/cash.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

@@ -39,6 +39,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -138,6 +139,7 @@ public class ProductController {
     }
 
     public void inic() {
+	vboxPreCart.setSpacing(5);
 
         txtBuscar.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getControlNewText().length() <= 40) {
@@ -237,8 +239,8 @@ public class ProductController {
                 e.printStackTrace();
             }
         } else {
-            if (comboOrdenar.getSelectionModel().getSelectedItem().equals(comboOrdenar.getItems().get(0))
-                || comboOrdenar.getSelectionModel().getSelectedItem() == null) {
+            if (comboOrdenar.getSelectionModel().getSelectedItem() == null 
+                || comboOrdenar.getSelectionModel().getSelectedItem().equals(comboOrdenar.getItems().get(0))) {
                 flowPaneProductos.getChildren().setAll(panels);
             } else {
                 order(s, o);
@@ -428,9 +430,17 @@ public class ProductController {
         Button btn = (Button) panelProd.getChildren().get(6);
         btn.setDisable(existencia == 0 ? true : false);
 
+        int contador;
+
+        if (cantidadProducto.get(resVarchar) == null) {
+            contador = 0;
+        } else {
+            contador = cantidadProducto.get(resVarchar);
+        }
+
         EventHandler<ActionEvent> eventHandlerBtnAgregar = new EventHandler<ActionEvent>() {
 
-            int cont = 0;
+            int cont = contador;
 
             @Override
             public void handle(ActionEvent arg0) {
@@ -468,9 +478,11 @@ public class ProductController {
             panelProduct.setId("paneBackDeg");
 
             Label nombreProduct = new Label(nombreProducto);
-            nombreProduct.setMinWidth(220);
-            nombreProduct.setMinHeight(50);
-            nombreProduct.setFont(new Font("Arial", 15));
+            nombreProduct.setWrapText(true);
+            nombreProduct.setPadding(new Insets(5, 5, 5, 5));
+            nombreProduct.setMinWidth(200);
+            nombreProduct.setMinHeight(60);
+            nombreProduct.setPrefSize(200, 60);
             nombreProduct.setLayoutX(0);
             nombreProduct.setLayoutY(0);
             nombreProduct.setAlignment(Pos.CENTER);
@@ -496,7 +508,7 @@ public class ProductController {
                         cantidadProducto.remove(nombreProducto);
 
                         if (vboxPreCart.getChildren().isEmpty()) {
-                            lblSubtotal.setText("Subtotal:");
+                            lblSubtotal.setText("Subtotal Producto:");
                             btnGoToCart.setDisable(true);
                         }
 
@@ -510,7 +522,7 @@ public class ProductController {
                         Label lbl2 = (Label) panel.getChildren().get(4);
 
                         lbl.setText(cant + "");
-                        lbl2.setText(nombreProducto + " Subtotal: $" + df.format(precioNuevo));
+                        lbl2.setText("Subtotal Producto: $" + df.format(precioNuevo));
                         panel.getChildren().set(2, lbl);
                         panel.getChildren().set(4, lbl2);
                         vboxPreCart.getChildren().set(index, panel);
@@ -560,7 +572,7 @@ public class ProductController {
                         Label lbl2 = (Label) panel.getChildren().get(4);
 
                         lbl.setText(cant + "");
-                        lbl2.setText(nombreProducto + " Subtotal: $" + df.format(precioNuevo));
+                        lbl2.setText("Subtotal Producto: $" + df.format(precioNuevo));
                         panel.getChildren().set(2, lbl);
                         panel.getChildren().set(4, lbl2);
                         vboxPreCart.getChildren().set(index, panel);
@@ -573,20 +585,14 @@ public class ProductController {
 
             btnAnadir.setOnAction(eventHandlerBtnAnadir);
 
-            Label subtotal = new Label(nombreProducto + " Subtotal: $" + df.format(precio));
+            Label subtotal = new Label("Subtotal Producto: $" + df.format(precio));
             subtotal.setMinWidth(366);
             subtotal.setMinHeight(50);
             subtotal.setLayoutX(0);
             subtotal.setLayoutY(50);
             subtotal.setFont(new Font("Arial", 12));
             subtotal.setAlignment(Pos.CENTER);
-
-            panelProduct.getChildren().add(nombreProduct);
-            panelProduct.getChildren().add(btnQuitar);
-            panelProduct.getChildren().add(cantidadProduct);
-            panelProduct.getChildren().add(btnAnadir);
-            panelProduct.getChildren().add(subtotal);
-
+            panelProduct.getChildren().addAll(nombreProduct, btnQuitar, cantidadProduct, btnAnadir, subtotal);
             vboxPreCart.getChildren().add(panelProduct);
 
             subtotalF += precio;
@@ -606,7 +612,7 @@ public class ProductController {
             Label lbl2 = (Label) panel.getChildren().get(4);
 
             lbl.setText(cant + "");
-            lbl2.setText(nombreProducto + " Subtotal: $" + df.format(precioNuevo));
+            lbl2.setText("Subtotal Producto: $" + df.format(precioNuevo));
             panel.getChildren().set(2, lbl);
             panel.getChildren().set(4, lbl2);
             vboxPreCart.getChildren().set(index, panel);
@@ -669,7 +675,7 @@ public class ProductController {
                     Label lbl2 = (Label) panel.getChildren().get(4);
 
                     lbl.setText(cant + "");
-                    lbl2.setText(nombreProducto + " Subtotal: $" + df.format(precioNuevo));
+                    lbl2.setText("Subtotal Producto: $" + df.format(precioNuevo));
                     panel.getChildren().set(2, lbl);
                     panel.getChildren().set(4, lbl2);
                     vboxPreCart.getChildren().set(index, panel);
@@ -719,7 +725,7 @@ public class ProductController {
                     Label lbl2 = (Label) panel.getChildren().get(4);
 
                     lbl.setText(cant + "");
-                    lbl2.setText(nombreProducto + " Subtotal: $" + df.format(precioNuevo));
+                    lbl2.setText("Subtotal Producto: $" + df.format(precioNuevo));
                     panel.getChildren().set(2, lbl);
                     panel.getChildren().set(4, lbl2);
                     vboxPreCart.getChildren().set(index, panel);
@@ -731,7 +737,7 @@ public class ProductController {
 
         btnAnadir.setOnAction(eventHandlerBtnAnadir);
 
-        Label subtotal = new Label(nombreProducto + " Subtotal: $" + df.format(precio * ((float) cantidad)));
+        Label subtotal = new Label("Subtotal Producto: $" + df.format(precio * ((float) cantidad)));
         subtotal.setMinWidth(366);
         subtotal.setMinHeight(50);
         subtotal.setLayoutX(0);

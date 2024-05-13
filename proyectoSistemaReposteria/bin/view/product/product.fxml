@@ -42,9 +42,9 @@
       </Pane>
       <Pane id="backPane" layoutX="850.0" prefHeight="620.0" prefWidth="430.0">
          <children>
-            <ScrollPane layoutX="30.0" layoutY="10.0" prefHeight="450.0" prefWidth="370.0">
+            <ScrollPane layoutX="30.0" layoutY="10.0" prefHeight="425.0" prefWidth="370.0">
                <content>
-                  <VBox fx:id="vboxPreCart" prefHeight="500.0" prefWidth="350.0" />
+                  <VBox fx:id="vboxPreCart" prefHeight="420.0" prefWidth="350.0" />
                </content>
             </ScrollPane>
             <Button id="btnBig" fx:id="btnGoToCart" layoutX="115.0" layoutY="550.0" mnemonicParsing="false" onAction="#goToCart" prefHeight="35.0" prefWidth="200.0" text="Ir a Caja">
@@ -65,6 +65,7 @@
                   </Label>
                </children>
             </Pane>
+            <Label id="labelIVA" layoutX="30.0" layoutY="455.0" prefHeight="25.0" prefWidth="370.0" text="*Precio sin IVA*" />
          </children></Pane>
    </children>
 </AnchorPane>
