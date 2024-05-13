@@ -3,8 +3,12 @@ package controller.mainMenu;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import controller.client.MenuClientManagerController;
 import controller.client.MenuClienteController;
 import controller.product.ProductController;
+import controller.product.ProductManagerController;
+import controller.sales.SalesManagerController;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,21 +20,25 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Menu2Controller {
-    @FXML
-    private BorderPane bp;
+public class MenuManagerController {
 
     @FXML
-    private Button btnClientes;
+    private BorderPane bp;
 
     @FXML
     private Button btnClose;
 
     @FXML
+    private Button btnClients;
+
+    @FXML
     private Button btnMenu;
 
     @FXML
-    private Button btnProducto;
+    private Button btnProducts;
+
+    @FXML
+    private Button btnSales;
 
     @FXML
     private AnchorPane center;
@@ -40,14 +48,13 @@ public class Menu2Controller {
 
     private Connection con;
 
-    private String employeeName;
-
-    private String employeeLastName1;
-
-    private String employeeLastName2;
-
     public void setCon(Connection con) {
         this.con = con;
+    }
+
+    public void inic() throws IOException {
+        loadPage("/view/client/menuClientsManager.fxml");
+        navList.setTranslateX(-250);
     }
 
     @FXML
@@ -56,15 +63,20 @@ public class Menu2Controller {
         Parent root = loader.load();
         bp.getChildren().setAll(root);
     }
-    
+
     @FXML
-    void goToProduct(ActionEvent event) throws IOException {
-        loadPage("/view/product/product.fxml");
+    void goToClients(ActionEvent event) throws IOException {
+        loadPage("/view/client/menuClientsManager.fxml");
     }
 
     @FXML
-    void goToClientes(ActionEvent event) throws IOException {
-        loadPage("/view/client/menuCliente.fxml");
+    void goToProducts(ActionEvent event) throws IOException {
+        loadPage("/view/product/ProductManager.fxml");
+    }
+
+    @FXML
+    void goToSales(ActionEvent event) throws IOException {
+        loadPage("/view/sales/SalesManager.fxml");
     }
 
     @FXML
@@ -92,40 +104,23 @@ public class Menu2Controller {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
         root = loader.load();
         switch (page) {
-            case "/view/product/product.fxml" -> {
-                ProductController controller = loader.getController();
+            case "/view/sales/SalesManager.fxml" -> {
+                SalesManagerController controller = loader.getController();
                 controller.setCon(con);
                 controller.inic();
-                controller.setEmployeeName(employeeName);
-                controller.setEmployeeLastName1(employeeLastName1);
-                controller.setEmployeeLastName2(employeeLastName2);
             }
-            case "/view/client/menuCliente.fxml" -> {
-                MenuClienteController controller = loader.getController();
+            case "/view/client/menuClientsManager.fxml" -> {
+                MenuClientManagerController controller = loader.getController();
                 controller.setCon(con);
                 controller.inic();
-                controller.setEmployeeName(employeeName);
-                controller.setEmployeeLastName1(employeeLastName1);
-                controller.setEmployeeLastName2(employeeLastName2);
+            }
+            case "/view/product/ProductManager.fxml" -> {
+                ProductManagerController controller = loader.getController();
+                controller.setCon(con);
+                controller.inic();
             }
         }
         center.getChildren().setAll(root);
     }
 
-    public void inic() throws IOException {
-        loadPage("/view/product/product.fxml");
-        navList.setTranslateX(-250);
-    }
-
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
-    }
-
-    public void setEmployeeLastName1(String employeeLastName1) {
-        this.employeeLastName1 = employeeLastName1;
-    }
-
-    public void setEmployeeLastName2(String employeeLastName2) {
-        this.employeeLastName2 = employeeLastName2;
-    }
 }

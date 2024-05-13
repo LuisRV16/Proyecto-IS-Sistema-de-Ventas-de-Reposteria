@@ -1,5 +1,7 @@
-create procedure addProduct
-	@name varchar(50),
+create procedure updateProduct
+	@id varchar(15),
+	@oldName varchar(40),
+	@name varchar(40),
 	@weight int, -- peso en gramos
 	@description varchar(400),
 	@stock int,
@@ -10,15 +12,7 @@ create procedure addProduct
 	@msg varchar(200) output
 as
 begin
-	declare @id varchar(15)
 	declare @salePrice float
-
-	exec getRandomId @length = 15, @randomId = @id output
-
-	while exists (select * from producto where idProducto = @id)
-	begin
-		exec getRandomId @length = 15, @randomId = @id output
-	end
 
 	if @name = '' or replace(@name, ' ', '') = ''
 		begin
@@ -40,7 +34,7 @@ begin
 		begin
 			set @msg = 'Seleccione una imagen para el producto.'
 		end
-	else if exists (select * from producto where nombre = @name)
+	else if exists (select * from producto where nombre = @name) and @oldName != @name
 		begin
 			set @msg = 'Un producto ya se encuentra registrado con este nombre.'
 		end
@@ -49,14 +43,21 @@ begin
 			set @discount = @discount/100
 			set @salePrice = @normalPrice - @normalPrice * @discount
 
-			insert into producto
-			(idProducto, nombre, peso, descripcion, existencia, precioNormal, descuento, precioVenta, tipoDeProducto,
-				imagenDelProducto)
-			values
-			(@id, @name, @weight, @description, @stock, @normalPrice, @discount, @salePrice, @kindOfProduct, @productImage)
+			update producto
+			set
+				nombre = @name,
+				peso = @weight,
+				descripcion = @description,
+				existencia = @stock,
+				precioNormal = @normalPrice,
+				descuento = @discount,
+				precioVenta = @salePrice,
+				tipoDeProducto = @kindOfProduct,
+				imagenDelProducto = @productImage
+			where
+				idProducto = @id
 
-			set @msg = 'El producto ha sido registrado exitosamente.'
+			set @msg = 'El producto ha sido actualizado exitosamente.'
 
 		end
-
 end

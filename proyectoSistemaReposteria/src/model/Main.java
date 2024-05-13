@@ -8,13 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader loader = new
-        FXMLLoader(getClass().getResource("/view/login/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login/login.fxml"));
         Parent root = loader.load();
 
         // Inicializa todos los componentes requeridos
@@ -23,7 +23,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        
     }
 
     public static void main(String[] args) {

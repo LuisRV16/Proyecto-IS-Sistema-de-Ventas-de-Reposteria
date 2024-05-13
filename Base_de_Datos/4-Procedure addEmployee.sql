@@ -25,7 +25,6 @@ create procedure addEmployee
 	@msg varchar(100) output
 as
 begin
-	declare @id varchar(15)
 	declare @userName varchar(15)
 	declare @sql nvarchar(100)
 
@@ -34,25 +33,33 @@ begin
 
 	if not exists (select * from empleado where rfc = @rfc)
 	begin
-		
-		SET @sql = N'CREATE LOGIN ' + QUOTENAME(@userName) + N' WITH PASSWORD = N''' + @pwd + N''''
-		EXEC sp_executesql @sql;
-		set @sql = 'CREATE USER ' + QUOTENAME(@userName) + ' FOR LOGIN ' + QUOTENAME(@userName)
-		exec sp_executesql @sql
-		set @sql = 'ALTER ROLE employee ADD MEMBER ' + QUOTENAME(@userName)
-		exec sp_executesql @sql
 
-		insert into empleado
-		(rfc, nombre, apellido1, apellido2, puesto, salario, idSupervisor, curp, nss,
-		 fechaContratacion, fechaDeNacimiento, sexo, estadoCivil, estatus, correo, calle, numeroInterior,
-		 numeroExterior, codigoPostal, colonia, ciudad, estado, nombreUsuario)
-		values
-			(@rfc, @name, @lastName1, @lastName2, @position, @salary, @idSupervisor, @curp, @nss,
-			 @dateHire, @birthdate, @gender, @civilStatus, @status, @email, @street, @interiorNumber,
-			 @outdoorNumber, @postalCode, @colony, @city, @state, @userName)
+		if @position <> 'Gerente'
+		begin
+			SET @sql = N'CREATE LOGIN ' + QUOTENAME(@userName) + N' WITH PASSWORD = N''' + @pwd + N''''
+			EXEC sp_executesql @sql;
+			set @sql = 'CREATE USER ' + QUOTENAME(@userName) + ' FOR LOGIN ' + QUOTENAME(@userName)
+			exec sp_executesql @sql
+			set @sql = 'ALTER ROLE employee ADD MEMBER ' + QUOTENAME(@userName)
+			exec sp_executesql @sql
 
-		set @msg =  'Registro exitoso.' + CHAR(13) + CHAR(10) + 'El usuario para el cajero es: '
-			+ @userName + CHAR(13) + CHAR(10) + 'Su contraseña es: ' + @pwd
+			insert into empleado
+			(rfc, nombre, apellido1, apellido2, puesto, salario, idSupervisor, curp, nss,
+				fechaContratacion, fechaDeNacimiento, sexo, estadoCivil, estatus, correo, calle, numeroInterior,
+				numeroExterior, codigoPostal, colonia, ciudad, estado, nombreUsuario)
+			values
+				(@rfc, @name, @lastName1, @lastName2, @position, @salary, @idSupervisor, @curp, @nss,
+					@dateHire, @birthdate, @gender, @civilStatus, @status, @email, @street, @interiorNumber,
+					@outdoorNumber, @postalCode, @colony, @city, @state, @userName)
+
+			set @msg =  'Registro exitoso.' + CHAR(13) + CHAR(10) + 'El usuario para el empleado es: '
+				+ @userName + CHAR(13) + CHAR(10) + 'Su contraseña es: ' + @pwd
+		end
+		else
+		begin
+			set @msg = 'Solo puede dar de alta a empleados que no serán gerentes.'
+		end
+	
 	end
 	else
 	begin

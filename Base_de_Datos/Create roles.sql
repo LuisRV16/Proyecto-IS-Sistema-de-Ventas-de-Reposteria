@@ -21,3 +21,19 @@ grant exec on addSaleProduct to employee
 
 grant exec on searchProduct to employee
 grant exec on orderProducts to employee
+
+-----------------------------------------------------
+
+create role manager
+grant select on cliente to manager
+grant select, insert, update on producto to manager
+grant select on venta to manager
+grant select on ventaProducto to manager
+grant exec on getEmployeeByUser to manager
+grant exec on getClient to manager
+grant exec on getSales to manager
+grant exec on getSalesProducts to manager
+grant exec on getProduct to manager
+grant exec on getProductByName to manager
+grant exec on addProduct to manager
+grant exec on updateProduct to manager

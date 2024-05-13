@@ -80,30 +80,60 @@ public class LoginFrameController {
         }
         
         try {
-            CallableStatement statement = con.prepareCall("{call getEmployeeByUser(?, ?, ?, ?)}");
+            CallableStatement statement = con.prepareCall("{call getEmployeeByUser(?, ?, ?, ?, ?)}");
 
             statement.setString(1, user);
             statement.registerOutParameter(2, Types.VARCHAR);
             statement.registerOutParameter(3, Types.VARCHAR);
             statement.registerOutParameter(4, Types.VARCHAR);
+            statement.registerOutParameter(5, Types.VARCHAR);
 
             statement.execute();
 
             employeeName = statement.getString(2);
             employeeLastName1 = statement.getString(3);
             employeeLastName2 = statement.getString(4);
+            String position = statement.getString(5);
             
             Parent root = null;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainMenu/menu2.fxml"));
-            root = loader.load();
+
+            if (position == null) {
+                alert.setContentText("Acceso denegado. No tienes permisos para acceder a este recurso.");
+                alert.showAndWait();
+                return;
+            }
+
+            switch (position) {
+                case "Gerente" -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainMenu/menuManager.fxml"));
+                    root = loader.load();
+                    
+                    MenuManagerController controller = loader.getController();
+                    controller.setCon(con);
+                    controller.inic();
+                    ap.getChildren().setAll(root);
+                }
+                
+                case "Cajero" -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainMenu/menu2.fxml"));
+                    root = loader.load();
+                    
+                    Menu2Controller controller = loader.getController();
+                    controller.setCon(con);
+                    controller.setEmployeeName(employeeName);
+                    controller.setEmployeeLastName1(employeeLastName1);
+                    controller.setEmployeeLastName2(employeeLastName2);
+                    controller.inic();
+                    ap.getChildren().setAll(root);
+                }
             
-            Menu2Controller controller = loader.getController();
-            controller.setCon(con);
-            controller.setEmployeeName(employeeName);
-            controller.setEmployeeLastName1(employeeLastName1);
-            controller.setEmployeeLastName2(employeeLastName2);
-            controller.inic();
-            ap.getChildren().setAll(root);
+                default -> {
+                    alert.setContentText("Acceso denegado. No tienes permisos para acceder a este recurso.");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
