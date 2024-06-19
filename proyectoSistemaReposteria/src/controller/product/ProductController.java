@@ -386,7 +386,8 @@ public class ProductController {
     }
 
     private Pane setPane(Pane panelProd, Image image, String resVarchar, float resFloat, float descFloat,
-            float precioFinal, int existencia) {
+            float precioFinal, int existencia) 
+    {
 
         ImageView iv = (ImageView) panelProd.getChildren().get(0);
         iv.setImage(image);

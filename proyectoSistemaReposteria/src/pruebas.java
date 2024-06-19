@@ -5,10 +5,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.LinkedHashSet;
+import java.util.concurrent.Callable;
 
 import model.SQLConnection;
 
@@ -49,7 +52,7 @@ public class pruebas {
 
         Connection con = connector.getConnection();
 
-        addProduct("src/images/brownies.jpeg", con, "Brownie", 100, "Delicioso brownie de chocolate", 15, 25.0f, 0.1f, "dulce");
+        addProduct("src/images/brownies.jpeg", con, "Brownie", 100, "Delicioso brownie de chocolate", 15, 25.0f, 10.0f, "dulce");
         addProduct("src/images/gelatina1.jpg", con, "Gelatina mosaico", 500, "Deliciosa gelatina mosaico", 10, 100.0f, 0, "dulce");
         addProduct("src/images/gelatina2.jpg", con, "Gelatina de fresa", 500, "Deliciosa gelatina de fresa", 10, 100.0f, 0, "dulce");
         addProduct("src/images/muffinChocolate.jpg", con, "Muffin de chocolate", 100, "Delicioso muffin de chocolate", 20, 20.0f, 0, "dulce");
@@ -71,9 +74,9 @@ public class pruebas {
                 File imageFile = new File(pathImage);
                 byte[] datosImagen = Files.readAllBytes(imageFile.toPath());
                 // Aquí tienes los datos binarios de la imagen en datosImagen[]
-                String sql = "{call addProduct(?, ?, ?, ?, ?, ?, ?, ?)}";
+                String sql = "{call addProduct(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
-                try (PreparedStatement statement = con.prepareStatement(sql)) {
+                try (CallableStatement statement = con.prepareCall(sql)) {
                     statement.setString(1, name);
                     statement.setInt(2, weight);
                     statement.setString(3, description);
@@ -82,6 +85,7 @@ public class pruebas {
                     statement.setFloat(6, discount);
                     statement.setString(7, typeOfProduct);
                     statement.setBytes(8, datosImagen);
+                    statement.registerOutParameter(9, Types.VARCHAR);
                     statement.execute();
 
                     System.out.println("Imagen insertada correctamente");

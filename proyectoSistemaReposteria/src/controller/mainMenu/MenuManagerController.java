@@ -67,35 +67,38 @@ public class MenuManagerController {
     @FXML
     void goToClients(ActionEvent event) throws IOException {
         loadPage("/view/client/menuClientsManager.fxml");
+        openMenu(event);
     }
 
     @FXML
     void goToProducts(ActionEvent event) throws IOException {
         loadPage("/view/product/ProductManager.fxml");
+        openMenu(event);
     }
 
     @FXML
     void goToSales(ActionEvent event) throws IOException {
         loadPage("/view/sales/SalesManager.fxml");
+        openMenu(event);
     }
 
     @FXML
     void openMenu(ActionEvent event) {
         TranslateTransition openNav = new TranslateTransition(new Duration(350), navList);
         openNav.setToX(0);
-        TranslateTransition openNavCenter = new TranslateTransition(new Duration(350), center);
-        openNavCenter.setToX(navList.getWidth());
+        // TranslateTransition openNavCenter = new TranslateTransition(new Duration(350), center);
+        // openNavCenter.setToX(navList.getWidth());
 
         TranslateTransition closeNav = new TranslateTransition(new Duration(350), navList);
-        TranslateTransition closeNavCenter = new TranslateTransition(new Duration(350), center);
+        // TranslateTransition closeNavCenter = new TranslateTransition(new Duration(350), center);
         if (navList.getTranslateX() != 0) {
             openNav.play();
-            openNavCenter.play();
+            // openNavCenter.play();
         } else {
             closeNav.setToX(-(navList.getWidth()));
-            closeNavCenter.setToX(0);
+            // closeNavCenter.setToX(0);
             closeNav.play();
-            closeNavCenter.play();
+            // closeNavCenter.play();
         }
     }
 

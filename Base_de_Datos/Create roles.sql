@@ -14,8 +14,6 @@ grant exec on updateClient to employee
 grant exec on getProduct to employee
 grant exec on getClient to employee
 grant exec on getClientByName to employee
-grant exec on dbo.getIdClientByName to employee
-grant exec on dbo.getIdEmployeeByName to employee
 grant exec on addSale to employee
 grant exec on addSaleProduct to employee
 

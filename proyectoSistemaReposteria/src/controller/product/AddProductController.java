@@ -40,6 +40,9 @@ public class AddProductController {
     private AnchorPane ap;
 
     @FXML
+    private Pane paneImage;
+
+    @FXML
     private Button btnAdd;
 
     @FXML
@@ -99,7 +102,7 @@ public class AddProductController {
             }
             try {
                 double newValue = Double.parseDouble(newText); // Intentar convertir a Double
-                if (newValue >= 1.0) { // Verificar que el valor sea mayor o igual a 1
+                if (newValue >= 1.0 && newText.length() <= 11) { // Verificar que el valor sea mayor o igual a 1
                     return change;
                 } else {
                     return null; // Rechazar el cambio si es menor que 1

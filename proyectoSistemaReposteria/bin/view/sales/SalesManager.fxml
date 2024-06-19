@@ -13,7 +13,7 @@
         <content>
           <AnchorPane prefHeight="200.0" prefWidth="640.0">
                <children>
-                  <VBox fx:id="vboxSales" prefHeight="200.0" prefWidth="840.0" />
+                  <VBox fx:id="vboxSales" prefHeight="200.0" prefWidth="970.0" />
                </children>
             </AnchorPane>
         </content>
@@ -23,10 +23,10 @@
       </ScrollPane>
    </center>
    <right>
-      <Pane prefHeight="570.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Pane prefHeight="570.0" prefWidth="135.0" BorderPane.alignment="CENTER" />
    </right>
    <left>
-      <Pane prefHeight="570.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Pane prefHeight="570.0" prefWidth="135.0" BorderPane.alignment="CENTER" />
    </left>
    <bottom>
       <Pane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />

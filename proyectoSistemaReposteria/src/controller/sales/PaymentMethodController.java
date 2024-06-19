@@ -95,6 +95,8 @@ public class PaymentMethodController {
         Stage stage = (Stage) btnCashPayment.getScene().getWindow();
         stage.close();
 
+        String cardPayment = (event.getSource().equals(btnCardPayment) ? "credito" : "debito");
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sales/CardPayment.fxml"));
             Parent root = loader.load();
@@ -113,10 +115,11 @@ public class PaymentMethodController {
             controller.setEmployeeName(employeeName);
             controller.setEmployeeLastName1(employeeLastName1);
             controller.setEmployeeLastName2(employeeLastName2);
-            controller.setCardType("debito");
+            controller.setCardType(cardPayment);
 
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
+            newStage.setResizable(false);
             newStage.show();
 
             controller.inic(); // inicio de la animacion despues de que se abra la vista
@@ -153,6 +156,7 @@ public class PaymentMethodController {
 
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
+            newStage.setResizable(false);
             newStage.show();
         } catch (IOException e) {
             e.printStackTrace();

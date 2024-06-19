@@ -10,14 +10,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.SQLConnection;
 
 public class LoginFrameController {
@@ -37,7 +38,7 @@ public class LoginFrameController {
     private TextField txtPassword;
 
     @FXML
-    private TextField lblUser;
+    private TextField txtUser;
 
     private String employeeName;
 
@@ -45,10 +46,39 @@ public class LoginFrameController {
 
     private String employeeLastName2;
 
+    public void inic() {
+
+        txtUser.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 128) {
+                return change;
+            }
+            return null;
+        }));
+
+        txtPassword.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 128) {
+                return change;
+            }
+            return null;
+        }));
+
+        pwdPassword.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().length() <= 128) {
+                return change;
+            }
+            return null;
+        }));
+    }
+
+    @FXML
+    void enterToMenu(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) btnLogin.fire();
+    }
+
     @FXML
     void goToMenu(ActionEvent event) {
 
-        String user = lblUser.getText();
+        String user = txtUser.getText();
         String password = pwdPassword.isVisible() ? pwdPassword.getText() : txtPassword.getText();
 
         SQLConnection sqlCon = new SQLConnection();

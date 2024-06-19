@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 
+import controller.mainMenu.LoginFrameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +19,9 @@ public class Main extends Application {
         Parent root = loader.load();
 
         // Inicializa todos los componentes requeridos
+        LoginFrameController controller = loader.getController();
+        controller.inic();
+        
         Scene scene = new Scene(root);
         stage.setTitle("Prueba");
         stage.setScene(scene);

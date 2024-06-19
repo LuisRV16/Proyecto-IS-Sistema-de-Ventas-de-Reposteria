@@ -85,6 +85,11 @@
     -fx-font-weight: bold;
     -fx-text-fill: #ffd166;
 }
+#labelTitleBlack{
+    -fx-font-size:28;
+    -fx-font-family: "Segoe";
+    -fx-font-weight: bold;
+}
 #labelSmallTitle{
     -fx-font-size:24;
     -fx-font-family: "Segoe";
@@ -179,9 +184,20 @@
     -fx-border-width: 2px;
     -fx-font-size:14;
     -fx-font-family: "Helvetica";
-    -fx-background-color: #FFFFFF, #FFFFFF;
+    -fx-background-color: #F5EEE9, #FFFFFF;
 }
 .text-field:focused {
+    -fx-border-color: #0093EF;
+}
+#recibe {
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-font-size:28;
+    -fx-font-family: "Helvetica";
+    -fx-background-color: #F5EEE9, #FFFFFF;
+}
+.recibe:focused {
     -fx-border-color: #0093EF;
 }
 /*Combo box------------------------------------------*/
@@ -318,5 +334,14 @@
 }
 /**/
 .text-area{
-    -fx-font-size: 16;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-font-size:14;
+    -fx-font-family: "Helvetica";
+    -fx-background-color: #F5EEE9, #FFFFFF;
+}
+
+.text-area:focus{
+    -fx-border-color: #0093EF;
 }

@@ -82,7 +82,7 @@ public class ProductManagerController {
                 lblNormalPrice.setLayoutY(100);
 
                 float descFloat = resultados.getFloat(7);
-                Label lblDesc = new Label("Descuento: " + ((int) descFloat * 100) + "%");
+                Label lblDesc = new Label("Descuento: " + ((int) (descFloat * 100)) + "%");
                 lblDesc.setLayoutX(400);
                 lblDesc.setLayoutY(100);
 

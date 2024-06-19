@@ -28,6 +28,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -111,7 +112,7 @@ public class UpdateProductController {
             }
             try {
                 double newValue = Double.parseDouble(newText); // Intentar convertir a Double
-                if (newValue >= 1.0) { // Verificar que el valor sea mayor o igual a 1
+                if (newValue >= 1.0 && newText.length() <= 11) { // Verificar que el valor sea mayor o igual a 1
                     return change;
                 } else {
                     return null; // Rechazar el cambio si es menor que 1
@@ -212,7 +213,7 @@ public class UpdateProductController {
                 imageView.setImage(image);
                 txtName.setText(name);
                 txtNormalPrice.setText(normalPrice + "");
-                txtDesc.setText(((int) desc * 100)+"");
+                txtDesc.setText(((int) (desc * 100))+"");
                 txtFinalPrice.setText(finalPrice + "");
                 txtWeight.setText(weight+"");
                 txtStock.setText(stock + "");
@@ -223,6 +224,20 @@ public class UpdateProductController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void calculateFinalPrice(KeyEvent event) {
+        String normalPrice = txtNormalPrice.getText();
+        String desc = txtDesc.getText();
+
+        if (!normalPrice.equals("") && !desc.equals("")) {
+            float price = Float.parseFloat(normalPrice) - Float.parseFloat(normalPrice) * (Float.parseFloat(desc)/100);
+            txtFinalPrice.setText(price + "");
+        } else {
+            txtFinalPrice.setText("");
+        }
+
     }
 
     private void openFileChooser() {
@@ -302,7 +317,7 @@ public class UpdateProductController {
             alert.showAndWait();
             return;
         } else {
-            desc = Float.parseFloat(txtNormalPrice.getText());
+            desc = Float.parseFloat(txtDesc.getText());
         }
 
         if (txtWeight.getText().equals("")) {
